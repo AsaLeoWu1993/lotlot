@@ -18,7 +18,7 @@ namespace TestApi
     {
         static async Task Main(string[] args)
         {
-            var path = "mongodb://admin:123456@0.0.0.0:27027/";
+            var path = "mongodb://admin:123456@132.232.70.44:27027/";
             Console.WriteLine(AESHelper.Encrypt(path));
             End();
         }
