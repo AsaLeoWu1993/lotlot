@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+			<div id="header"></div>
+
+			<script>
+				$(function(){
+					$('#header').load('common/header.html');
+				})
+			</script>
+			<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li class="active">
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+							<script>
+								(function() {
+									var username = localStorage.getItem('loginName');
+									$('#username-min').html(username);
+									if (localStorage.getItem('isHighest') == '3') {
+										$('#high-level').remove();
+									} else {
+										$('#high-level').show();
+									}
+								})();
+							</script>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">账户安全</li>
+					</ol>
+					<!--面包屑当前位置end-->
+
+					<!--内容区域start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<div class="account-sec">
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe01.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										登录密码<em>请牢记密码，平台未提供自助找回功能</em>
+										<p>建议您使用数字组合、混合大小写、在组合中加入下划线等符号。</p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-success btn-item layer-btn" @click="handleShowPanel(1)">修改密码</a>
+									</div>
+								</div>
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe02.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										安全密码<em>首次修改，默认安全密码888888</em>
+										<p>在进行银行卡绑定、提现等资金操作时需要进行安全密码确认，以提高您的资金安全性。</p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-success btn-item layer-btn" @click="handleShowPanel(2)">修改安全密码</a>
+									</div>
+								</div>
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe03.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										联系方式<em>请填写真实有效数据，特殊情况处理此联系方式将是代理账号的唯一识别途径</em>
+										<p><span v-text="'手机：' + (contactInfo.phone ? (contactInfo.phone.substr(0,3) + '****' + contactInfo.phone.substr(8,4)) : '未设置')"></span><span v-text="'QQ：' + (contactInfo.QQ ? ('****' + contactInfo.QQ.substr(5,4)) : '未设置')"></span><span v-text="'Email：' + (contactInfo.email || '未设置')"></span></p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-success btn-item layer-btn" @click="handleShowPanel(3)">设置联系方式</a>
+									</div>
+								</div>
+
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe04.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										银行卡信息<em>银行账户是为了方便余额提现，请认真填写</em>
+										<p><span v-text="'户名：' + (bank.oldName ? ('**' + bank.oldName.substr(bank.oldName.length - 1, 1)) : '未设置')"></span><span v-text="'开户行：' + (bank.oldType || '未设置')"></span><span v-text="'卡号：' + (bank.oldAccount ? (bank.oldAccount.substr(0, 10) + '****' + bank.oldAccount.substr(13, 4)) : '未设置')"></span></p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-primary btn-item layer-btn" @click="handleShowPanel(4)">修改银行账户</a>
+									</div>
+								</div>
+
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe05.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										支付宝信息<em>支付宝账户是为了方便余额提现，请认真填写</em>
+										<p>
+											<span v-text="'用户名：' + (aliPay.oldName ? ('**' + aliPay.oldName.substr(aliPay.oldName.length - 1, 1)) : '未设置')"></span>
+											<span>
+												<a v-show="aliPay.oldImg" class="viewcode">
+													二维码预览
+													<span class="erwm">
+														<span class="arrow_box">
+															<img :src="aliPay.oldImg"/>
+														</span>
+													</span>
+												</a>
+											</span>
+										</p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-success btn-item layer-btn" @click="handleShowPanel(5)">修改支付宝账户</a>
+										<a class="btn btn-warning btn-item layer-btn" @click="handleShowPanel(6)">解绑支付宝账户</a>
+									</div>
+								</div>
+
+								<div class="secset-item flex-tab">
+									<div class="flex-tab-cell tab-left">
+										<img class="sec-icon" src="img/icon-safe05.png"/>
+									</div>
+									<div class="flex-tab-cell tab-middle">
+										数字货币信息<em>支持USDT/ERC20，提现最低1万，手续费3%</em>
+										<p>
+											<span v-text="'数字货币地址：' + (digital.oldAddress || '当前未设置数据货币地址')"></span>
+											<!-- <span>
+												<a v-show="aliPay.oldImg" class="viewcode">
+													二维码预览
+													<span class="erwm">
+														<span class="arrow_box">
+															<img :src="aliPay.oldImg"/>
+														</span>
+													</span>
+												</a>
+											</span> -->
+										</p>
+									</div>
+									<div class="flex-tab-cell tab-right">
+										<a class="btn btn-success btn-item layer-btn" @click="handleShowPanel(7)">修改数字货币</a>
+										<!-- <a class="btn btn-warning btn-item layer-btn" @click="handleShowPanel(6)">解绑支付宝账户</a> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--内容区域   end-->
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+
+			<!--1--修改登录密码层弹出start-->
+			<div id="layer-content1" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改登录密码</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 原密码输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>当前登录密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="password.old" :readonly="password.canEdit" type="password" placeholder="请输入原密码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>新的登录密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="password.new" :readonly="password.canEdit" type="password" placeholder="请输入新密码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>确认新密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="password.repeat" type="password" :readonly="password.canEdit" placeholder="再次输入新密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleModifyPassword" class="btn btn-layerbtm btn-warning sub">立即修改</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--1--修改登录密码层弹出end-->
+
+			<!--2--修改安全密码层弹出start-->
+			<div id="layer-content2" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改安全密码</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 首次修改初始密码：888888<br>原密码输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>当前安全密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="safePassword.old" autocomplete="new-password" type="password" placeholder="请输入原密码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>新的安全密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="safePassword.new" type="password" placeholder="请输入新密码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>确认新密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="safePassword.repeat" type="password" placeholder="再次输入新密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleVeirfySafePW(1)" class="btn btn-layerbtm btn-warning">立即修改</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--2--修改安全密码层弹出end-->
+
+			<!--3--设置联系方式层弹出start-->
+			<div id="layer-content3" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>设置联系方式</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 请输入真实有效联系方式（至少一项），确认无误后提交保存
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>当前安全密码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="safePassword.old" type="password" placeholder="请输入安全密码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">手机号码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="contactInfo.phone" placeholder="请输入手机号码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">QQ号码</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="contactInfo.QQ" placeholder="请输入QQ号码">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">Email</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="contactInfo.email" placeholder="请输入Email">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleVeirfySafePW(2)" class="btn btn-layerbtm btn-warning">提交保存</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--3--设置联系方式层弹出end-->
+
+			<!--4--修改银行账号层弹出start-->
+			<div id="layer-content4" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改银行账户</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 为了保护账户安全，修改银行账户会先验证原账号。<br>原账号输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix" v-if="bank.oldAccount">
+							<label class="col-sm-4 control-label"><em>*</em>当前收款账号</label>
+							<div class="col-sm-6">
+								<input  class="form-control" v-model="bank.account" placeholder="输入当前收款账号" >
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>姓名</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="bank.name" placeholder="请输入开户人姓名">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>新的收款银行</label>
+							<div class="col-sm-6">
+								<div class="clearfix">
+									<select v-model="bank.type" class="select-control">
+										<option value="0">选择收款开户银行</option>
+										<option v-for="(item, index) in bank.list" :key="index" :value="item.type">{{item.title}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>新的收款账号</label>
+							<div class="col-sm-6">
+								<input  class="form-control" v-model="bank.newAccount" placeholder="请输入新的收款账号">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" v-model="safePassword.old" placeholder="请输入安全密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleVeirfySafePW(3)" class="btn btn-layerbtm btn-warning">立即设置</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--4--修改银行账号层弹出end-->
+
+			<!--5--修改支付宝层弹出start-->
+			<div id="layer-content5" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改支付宝账户</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 为了保护账户安全，修改支付宝账户会先验证原账号。<br>原账号输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix" v-show="aliPay.oldName">
+							<label class="col-sm-4 control-label"><em>*</em>当前支付宝账号</label>
+							<div class="col-sm-6">
+								<input  class="form-control" v-model="aliPay.account" placeholder="请输入当前支付宝账号">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>新支付宝账号</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="aliPay.newAccount" placeholder="请输入新支付宝账号">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>上传收款二维码</label>
+							<div class="col-sm-6">
+								<input ref="upload-QR-img"  class="form-control" type="file" placeholder="" @change="handleChange">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" v-model="safePassword.old" placeholder="请输入安全密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a class="btn btn-layerbtm btn-warning" @click="handleVeirfySafePW(4)">立即设置</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--5--修改支付宝层弹出end-->
+
+			<!--6--解绑支付宝层弹出start-->
+			<div id="layer-content6" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>解绑支付宝账户</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 安全密码输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" v-model="safePassword.old" placeholder="请输入安全密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a class="btn btn-layerbtm btn-warning" @click="handleVeirfySafePW(5)">确定</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--6--解绑支付宝层弹出end-->
+
+			<!--7--货币地址层弹出start-->
+			<div id="layer-content7" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>数字货币地址</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 为了保护账户安全，修改数字货币地址会先验证原账号。<br>原地址输入错误3次，账号将被锁定，等待时间10分钟
+								</div>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>选择数字货币类型</label>
+							<div class="col-sm-6">
+								<select class="ope-select" style="display: block;width: 100%;" v-model="digital.selectType">
+									<option v-for="(item, index) in digitalTypeList" :key="index" :value="item.value">{{item.title}}</option>
+								</select>
+							</div>
+						</div>
+						<div v-if="digital.oldAddress" class="form-group clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>当前货币地址</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="digital.old_address" placeholder="请输入当前数字货币地址">
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>货币地址</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="digital.address" placeholder="请输入数字货币地址">
+							</div>
+						</div>
+						<div v-if="!digital.oldAddress" class="form-group clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>货币地址</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="digital.replateAddress" placeholder="请再次输入数字货币地址">
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" v-model="safePassword.old" placeholder="请输入安全密码">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a class="btn btn-layerbtm btn-warning" @click="handleVeirfySafePW(6)">立即设置</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--7--货币地址层弹出end-->
+		</div>
+
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						isLoading: false,
+						isVerifyLoading: false,
+						isBankLoading: false,
+						isInfoLoading: false,
+						aliLoading: false,
+						password: {
+							old: '',
+							new: '',
+							repeat: '',
+							canEdit: true
+						},
+						safePassword: {
+							old: '',
+							new: '',
+							repeat: '',
+							canEdit: true
+						},
+						contactInfo: {
+							phone: '',
+							QQ: '',
+							email: '',
+							canEdit: true
+						},
+						bank: {
+							account: '',
+							oldAccount: '',
+							oldName: '',
+							oldType: '',
+							name: '',
+							type: '0',
+							newAccount: '',
+							list: [],
+							isVerify: false,
+							canEdit: true
+						},
+						aliPay: {
+							oldName: '',
+							oldImg: '',
+							account: '',
+							newAccount: '',
+							newImage: '',
+							canEdit: true
+						},
+						digitalTypeList: [
+							{
+								title: '泰达币 (USDT/ERC20)',
+								value: '1'
+							}
+						],
+						digital: {
+							old_address: '',
+							oldAddress: '',
+							address: '',
+							replateAddress: '',
+							selectType: '1',
+							isLoading: false
+						},
+						username: '',
+						scrollText: '',
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let isHighest = localStorage.getItem('isHighest');
+					switch(isHighest) {
+						case '2':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+						case '3':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					let that = this;
+
+					that.username = localStorage.getItem('loginName');
+					$('#username').html(localStorage.getItem('loginName'));
+					that.scrollText = localStorage.getItem('scrollText');
+					that.$nextTick(function() {
+						that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+						that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+						that.handleScroll();
+					});
+					that.handleGetContactInfo();
+					that.handleGetAccountInfo();
+					that.handleGetBankInfo();
+					that.handleGetAliPay();
+					that.handleQueryVirtual()
+				},
+				methods: {
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					modifyPassword() {
+						let that = this;
+
+						if (!that.password.old) {
+							layer.msg('请输入旧密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.password.new) {
+							layer.msg('请输入新密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.password.repeat) {
+							layer.msg('请输入确认新密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (that.password.repeat != that.password.new) {
+							layer.msg('新密码和确认新密码不同，请重新输入', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							axios({
+								url: '/api/AccountSafe/UpdateUserPwd',
+								method: 'post',
+								params: {
+									oldPwd: that.password.old,
+									newPwd: that.password.new
+								}
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+								if(data.data.Status === 100) {
+									that.password.old = '';
+									that.password.new = '';
+									that.password.repeat = '';
+								}
+							})
+						}
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleShowPanel(ind) {
+						let that = this;
+
+						that.password.canEdit = false;
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '800px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content' + ind)
+						});
+					},
+					handleClosePanel() {
+						let that = this;
+
+						that.contactInfo.canEdit = true;
+						that.safePassword.canEdit = true;
+						that.aliPay.canEdit = true;
+						that.bank.canEdit = true;
+						that.bank.isVerify = false;
+						that.safePassword.old = '';
+						layer.closeAll();
+					},
+					handleModifyPassword() {
+						let that = this;
+
+						if (!that.password.old) {
+							layer.msg('请输入原密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.password.new) {
+							layer.msg('请输入新密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.password.repeat) {
+							layer.msg('请输入重复密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (that.password.repeat !== that.password.new) {
+							layer.msg('新密码和重复密码不一样，请重新输入', {
+								time: 1500
+							})
+							that.password.repeat = '';
+							that.password.new = '';
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UpdateUserPwd',
+								method: 'post',
+								params: {
+									oldPwd: that.password.old,
+									newPwd: that.password.new
+								}
+							}).then(function(data) {
+								layer.close(index);
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.password.old = '';
+									that.password.new = '';
+									that.password.repeat = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1500)
+								}
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleModifySafePW() {
+						let that = this;
+
+						if (!that.safePassword.old) {
+							layer.msg('请输入原密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.safePassword.new) {
+							layer.msg('请输入新密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.safePassword.repeat) {
+							layer.msg('请输入重复密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (that.safePassword.repeat !== that.safePassword.new) {
+							layer.msg('新密码和重复密码不一样，请重新输入', {
+								time: 1500
+							})
+							that.safePassword.repeat = '';
+							that.safePassword.new = '';
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UpdateSafePwd',
+								method: 'post',
+								params: {
+									oldPwd: that.safePassword.old,
+									newPwd: that.safePassword.new
+								}
+							}).then(function(data) {
+								layer.close(index);
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.safePassword.old = '';
+									that.safePassword.new = '';
+									that.safePassword.repeat = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1500)
+								}
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleVeirfySafePW(t) {
+						let that = this;
+
+						if ((!that.safePassword.old && t !== 3) || (t === 3 && that.bank.oldAccount && !that.safePassword.old)) {
+							layer.msg('请输入安全密码', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.isVerifyLoading) {
+							that.isVerifyLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/VerifySecurePwd',
+								params: {
+									safePwd: that.safePassword.old
+								}
+							}).then(function(data) {
+								layer.close(index);
+								that.isVerifyLoading = false;
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+								if (data.data.Status === 100) {
+									switch(t) {
+										case 1:
+											that.handleModifySafePW();
+										break;
+										case 2:
+											that.handleSaveContactInfo();
+										break;
+										case 3:
+											that.handleSaveBank();
+										break;
+										case 4:
+											that.handleModifyAliPay();
+										break;
+										case 5:
+											that.handleUnbind();
+										break;
+										case 6:
+											that.handleSetNumber();
+										break;
+									}
+								} else {
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+								}
+							})
+						}
+					},
+					handleSetNumber() {
+						let that = this,
+							params_ = {};
+
+						if (!that.handleVerifyAddress()) {
+							return;
+						}
+
+						if (that.digital.oldAddress && !that.digital.old_address) {
+							layer.msg('请输入当前数字货币地址', {
+								time: 1500
+							})
+							return false;							
+						}
+
+						if (that.digital.oldAddress && that.digital.old_address) {
+							params_['oldPath'] = that.digital.old_address;
+						}
+
+						if (!that.digital.oldAddress && !that.digital.address) {
+							layer.msg('请输入数字货币地址', {
+								time: 1500
+							})
+							return false;							
+						}
+
+						if (!that.digital.oldAddress && !that.digital.replateAddress) {
+							layer.msg('请输入重复数字货币地址', {
+								time: 1500
+							})
+							return false;							
+						}
+
+						if (!that.digital.oldAddress && that.digital.address != that.digital.replateAddress) {
+							layer.msg('数字货币地址不一样，请重新输入', {
+								time: 1500
+							})
+							that.digital.address = '';
+							that.digital.replateAddress = '';
+							return false;
+						}
+
+						params_['type'] = that.digital.selectType;
+						params_['path'] = that.digital.address;
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UpdateVirtual',
+								method: 'post',
+								params: params_
+							}).then(function(data) {
+								layer.close(index);
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.safePassword.old = '';
+									that.digital.address = '';
+									that.digital.replateAddress = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+										that.handleQueryVirtual();
+									}, 1500)
+								}
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleQueryVirtual() {
+						let that = this;
+
+						if (!that.digital.isLoading) {
+							that.digital.isLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetVirtual'
+							}).then(function(data) {
+								that.digital.isLoading = false;
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.digital.oldAddress = result[0].CurrencyPath;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleVerifyAddress() {
+						let that = this,
+							_address = that.digital.address;
+						if (!_address) {
+							layer.msg('请输入数字货币地址', {
+								time: 1500
+							})
+							return false;
+						}
+
+						if (!_address.startsWith('0x')) {
+							layer.msg('数字货币地址有误，请重新输入', {
+								time: 1500
+							})
+							that.digital.address = '';
+							that.digital.replateAddress = '';
+							return false;
+						}
+
+						if (!(/^(0x)?[0-9a-fA-F]{40}$/).test(_address)) {
+							layer.msg('数字货币地址有误，请重新输入', {
+								time: 1500
+							})
+							that.digital.address = '';
+							that.digital.replateAddress = '';
+							return false;
+						}
+						return true;
+					},
+					handleSaveContactInfo() {
+						let that = this;
+
+						if (!that.contactInfo.phone && !that.contactInfo.QQ && !that.contactInfo.email) {
+							layer.msg('请至少输入一种联系方式', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/SetContactInfo',
+								method: 'post',
+								params: {
+									phone: that.contactInfo.phone,
+									qq: that.contactInfo.QQ,
+									email: that.contactInfo.email
+								}
+							}).then(function(data) {
+								layer.close(index);
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.safePassword.old = '';
+									that.contactInfo.phone = '';
+									that.contactInfo.QQ = '';
+									that.contactInfo.email = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+										that.handleGetContactInfo();
+									}, 1500)
+								}
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetContactInfo() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetContactInfo'
+							}).then(function(data) {
+								that.isLoading = false;
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.contactInfo = {
+										phone: result.Phone,
+										QQ: result.QQ,
+										email: result.Email,
+										canEdit: true
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetAccountInfo() {
+						let that = this;
+
+						if (!that.isInfoLoading) {
+							that.isInfoLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetBankList'
+							}).then(function(data) {
+								that.isInfoLoading = false;
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									for (let item in result) {
+										that.bank.list.push({
+											type: result[item],
+											title: item
+										})
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetBankInfo() {
+						let that = this;
+
+						if (!that.isBankLoading) {
+							that.isBankLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetBankInfo'
+							}).then(function(data) {
+								that.isBankLoading = false;
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.bank.oldAccount = result.BankNum;
+									that.bank.oldName = result.Name;
+									that.bank.oldType = result.BankName;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleSaveBank() {
+						let that = this;
+
+						if (!that.bank.account && that.bank.oldAccount) {
+							layer.msg('请输入当前收款账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.bank.name) {
+							layer.msg('请输入开户人姓名', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (that.bank.type == '0') {
+							layer.msg('请选择银行卡类型', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.bank.newAccount && that.bank.newAccount != that.bank.account) {
+							layer.msg('请输入新的收款账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UpdateBankInfo',
+								method: 'post',
+								params: {
+									currentInfo: that.bank.account,
+									accountName: that.bank.name,
+									bankType: that.bank.type,
+									bankInfo: that.bank.newAccount
+								}
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.bank.account = '';
+									that.bank.name = '';
+									that.bank.type = '0';
+									that.bank.newAccount = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1500)
+									that.handleGetBankInfo();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetAliPay() {
+						let that = this;
+
+						if (!that.aliLoading) {
+							that.aliLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetAlipayInfo'
+							}).then(function(data) {
+								that.aliLoading = false;
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.aliPay.oldName = result.Name;
+									that.aliPay.oldImg = result.Path ? (result.Path.indexOf('://') != -1 ? result.Path : ('/' + result.Path)) : '';
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleChange() {
+						let that = this;
+
+						that.aliPay.newImage = that.$refs['upload-QR-img'].files[0];
+					},
+					handleModifyAliPay() {
+						let that = this,
+							formData = new FormData(),
+							img = '';
+
+						if (!that.aliPay.account && that.aliPay.oldName) {
+							layer.msg('请输入当前支付宝账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.aliPay.newAccount) {
+							layer.msg('请输入新的支付宝账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						img = that.$refs['upload-QR-img'].files[0];
+
+						if (!that.aliPay.newImage) {
+							layer.msg('请选择上传收款二维码', {
+								time: 1500
+							})
+							return;
+						} else if (that.aliPay.newImage.size > 5 * 1024 * 1024) {
+							layer.msg('上传收款二维码不能大于5M', {
+								time: 1500
+							})
+							return;
+						} else {
+							formData.append('fileinput', that.aliPay.newImage);
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UpdateAlipayInfo',
+								method: 'post',
+								params: {
+									currentName: that.aliPay.account,
+									newName: that.aliPay.newAccount
+								},
+								data: formData
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+
+									that.aliPay.account = '';
+									that.aliPay.newAccount = '';
+									that.$refs['upload-QR-img'].value = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1500)
+									that.handleGetAliPay();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleUnbind() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/UnboundAccount',
+								method: 'post'
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.close(index);
+								that.handleGetAliPay();
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1500)
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+
+</html>

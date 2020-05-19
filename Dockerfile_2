@@ -1,0 +1,25 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+WORKDIR /src
+COPY ["/AgentManagement/AgentManagement.csproj", "/AgentManagement/"]
+COPY ["/Operation/Operation.csproj", "/Operation/"]
+COPY ["/Entity/Entity.csproj", "Entity/"]
+RUN dotnet restore "/AgentManagement/AgentManagement.csproj"
+COPY . .
+WORKDIR "/src/AgentManagement"
+RUN dotnet build "AgentManagement.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "AgentManagement.csproj" -c Release -o /app
+
+FROM base AS final
+COPY /AgentManagement/AgentManagement.xml /app
+RUN apt-get update -y && apt-get install -y libgdiplus && apt-get clean && ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "AgentManagement.dll"]

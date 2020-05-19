@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/iview.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/iview.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+				<div id="header"></div>
+
+				<script>
+					$(function(){
+						$('#header').load('common/header.html');
+					})
+				</script>
+				<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li class="active">
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+							<script>
+								(function() {
+									var username = localStorage.getItem('loginName');
+									$('#username-min').html(username);
+									if (localStorage.getItem('isHighest') == '3') {
+										$('#high-level').remove();
+									} else {
+										$('#high-level').show();
+									}
+								})();
+							</script>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">账变记录</li>
+					</ol>
+					<!--面包屑当前位置end-->
+
+					<!--数据区域start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<div class="site-opearea clearfix">
+								<div class="dis-flex mg-btm10 pull-left">
+									<div class="flex-1 flex-item pull-left">
+										<select class="ope-select" v-model="info.type">
+											<option value="0">全部</option>
+											<option value="1">余额充值</option>
+											<option value="2">直充扣费</option>
+											<option value="3">余额提现</option>
+											<option value="4">团队返利</option>
+											<option value="5">提现退回</option>
+											<option value="6">活动</option>
+											<option value="7">其他</option>
+											<option value="8">库存充值</option>
+											<option value="9"></option>
+										</select>
+									</div>
+								</div>
+								<div class="dis-flex mg-btm10 pull-left">
+									<div class="flex-1 flex-item pull-left">
+										<!-- <input class="date-normal" type="text" id="datestart" value=""> -->
+										<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="info.startTime"></Date-Picker>
+									</div>
+									<div class="flex-none pull-left lineheight">-</div>
+									<div class="flex-1 flex-item pull-left" style="margin-right: 10px">
+										<!-- <input class="date-normal end" type="text" id="dateend" value=""> -->
+										<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="info.endTime"></Date-Picker>
+									</div>
+								</div>
+								<div v-show="isHighest_" class="input-full mg-btm10 pull-left">
+									<input class="ope-input" type="text" v-model="info.agentName" placeholder="输入用户">
+								</div>
+								<div class="btn-full pull-left">
+									<a @click="handleGetData" class="btn btn-sm btn-success"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+								</div>
+							</div>
+
+							<!--表格数据 start-->
+							<div class="table-area mg-btm20">
+								<table class="table-normal table-bordered">
+                                    <thead>
+										<tr>
+											<th>流水号</th>
+											<th>时间</th>
+											<th>变动金额</th>
+											<th>变动后余额</th>
+											<th>类型</th>
+											<th>摘要</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(item, index) in list" :key="index">
+											<td><span v-text="item.id"></span></td>
+											<td><span v-text="item.time"></span></td>
+											<td><span v-text="item.change"></span></td>
+											<td><span v-text="item.balance"></span></td>
+											<td><span v-text="item.type"></span></td>
+											<td><span v-text="item.remark"></span></td>
+										</tr>
+									</tbody>
+                                </table>
+							</div>
+							<!--表格数据  end-->
+						</div>
+					</div>
+					<!--数据区域   end-->
+					<div style="text-align: center">
+						<Page style="margin-top: 20px;" :total="page.total" show-total :page-size="page.pageSize" :current="page.pageNum" @on-change="handleChangePage(1, $event)"/>
+					</div>
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+		</div>
+
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/tools.js?v1.0.0"></script>
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						isLoading: false,
+						page: {
+							pageNum: 1,
+							pageSize: 12,
+							total: 0
+						},
+						list: [],
+						info: {
+							agentName: '',
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							name: '',
+							type: '0'
+						},
+						options3: {
+							disabledDate (date) {
+								return date && date.valueOf() > Date.now();
+							}
+						},
+						username: '',
+						scrollText: '',
+						isHighest_: '',
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let isHighest = localStorage.getItem('isHighest');
+					this.isHighest_ = isHighest == 1;
+					switch(isHighest) {
+						case '2':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+						case '3':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					if (localStorage.getItem('isHighest') == '3') {
+						$('#high-level').remove();
+					} else {
+						$('#high-level').show();
+					}
+					let that = this;
+
+					that.username = localStorage.getItem('loginName');
+					$('#username').html(localStorage.getItem('loginName'));
+					that.scrollText = localStorage.getItem('scrollText');
+					that.$nextTick(function() {
+						that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+						that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+						that.handleScroll();
+					});
+					that.handleGetData();
+				},
+				methods: {
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleChangePage(type, e) {
+						let that = this;
+
+						that.page.pageNum = e;
+						that.handleGetData();
+					},
+					handleGetData() {
+						let that = this,
+							vParam = {};
+
+						if (that.info.agentName) {
+							vParam['agentName'] = that.info.agentName;
+						}
+
+						if (that.info.startTime) {
+							vParam['startTime'] = that.info.startTime;
+						}
+
+						if (that.info.endTime) {
+							vParam['endTime'] = that.info.endTime;
+						}
+
+						if (that.info.type !== '0') {
+							vParam['status'] = that.info.type;
+						}
+
+						vParam['start'] = that.page.pageNum;
+						vParam['pageSize'] = that.page.pageSize;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/SearchAccountChange',
+								params: vParam
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.close(index);
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.page.total = data.data.Total;
+									that.list = result.map(function(item) {
+										return {
+											id: item.SerialNum,
+											time: item.AddTime,
+											change: item.Change,
+											balance: item.Balance,
+											type: item.Type,
+											remark: item.Remark
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+
+</html>

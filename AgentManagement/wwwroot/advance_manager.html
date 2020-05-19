@@ -1,0 +1,5303 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/iview.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/iview.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+			<div id="header"></div>
+
+			<script>
+				$(function(){
+					$('#header').load('common/header.html');
+				})
+			</script>
+			<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none" class="active">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+							<script>
+								(function() {
+									var username = localStorage.getItem('loginName');
+									$('#username-min').html(username);
+									if (localStorage.getItem('isHighest') == '3') {
+										$('#high-level').remove();
+									} else {
+										$('#high-level').show();
+									}
+								})();
+							</script>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">高级管理</li>
+					</ol>
+					<!--面包屑当前位置end-->
+
+					<!--第一部分选项卡表格内容区域start-->
+					<div class="widget-site-box mg-btm20">
+						<div class="body">
+							<!--响应式选项卡start-->
+							<div class="tabs-response">
+								<div class="tabs-menu">
+									<div class="tabs-menulist">
+										<div class="swiper-wrapper tabs-head">
+											<div class="swiper-slide swiper-slide-1 cur">
+												<a href="javascript:void(0)">代理充值订单</a>
+											</div>
+											<div class="swiper-slide swiper-slide-2">
+												<a href="javascript:void(0)">商户充值订单</a>
+											</div>
+											<div class="swiper-slide swiper-slide-3">
+												<a href="javascript:void(0)">账号管理</a>
+											</div>
+											<div class="swiper-slide swiper-slide-4 verify">
+												<a href="javascript:void(0)">高级管理</a>
+											</div>
+											<div class="swiper-slide swiper-slide-5">
+												<a href="javascript:void(0)">操作日志</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-6">
+												<a href="javascript:void(0)">充值卡管理</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-7">
+												<a href="javascript:void(0)">数据分库</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-8">
+												<a href="javascript:void(0)">平台配置</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-9">
+												<a href="javascript:void(0)">游戏动画配置</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-10">
+												<a href="javascript:void(0)">游戏开奖时间配置</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-11">
+												<a href="javascript:void(0)">游戏管理</a>
+											</div>
+											<div class="swiper-slide swiper-slide-12 online">
+												<a href="javascript:void(0)">在线商户</a>
+											</div>
+											<div class="swiper-slide verify swiper-slide-13">
+												<a href="javascript:void(0)">运营模式</a>
+											</div>
+										</div>
+
+										<!-- Add Arrows -->
+								        <div class="swiper-button-next" @click="handleSlide('next')"></div>
+								        <div class="swiper-button-prev" @click="handleSlide('prev')"></div>
+									</div>
+								</div>
+
+								<div class="tabs-body">
+									<!--代理充值订单start-->
+									<div class="tabs-boxcon cur">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btns-group btns-group-green pull-left clearfix mg-btm10 m-float-none">
+													<a @click="handleQueryRecharge(1)" :class="['btn', 'btn-sm', selectBtn === 1 ? 'btn-success' : 'btn-default']">今天</a>
+													<a @click="handleQueryRecharge(2)" :class="['btn', 'btn-sm', selectBtn === 2 ? 'btn-success' : 'btn-default']">昨天</a>
+													<a @click="handleQueryRecharge(3)" :class="['btn', 'btn-sm', selectBtn === 3 ? 'btn-success' : 'btn-default']">近7天</a>
+												</div>
+												<div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<!-- <input class="date-normal" type="text" v-model="recharge.startTime"> -->
+														<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="recharge.startTime"></Date-Picker>
+													</div>
+													<div class="flex-none pull-left lineheight">-</div>
+													<div class="flex-1 flex-item pull-left" style="margin-right: 10px;">
+														<!-- <input class="date-normal end" type="text" v-model="recharge.endTime"> -->
+														<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="recharge.endTime"></Date-Picker>
+													</div>
+												</div>
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="recharge.name" placeholder="购卡账户名">
+												</div>
+												<!-- <div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<select class="ope-select" v-model="selectSaleType1">
+															<option v-for="(item, index) in saleTypeList" :key="index" :value="item.value">{{item.title}}</option>
+														</select>
+													</div>
+												</div> -->
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleQuery" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleResetQuery(3)" class="btn btn-sm btn-default">重置</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--表格数据 start-->
+										<div class="table-area mg-btm20">
+											<table class="table-normal table-bordered">
+			                                    <thead>
+													<tr>
+														<th style="width:11.5%">购卡账户</th>
+														<th style="width:11.5%">上级代理的账户名</th>
+														<th style="width:11.5%">支付金额</th>
+														<th style="width:11.5%">到账金额</th>
+														<th style="width:19.5%">订单方式</th>
+														<th style="width:11.5%">订单状态</th>
+														<th style="width:11.5%">申请时间</th>
+														<th style="width:11.5%">处理时间</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in recharge.list" :key="index">
+														<td style="width:11.5%"><span v-text="item.name"></span></td>
+														<td style="width:11.5%"><span v-text="item.agent"></span></td>
+														<td style="width:11.5%"><span v-text="'￥' + item.money"></span></td>
+														<td style="width:11.5%"><span v-text="'￥' + item.actMoney"></td>
+														<td style="width:19.5%"><span v-text="item.type"></td>
+														<td style="width:11.5%"><span v-text="item.status"></td>
+														<td style="width:11.5%"><span v-text="item.applyTime"></td>
+														<td style="width:11.5%"><span v-show="item.isHandle" v-text="item.handleTime"></span><a v-show="!item.isHandle" @click="handleConfirmArr(item.id)">确认到账</a></td>
+													</tr>
+												</tbody>
+			                                </table>
+										</div>
+										<!--表格数据  end-->
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="recharge.page.total" show-total :page-size="recharge.page.pageSize" :current="recharge.page.pageNum" @on-change="handleChangePage(4, $event)"/>
+										</div>
+									</div>
+									<!--代理充值订单  end-->
+
+									<!--商户充值订单 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btns-group btns-group-green pull-left clearfix mg-btm10 m-float-none">
+													<a @click="handleQueryRecharge(4)" :class="['btn', 'btn-sm', selectBtnM === 4 ? 'btn-success' : 'btn-default']">今天</a>
+													<a @click="handleQueryRecharge(5)" :class="['btn', 'btn-sm', selectBtnM === 5 ? 'btn-success' : 'btn-default']">昨天</a>
+													<a @click="handleQueryRecharge(6)" :class="['btn', 'btn-sm', selectBtnM === 6 ? 'btn-success' : 'btn-default']">近7天</a>
+												</div>
+												<div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="rechargeM.startTime"></Date-Picker>
+													</div>
+													<div class="flex-none pull-left lineheight">-</div>
+													<div class="flex-1 flex-item pull-left" style="margin-right: 10px;">
+														<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="rechargeM.endTime"></Date-Picker>
+													</div>
+												</div>
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="rechargeM.name" placeholder="商户名">
+												</div>
+												<div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<select class="ope-select" v-model="selectSaleType2">
+															<option v-for="(item, index) in saleTypeList" :key="index" :value="item.value">{{item.title}}</option>
+														</select>
+													</div>
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleQueryM" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleResetQuery(6)" class="btn btn-sm btn-default">重置</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--表格数据 start-->
+										<div class="table-area mg-btm20">
+											<table class="table-normal table-bordered">
+			                                    <thead>
+													<tr>
+														<th style="width:11.5%">商户名</th>
+														<th style="width:11.5%">直接代理</th>
+														<th style="width:11.5%">金额</th>
+														<th style="width:11.5%">支付方式</th>
+														<th style="width:11.5%">到期时间</th>
+														<th style="width:11.5%">处理时间</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in rechargeM.list" :key="index">
+														<td style="width:11.5%"><span v-text="item.name"></span></td>
+														<td style="width:11.5%"><span v-text="item.agent"></span></td>
+														<td style="width:11.5%"><span v-text="'￥' + item.money"></span></td>
+														<td style="width:19.5%"><span v-text="item.type"></td>
+														<td style="width:11.5%"><span v-text="item.applyTime"></td>
+														<td style="width:11.5%"><span v-text="item.handleTime"></span></td>
+													</tr>
+												</tbody>
+			                                </table>
+										</div>
+										<!--表格数据  end-->
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="rechargeM.page.total" show-total :page-size="rechargeM.page.pageSize" :current="rechargeM.page.pageNum" @on-change="handleChangePage(9, $event)"/>
+										</div>
+									</div>
+									<!--商户充值订单  end-->
+
+									<!--账号管理start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="account.searchName" placeholder="输入用户名">
+												</div>
+												<div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<select class="ope-select" v-model="account.type">
+															<option value="1">代理账号</option>
+															<option value="2">商户账号</option>
+														</select>
+													</div>
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleQueryAccount" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleResetQuery(4)" class="btn btn-sm btn-default">重置</a>
+													</div>
+												</div>
+												<div class="opetext-info pull-right clearfix">
+													<!-- <p class="pull-left">
+														商户账号在线数量
+														<b><span v-text="account.onlineMechantNum"></span></b>
+													</p> -->
+													<p class="pull-left">
+														代理账号数量
+														<b><span v-text="account.agentNum"></span></b>
+													</p>
+													<p class="pull-left">
+														商户账号数量
+														<b><span v-text="account.merchantNum"></span></b>
+													</p>
+													<p class="pull-left">
+														未到期商户账号数量
+														<b><span v-text="account.merchantNum - account.overdueNum"></span></b>
+													</p>
+													<p class="pull-left">
+														平台玩家账号总数
+														<b><span v-text="account.userCount"></span></b>
+													</p>
+												</div>
+											</div>
+											<!--表格数据 start-->
+											<div v-show="account.type === '1'" class="table-area mg-btm20">
+												<table class="table-normal table-bordered">
+													<thead>
+														<tr>
+															<th>用户名</th>
+															<th>用户余额</th>
+															<th>代理价格</th>
+															<th>银行账户</th>
+															<th>最后登录IP</th>
+															<th>最后登录时间</th>
+															<th>创建时间</th>
+															<th width="500">操作</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr v-for="(item, index) in account.list" :key="index">
+															<td><span v-text="item.username.lastIndexOf('>') !== -1 ? item.username.substr(0, item.username.lastIndexOf('>') + 1) : ''"></span><span class="last-bold" v-text="' ' + (item.username.lastIndexOf('>') !== -1 ? item.username.substr(item.username.lastIndexOf('>') + 1, item.username.length) : item.username)"></span></td>
+															<td><span v-text="'￥' + item.money"></span></td>
+															<td><span v-text="'￥' + item.agentPrice"></td>
+															<td><span v-text="item.bankId"></td>
+															<td><span v-text="item.ip"></td>
+															<td><span v-text="item.loginTime"></td>
+															<td><span v-text="item.createTime"></td>
+															<td>
+																<a class="btn btn-sm btn-info layer-btn" @click="handleShowPanel(1, item.agentId)">联系方式</a>
+																<a v-bind:class="['btn', 'btn-sm', item.lock == 1 ? 'btn-success' : 'btn-warning']" @click="handleLockAgent(item.agentId)" v-text="item.lock == 1 ? '锁定' : '解锁'"></a>
+																<a class="btn btn-sm btn-success showshadow chgprice" @click="handleShowChangePrice(item.agentId)">修改价格</a>
+																<a class="btn btn-sm btn-danger layer-btn" @click="handleShowPanel(2, item.agentId, (item.username.lastIndexOf('>') !== -1 ? item.username.substr(item.username.lastIndexOf('>') + 1, item.username.length) : item.username))">加扣款</a>
+																<a class="btn btn-sm btn-primary showshadow resetpsw" @click="handleResetPassword(item.agentId)">重置登录密码</a>
+																<a class="btn btn-sm btn-primary showshadow resetpsw" @click="handleResetSafePassword(item.agentId)">重置安全密码</a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<div style="text-align: center">
+													<Page style="margin-top: 20px;" :total="page.total" show-total :page-size="page.pageSize" :current="page.pageNum" @on-change="handleChangePage(1, $event)"/>
+												</div>
+											</div>
+											<div v-show="account.type === '2'" class="table-area mg-btm20">
+												<table class="table-normal table-bordered">
+													<thead>
+														<tr>
+															<th>代理账号名称</th>
+															<th>商户账号名称</th>
+															<th>商户安全码</th>
+															<th>商户到期时间</th>
+															<th>最后登录时间</th>
+															<th width="400">操作</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr v-for="(item, index) in account.merchantList" :key="index">
+															<td><span v-text="item.agentName"></span></td>
+															<td><span v-text="item.merchantName"></td>
+															<td><span v-text="item.safeCode"></td>
+															<td><span v-text="item.expireTime"></td>
+															<td><span v-text="item.lastTime"></td>
+															<td>
+																<a class="btn btn-sm btn-primary showshadow resetpsw" @click="handleResetSafeCode(item.id)">重置安全码</a>
+																<a :class="['btn', 'btn-sm', 'showshadow', 'resetpsw', item.level ? 'btn-danger' : 'btn-primary']" @click="handleShowSetting(item.id, item.level)">高级商户</a>
+																<a class="btn btn-sm btn-primary showshadow resetpsw" @click="handleResetMPassword(item.id)">重置登录密码</a>
+																<a class="btn btn-sm btn-primary showshadow resetpsw" @click="handleResetMLockPwd(item.id)">重置锁屏密码</a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<div style="text-align: center">
+													<Page style="margin-top: 20px;" :total="account.page.total" show-total :page-size="account.page.pageSize" :current="account.page.pageNum" @on-change="handleChangePage(7, $event)"/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--账号管理  end -->
+
+									<!--高级管理start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="advan-setting">
+												<!-- <div class="setting-item clearfix clearfix">
+													<label class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;清空测试数据：</label>
+													<div class="set-btn pull-left">
+														<a @click="handleEnterClear" class="btn btn-sm btn-success"><i class="fa fa-check"></i>清空</a>
+													</div>
+												</div> -->
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置级差值：</label>
+													<div class="row-full pull-left">
+														<input class="form-control" v-model="rangeValue" @input="handleInputNumber($event, 5)" placeholder="请输入级差">
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSetRange" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">设置指定商户的上级代理：</label>
+													<div class="row-full pull-left" style="margin-right: 10px;">
+														<input class="form-control" v-model="target.account" style="width: 160px;" placeholder="请输入指定商户账号">
+													</div>
+													<div class="set-btn pull-left" v-show="!target.upAccount">
+														<a @click="handleVerifyTarget" class="btn btn-sm btn-success"><i class="fa fa-check"></i>验证商户账号</a>
+													</div>
+													<div class="row-full pull-left" style="margin-right: 10px;line-height: 30px;" v-show="target.upAccount">
+														<span v-text="`上级代理账号：${target.upAccount}`"></span>
+													</div>
+													<label class="pull-left" v-show="target.upAccount">选择新的上级代理账号：</label>
+													<div class="row-full pull-left" v-show="target.upAccount">
+														<!-- <select class="ope-select" v-model="target.mUpAccount">
+															<option :value="item" v-for="(item, index) in target.showAccountList" :key="index">{{item}}</option>
+														</select> -->
+														<i-select v-model="target.mUpAccount" filterable>
+															<i-option v-for="(item, index) in target.showAccountList" :value="item" :key="index">{{ item }}</i-option>
+														</i-select>
+													</div>
+													<div class="set-btn pull-left" v-show="target.upAccount">
+														<a @click="handleSetUpAccount" class="btn btn-sm btn-success"><i class="fa fa-check"></i>设置</a>
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">设置统一出款时间：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<Time-Picker format="HH:mm" confirm v-model="time.startTime" style="width: 120px"></Time-Picker>
+														</div>
+														<div class="flex-none pull-left lineheight">
+															至
+														</div>
+														<div class="flex-1 flex-item pull-left">
+															<Time-Picker format="HH:mm" confirm v-model="time.endTime" style="width: 120px"></Time-Picker>
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSetTime" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>保存</a>
+													</div>
+													<div class="pull-left set-tip">
+														当前出款时间<span class="color-orange" v-text="time.curTime"></span>
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">加扣客户有效时间：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input class="ope-input md-w" type="text" v-model="time.name" placeholder="客户账号">
+														</div>
+														<div class="flex-none flex-item pull-left">
+															<input class="ope-input sm-w" type="text" v-model="time.timeValue" placeholder="">
+														</div>
+														<div class="flex-none flex-item pull-left">
+															<select class="ope-select sm-w no-mg" v-model="time.timeType">
+																<option value="1">月</option>
+																<option value="2">天</option>
+															</select>
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleAddMinusTime" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>保存</a>
+													</div>
+													<div class="pull-left set-tip">
+														加时间正数，扣时间负数
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">手动处理客户充值：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input class="ope-input md-w" type="text" v-model="manualRecharge.agent" placeholder="直接代理账号">
+														</div>
+														<div class="flex-1 flex-item pull-left">
+															<input class="ope-input md-w" type="text" v-model="manualRecharge.account" placeholder="客户账号">
+														</div>
+													</div>
+
+													<div class="row-full pull-left">
+														<input class="ope-input md-w no-mg" type="text" v-model="manualRecharge.money" placeholder="代理扣费（正数）" @input="handleInputNumber($event, 1)">
+													</div>
+
+													<div class="set-btn pull-left">
+														<a @click="handleManualRecharge" class="btn btn-sm btn-success"><i class="fa fa-usd"></i>充值</a>
+													</div>
+													<div class="pull-left set-tip">
+														手动处理客户充值执行后，扣除代理余额并逐级返利
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">配置人工收款二维码：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input ref="upload-QRCode1" class="ope-input" type="file" placeholder="" @change="handleChangeQrCode(1)">
+														</div>
+														<div class="flex-none viewarea flex-item pull-left clearfix">
+															<label class="pull-left">预览</label>
+															<input ref="switch01" type="checkbox" id="switch01" class="chk_switch" @change="handleChangeSwitch($event, 1)">
+															<label class="pull-left" for="switch01"></label>
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSetQRcode(1)" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>保存</a>
+													</div>
+													<div class="pull-left set-tip">
+														手动调整收款二维码
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">重置客户后台密码：</label>
+													<div class="row-full pull-left">
+														<input class="ope-input md-w no-mg" type="text" v-model="password.account" placeholder="客户账号">
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleResetPWByName" class="btn btn-sm btn-success"><i class="fa fa-repeat"></i>重置</a>
+													</div>
+													<div class="pull-left set-tip">
+														重置客户操作后台登录密码为：123456a
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">增减代理库存月卡：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input class="ope-input md-w" type="text" v-model="stock.agent" placeholder="代理账号">
+														</div>
+														<div class="flex-none flex-item pull-left">
+															<input class="ope-input sm-w no-mg" type="text" v-model="stock.value" placeholder="">
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleAddMinusStock" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>保存</a>
+													</div>
+													<div class="pull-left set-tip">
+														手动增减代理库存月卡
+													</div>
+												</div>
+
+												<div class="setting-item clearfix">
+													<label class="pull-left">代理免费时长和超出费用：</label>
+													<div class="row-full pull-left">
+														<input class="ope-input md-w" type="text" v-model="agent.account" placeholder="代理账号">
+													</div>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input class="ope-input md-w" type="text" v-model="agent.freeTime" placeholder="免费时长">
+														</div>
+													</div>
+
+													<div class="row-full pull-left">
+														<input class="ope-input md-w no-mg" type="text" v-model="agent.overMoney" placeholder="超出费用">
+													</div>
+
+													<div class="set-btn pull-left">
+														<a @click="handleFreeTimeOverMoney" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>保存</a>
+													</div>
+													<div class="pull-left set-tip">
+														当前用户可以免费使用<span v-text="agent.showFreeTime"></span>小时，超出部分每小时收费<span v-text="agent.showOverMoney"></span>元
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left" style="width: 150px;">销售后台滚动公告：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写公告内容" v-model="notice.content"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateNotice(1)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														手动更改PC、手机端销售后台滚动公告
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left" style="width: 150px;">商户后台滚动公告：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写公告内容" v-model="notice.merchantContent"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateNotice(2)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														手动更改PC、手机端商户后台滚动公告
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码1000地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码1000地址" v-model="notice.ThousandUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(4)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码1000地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码1100地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码1100地址" v-model="notice.ThoushunUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(5)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码1100地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码1200地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码1200地址" v-model="notice.ThoustwohUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(6)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码1200地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码1500地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码1500地址" v-model="notice.lowurl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(1)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码1500地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码2000地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码2000地址" v-model="notice.meurl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(2)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码2000地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置兑换码3000地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写兑换码3000地址" v-model="notice.hiurl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateEXAddress(3)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置获取兑换码3000地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置H5域名设置说明：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" maxlength="295" placeholder="填写H5域名设置说明" v-model="h5Domain.desc"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateH5DomainDesc" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置H5域名设置说明
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置H5微信授权域名：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写H5微信授权域名" v-model="h5Domain.name"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateH5DomainName" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置H5微信授权域名
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--高级管理  end -->
+
+									<!--操作日志start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="log.searchType" placeholder="操作类型">
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleQueryLog" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleResetQuery(5)" class="btn btn-sm btn-default">重置</a>
+													</div>
+												</div>
+											</div>
+											<!--表格数据 start-->
+											<div class="table-area mg-btm20">
+												<table class="table-normal table-bordered">
+													<thead>
+														<tr>
+																<th>操作时间</th>
+																<th>操作用户</th>
+																<th>登录IP</th>
+																<th>操作类型</th>
+																<th>状态</th>
+																<th>备注</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr v-for="(item, index) in log.list" :key="index">
+																<td><span v-text="item.time"></span></td>
+																<td><span v-text="item.name"></span></td>
+																<td><span v-text="item.ip"></span></td>
+																<td><span v-text="item.type"></span></td>
+																<td><span class="color-green"><span v-text="item.status"></span></span></td>
+																<td><span v-text="item.remark"></span></td>
+														</tr>
+													</tbody>
+											</table>
+											</div>
+											<!--表格数据  end-->
+											<div style="text-align: center">
+												<Page style="margin-top: 20px;" :total="log.page.total" show-total :page-size="log.page.pageSize" :current="log.page.pageNum" @on-change="handleChangePage(5, $event)"/>
+											</div>
+										</div>
+									</div>
+									<!--操作日志  end -->
+
+									<!--充值卡管理 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleShowPanel(6)" class="btn btn-sm btn-success">新增充值卡</a>
+													</div>
+												</div>
+												<div class="dis-flex mg-btm10 pull-left">
+													<div class="flex-1 flex-item pull-left">
+														<select class="ope-select" v-model="recharCard.status">
+															<option value="">全部</option>
+															<option value="1">未使用</option>
+															<option value="2">已使用</option>
+														</select>
+													</div>
+												</div>
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="recharCard.keyword" placeholder="代理名称">
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleGetCard" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleDeleteCheckCard" class="btn btn-sm btn-success">删除选中</a>
+													</div>
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleExportToXLSX" class="btn btn-sm btn-success">导出选中数据</a>
+													</div>
+												</div>
+											</div>
+											<!--表格数据 start-->
+											<div class="table-area mg-btm20">
+												<table class="table-normal table-bordered" id="tables">
+				                                    <thead>
+				                                    <tr>
+														<th>
+															<Checkbox :indeterminate="recharCard.indeterminate" :value="recharCard.checkAll" @click.prevent.native="handleCheckAll">全选</Checkbox>
+														</th>
+														<th>代理名称</th>
+				                                        <th>兑换码</th>
+				                                        <th>金额</th>
+														<th>状态</th>
+														<th>到期时间</th>
+				                                    </tr>
+				                                    </thead>
+				                                    <tbody>
+														<tr v-for="(item, index) in recharCard.cardList" :key="index">
+															<td><Checkbox :label="item.id" v-model="item.checked" @click.prevent.native="handleCheckGroup(item)"></Checkbox></td>
+															<td><span v-text="item.agentName"></span></td>
+															<td><span v-text="item.code"></span></td>
+															<td><span v-text="item.money"></span></td>
+															<td><span v-text="item.status"></span></td>
+															<td><span v-text="item.mTime"></span></td>
+														</tr>
+				                                    </tbody>
+				                                </table>
+											</div>
+											<!--表格数据  end-->
+											<!--<div style="text-align: center">
+												<Page style="margin-top: 20px;" :total="log.page.total" show-total :page-size="log.page.pageSize" :current="log.page.pageNum" @on-change="handleChangePage(5, $event)"/>
+											</div>-->
+										</div>
+									</div>
+									<!--充值卡管理  end -->
+
+									<!--数据分库 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleShowPanel(10)" class="btn btn-sm btn-success">新增库</a>
+													</div>
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleClearData" class="btn btn-sm btn-success">清理过期两天的商户</a>
+													</div>
+												</div>
+											</div>
+											<!--表格数据 start-->
+											<div class="table-area mg-btm20">
+												<table class="table-normal table-bordered">
+				                                    <thead>
+				                                    <tr>
+														<th>数据库地址</th>
+														<th>数据库名称</th>
+				                                        <th>在线人数</th>
+														<th>最大人数</th>
+														<th>操作</th>
+				                                    </tr>
+				                                    </thead>
+				                                    <tbody>
+				                                    <tr v-for="(item, index) in databaseList" :key="index">
+														<td><span v-text="item.path"></span></td>
+														<td><span v-text="item.name||'无'"></span></td>
+				                                        <td><span v-text="item.count"></span></td>
+														<td><span v-text="item.maxCount"></span></td>
+														<td><span class="btn btn-sm btn-success showshadow chgprice" @click="handleShowPanel(11, item.id)">修改</span></td>
+				                                    </tr>
+				                                    </tbody>
+				                                </table>
+											</div>
+											<!--表格数据  end-->
+										</div>
+									</div>
+									<!--数据分库  end -->
+
+									<!--平台配置 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="advan-setting">
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置商户后台登录URL：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写商户后台登录URL" v-model="platform.merchantUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSavePlatform(1)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置商户后台登录URL
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置玩家app下载地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写玩家app下载地址" v-model="platform.appUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSavePlatform(2)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置玩家app下载地址
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置商户后台app下载地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写商户后台app下载地址" v-model="platform.merchantAppUrl"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSavePlatform(3)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置商户后台app下载地址
+													</div>
+												</div>
+
+												<!-- <div class="setting-item clearfix">
+													<label class="pull-left">配置H5网页入口二维码图片：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<input ref="upload-QRCode2" class="ope-input" type="file" placeholder="" @change="handleChangeQrCode(2)">
+														</div>
+														<div class="flex-none viewarea flex-item pull-left clearfix">
+															<label class="pull-left">预览</label>
+															<input ref="switch02" type="checkbox" id="switch02" class="chk_switch" @change="handleChangeSwitch($event, 2)">
+															<label class="pull-left" for="switch02"></label>
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSetQRcode(2)" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置H5网页入口二维码图片
+													</div>
+												</div> -->
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置APP授权：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<span>appid:</span>
+															<input class="ope-input md-w" type="text" v-model="platform.appInfo.appid" placeholder="请填写appid">
+														</div>
+														<div class="flex-1 flex-item pull-left">
+															<span>appsecret:</span>
+															<input class="ope-input md-w" type="text" v-model="platform.appInfo.appsecret" placeholder="请填写appsecret">
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSavePlatform(4)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置APP授权信息
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置网页授权：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<span>appid:</span>
+															<input class="ope-input md-w" type="text" v-model="platform.h5Info.appid" placeholder="请填写appid">
+														</div>
+														<div class="flex-1 flex-item pull-left">
+															<span>appsecret:</span>
+															<input class="ope-input md-w" type="text" v-model="platform.h5Info.appsecret" placeholder="请填写appsecret">
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSavePlatform(5)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置网页授权信息
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置微信快捷登录：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-none viewarea flex-item pull-left clearfix" @click.stop.prevent="handleChangeSwitch($event, 3)">
+															<input ref="switch03" type="checkbox" id="switch03" v-model="platform.wechatLogin" class="chk_switch">
+															<label class="pull-left" for="switch03"></label>
+														</div>
+													</div>
+													<div class="pull-left set-tip">
+														配置启用与关闭微信快捷登录
+													</div>
+												</div>
+
+												<div class="setting-item clearfix clearfix">
+													<label class="pull-left">配置视讯视屏播放地址：</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" placeholder="填写视讯视屏播放地址" v-model="video.url"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateVideoUrl" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														配置视讯视屏播放地址
+													</div>
+												</div>
+
+												<!-- <div class="setting-item clearfix clearfix">
+													<label class="pull-left">更新APK本地内容：</label>
+													<div class="dis-flex date-timearea pull-left clearfix">
+														<div class="flex-1 flex-item pull-left">
+															<span>版本号:</span>
+															<input class="ope-input md-w" type="text" v-model="apk.version" placeholder="请填写版本号">
+														</div>
+														<div class="flex-1 flex-item pull-left">
+															<span>更新文件:</span>
+															<input ref="upload-update-file" style="display: inline-block;" class="ope-input" type="file" accept="application/zip" placeholder="" @change="handleChangeQrCode(3)">
+														</div>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleUpdateVersion" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+													<div class="pull-left set-tip">
+														更新APK本地内容(只能上传zip更新包)
+													</div>
+												</div> -->
+											</div>
+										</div>
+									</div>
+									<!--平台配置  end -->
+
+									<!--游戏动画配置 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="advan-setting">
+												<div class="setting-item clearfix clearfix" v-for="(item, index) in gameList" :key="index">
+													<label style="width: 220px;" class="pull-left">{{'配置' + item.name + '开奖动画URL：'}}</label>
+													<div class="row-full pull-left">
+														<textarea class="ope-textarea" :placeholder="`配置${item.name}开奖动画URL`" v-model="item.url"></textarea>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSaveAnimation(item)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--游戏动画配置  end -->
+
+									<!--游戏开奖时间配置 start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="advan-setting">
+												<div class="setting-item clearfix clearfix" v-for="(item, index) in gameList" :key="index">
+													<label style="width: 140px;text-align: right;" class="pull-left">{{item.name + '：'}}</label>
+													<div class="flex-none flex-item pull-left">
+														<span>总期数:</span>
+														<input class="ope-input" type="text" style="width: 50px;" v-model="item.dayNum" :placeholder="`${item.name}`" @input="handleInputNumber($event, 3, item)">
+													</div>
+													<div class="flex-none flex-item pull-left">
+														<span>首次开奖期号:</span>
+														<input class="ope-input" type="text" style="width: 110px;" v-model="item.firstNper" :placeholder="`${item.name}`">
+													</div>
+													<div class="flex-none flex-item pull-left">
+														<span>首次开奖时间:</span>
+														<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="item.firstStartTime" style="width: 160px"></Date-Picker>
+													</div>
+													<div class="flex-none flex-item pull-left">
+														<span>每次开奖时间:</span>
+														<input class="ope-input" type="text" style="width: 50px;" v-model="item.interval" :placeholder="`${item.name}`"  @input="handleInputNumber($event, 4, item)">
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSaveGameTime(item)" class="btn btn-sm btn-success"><i class="fa fa-check"></i>提交</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--游戏开奖时间配置  end -->
+
+									<!--游戏管理  start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btns-group btns-group-green pull-left clearfix mg-btm10 m-float-none">
+													<div class="set-btn pull-left">
+														<a @click="handleAddAddress" class="btn btn-sm btn-success"><i class="fa fa-check"></i>新增域名</a>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleSaveAddress" class="btn btn-sm btn-success"><i class="fa fa-check"></i>修改信息</a>
+													</div>
+												</div>
+											</div>
+											<div class="site-opearea clearfix" v-for="(item, index) in addressList" :key="index">
+												<div class="flex-none flex-item pull-left">
+													<span>域名地址：</span>
+													<input class="ope-input" type="text" style="width: 300px;" v-model="item.address" placeholder="域名地址">
+													<span>启用：</span>
+													<Checkbox v-model="item.checked"></Checkbox>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--游戏管理  end-->
+
+									<!--在线商户  start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="input-full mg-btm10 pull-left">
+													<input class="ope-input" type="text" v-model="online.name" placeholder="商户账号">
+												</div>
+												<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+													<div class="flex-1 flex-item pull-left">
+														<a @click="handleSearchMerchant" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+													</div>
+												</div>
+												<div class="opetext-info pull-right clearfix">
+													<p class="pull-left">
+														商户账号在线数量
+														<b><span v-text="online.total"></span></b>
+													</p>
+												</div>
+											</div>
+											<!--表格数据 start-->
+											<div class="table-area mg-btm20">
+												<table class="table-normal table-bordered" id="tables">
+													<thead>
+														<tr>
+																<th>商户账号</th>
+																<th>最近登录时间</th>
+														</tr>
+													</thead>
+													<tr v-for="(item, index) in online.list" :key="index">
+														<td><span v-text="item.name"></span></td>
+														<td><span v-text="item.time"></span></td>
+													</tr>
+												</table>
+											</div>
+											<!--表格数据  end-->
+											<div style="text-align: center">
+												<Page style="margin-top: 20px;" :total="online.total" show-total :page-size="online.pageSize" :current="online.pageNum" @on-change="handleChangePage(8, $event)"/>
+											</div>
+										</div>
+									</div>
+									<!--在线商户  end-->
+
+									<!--运营模式  start-->
+									<div class="tabs-boxcon">
+										<div class="incon-wrap">
+											<div class="site-opearea clearfix">
+												<div class="btns-group btns-group-green pull-left clearfix mg-btm10 m-float-none">
+													<div class="set-btn pull-left">
+														<a @click="handleModifyGameMode(true)" :class="['btn', 'btn-sm', gameMode ? 'btn-success' : 'btn-default']"><i :class="['fa', gameMode ? 'fa-check' : '']"></i>正式</a>
+													</div>
+													<div class="set-btn pull-left">
+														<a @click="handleModifyGameMode(false)" :class="['btn', 'btn-sm', gameMode ? 'btn-default' : 'btn-success']"><i :class="['fa', gameMode ? '' : 'fa-check']"></i>测试</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--运营模式  end-->
+								</div>
+							</div>
+							<!--响应式选项卡  end -->
+						</div>
+					</div>
+					<!--第一部分选项卡表格内容区域   end-->
+
+					<!--第二部分公告及提现记录start-->
+					<div id="advance-bottom" class="advance-btm clearfix">
+						<div class="col-sm-6">
+							<div class="widget-box box-withope mg-btm20">
+								<div class="header">
+									<i class="fa fa-volume-down" style="font-size: 18px;"></i> 公告管理
+									<a class="rightope btn btn-sm btn-primary" @click="handleShowPanel(5)">
+										<i class="fa fa-pencil" aria-hidden="true"></i>修改公告
+									</a>
+								</div>
+								<div class="body lefth">
+									<div class="art-session">
+										<h1 class="art-tit"><span v-text="notice.showTitle"></span></h1>
+										<div v-html="notice.showContent" style="word-break: break-all"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<!--选项卡start-->
+							<div class="model-cate withpadding widget-box">
+								<div class="tab-hd">
+									<span class="cur"><a>提现请求</a></span>
+									<span><a>提现记录</a></span>
+								</div>
+								<div class="tab-bd righth">
+									<!--提现请求start-->
+									<div class="cate-boxcon clearfix cur">
+										<div class="site-opearea clearfix pull-right dis-flex mg-btm12">
+											<div class="input-full pull-left flex-item flex-1">
+												<input class="ope-input" type="text" v-model="cashApply.loginName" placeholder="输入用户">
+											</div>
+											<div class="btn-full pull-left flex-item flex-none">
+												<a @click="handleQueryCash(1)" class="btn btn-sm btn-success"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+											</div>
+										</div>
+										<div class="table-area">
+											<table class="table-normal table-bordered">
+												<thead>
+													<tr>
+														<th>用户名</th>
+														<th>提现金额</th>
+														<th>当前余额</th>
+														<th>申请时间</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in cashApply.list" :key="index">
+														<td><span v-text="item.loginName"></span></td>
+														<td><span v-text="item.money"></span></td>
+														<td><span v-text="item.balance"></span></td>
+														<td><span v-text="item.time"></span></td>
+														<td>
+															<a @click="showRecordView(item)" class="btn btn-sm btn-success take-cash layer-btn">查看</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="cashApply.page.total" show-total :page-size="cashApply.page.pageSize" :current="cashApply.page.pageNum" @on-change="handleChangePage(2, $event)"/>
+										</div>
+									</div>
+									<!--提现请求end-->
+									<!--提现记录start-->
+									<div class="cate-boxcon">
+										<div class="site-opearea clearfix mg-btm12">
+											<div class="flex-1 flex-item dis-flex mg-btm10 pull-left" style="margin-top: 5px;">
+												<div class="flex-1 flex-item pull-left">
+													<!-- <input class="date-normal" type="text" id="datestart" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="cashRecord.startTime"></Date-Picker>
+												</div>
+												<div class="flex-none pull-left lineheight">-</div>
+												<div class="flex-1 flex-item pull-left" style="margin-right: 10px;">
+													<!-- <input class="date-normal end" type="text" id="dateend" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="cashRecord.endTime"></Date-Picker>
+												</div>
+											</div>
+											<div class="input-full pull-left flex-item flex-1" style="margin-right: 10px;margin-top: 5px;">
+												<input class="ope-input" type="text" v-model="cashRecord.name" placeholder="输入用户">
+											</div>
+											<div class="btn-full pull-left flex-item flex-none" style="margin-right: 10px;margin-top: 5px;">
+												<a @click="handleQueryCash(2)" class="btn btn-sm btn-success"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+											</div>
+											<div class="input-full pull-left flex-item flex-1" style="margin-top: 5px;">
+												<span v-text="`提现金额总计: ${cashRecord.all}`"></span>
+											</div>
+										</div>
+										<div class="table-area">
+											<table class="table-normal table-bordered">
+												<thead>
+													<tr>
+														<th>用户名</th>
+														<th>提现金额</th>
+														<th>剩余金额</th>
+														<th>申请时间</th>
+														<th>处理时间</th>
+														<th>提现方式</th>
+														<th>状态</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in cashRecord.list" :key="index">
+														<td><span v-text="item.name"></span></td>
+														<td><span v-text="item.money"></span></td>
+														<td><span v-text="item.balance"></span></td>
+														<td><span v-text="item.applyTime"></span></td>
+														<td><span v-text="item.handleTime"></span></td>
+														<td>
+															<div class="poverbox hsqure povfix">
+																<div v-show="item.type == '银行卡'">
+																		<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>银行卡</span>
+																		<span class="pover-con">
+																			<em class="arrow_box">卡号：<span v-text="item.url"></span></em>
+																		</span>
+																		<div class="shadowbg"></div>
+																</div>
+																<div v-show="item.type == '支付宝'" @click="handleViewAlipay(item.url)">
+																	<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>支付宝</span>
+																	<!-- <span class="pover-con">
+																		<em class="arrow_box"><img :src="item.url.split('&')[1]"/></em>
+																	</span>
+																	<div class="shadowbg"></div> -->
+																</div>
+																<div v-show="item.type == '泰达币'" @click="handleViewUsdt(item.url)">
+																	<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>泰达币</span>
+																</div>
+															<div>
+														</td>
+														<td class="color-orange"><span v-text="item.status"></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="cashRecord.page.total" show-total :page-size="cashRecord.page.pageSize" :current="cashRecord.page.pageNum" @on-change="handleChangePage(3, $event)"/>
+										</div>
+									</div>
+									<!--提现记录end-->
+								</div>
+							</div>
+							<!--选项卡end-->
+						</div>
+					</div>
+					<!--第二部分公告及提现记录  end-->
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+
+			<!--1--联系方式层弹出start-->
+			<div id="layer-content1" class="layer-info layer-content dis-hidden">
+				<h1>联系方式</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">手机号码</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="contactInfo.phone" :disabled="contactInfo.canEdit">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">QQ号码</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="contactInfo.QQ" :disabled="contactInfo.canEdit">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">Email</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="contactInfo.email" :disabled="contactInfo.canEdit">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--1--联系方式层弹出end-->
+
+			<!--2--加扣款层弹出start-->
+			<div id="layer-content2" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>加扣款</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">账号</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="addMinusMoney.name" disabled="">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>操作</label>
+							<div class="col-sm-6">
+								<div class="radio-groups">
+									<label class="item  clearfix" for="item01">
+										<input class="raidoicon pull-left" type="radio" v-model="addMinusMoney.addMinus" value="1"/>
+										<span class="pull-left">加钱</span>
+									</label>
+									<label class="item clearfix" for="item02">
+										<input class="raidoicon pull-left" type="radio" v-model="addMinusMoney.addMinus" value="2"/>
+										<span class="pull-left">扣钱</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>类型</label>
+							<div class="col-sm-6">
+								<select class="select-control" v-model="addMinusMoney.type">
+									<option value="1">充值</option>
+									<option value="2">提现</option>
+									<option value="3">冻结</option>
+									<option value="4">违规</option>
+									<option value="5">活动</option>
+									<option value="6">其他</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label"><em>*</em>金额</label>
+							<div class="col-sm-6">
+								<input class="form-control" v-model="addMinusMoney.money" @input="handleInputNumber($event, 2)"  type="text" placeholder="输入金额">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">理由</label>
+							<div class="col-sm-6">
+								<textarea class="textarea-control" placeholder="可留空" v-model="addMinusMoney.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleAddMinusMoney" class="btn btn-layerbtm btn-warning sub">提交</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--2--加扣款层弹出end-->
+
+			<!--3查看提现请求弹出层（支付宝）start-->
+			<div id="layer-content3" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">转账银行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue">支付宝</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">支付姓名：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.payName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">支付宝二维码：</label>
+							<div class="col-sm-6 col-xs-8">
+								<img class="alicode" :src="cashApply.select.QRCode"/>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2  control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--3查看提现请求弹出层（支付宝）end-->
+
+			<!--4查看提现请求弹出层（银行卡）start-->
+			<div id="layer-content4" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现银行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue" v-text="cashApply.select.transfer"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">银行姓名：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.payName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">银行账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.bankNum"></div>
+							</div>
+						</div>
+						<!-- <div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.bankNum"></div>
+							</div>
+						</div> -->
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--4查看提现请求弹出层（银行卡）end-->
+
+			<!--8--USDT层弹出start-->
+			<div id="layer-content8" class="layer-info layer-content dis-hidden layer-withbottom">
+				<div id="show-view-usdt"></div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--8--USDT层弹出end-->
+			<!--12--支付宝层弹出start-->
+			<div id="layer-content12" class="layer-info layer-content dis-hidden layer-withbottom">
+				<div style="width: 480px;height: 515px;">
+					<p v-if="cashRecord.alipayAccount" style="text-align: center;" v-text="`账号：${cashRecord.alipayAccount}`"></p>
+					<img v-if="cashRecord.alipayUrl" style="width: 480px;" :src="cashRecord.alipayUrl" alt/>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--12--支付宝层弹出end-->
+			<!--9查看提现请求弹出层（泰达币）start-->
+			<div id="layer-content9" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">收款类型：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue">数字货币(USDT/ERC20)</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">收款地址：</label>
+							<div class="col-sm-6 col-xs-8">
+								<a @click="handleViewQRCode" class="btn btn-sm btn-primary take-cash layer-btn">预览</a>
+								<div class="only-text">地址：</div>
+								<div class="only-text" v-text="cashApply.select.address"></div>
+								<div v-show="cashApply.select.showQRCode" id="qrcode" class="alicode"></div>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2  control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--9查看提现请求弹出层（泰达币）end-->
+
+			<!--5公告弹出层start-->
+			<div id="layer-content5" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改公告</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">公告标题：</label>
+							<div class="col-sm-6">
+								<input class="form-control " v-model="notice.title">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">公告内容：</label>
+							<div class="col-sm-6">
+								<textarea class="textarea-control" v-model="notice.content"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="layer-bottom twobtns clearfix">
+					<a @click="handleEnterModifyNotice" class="btn btn-layerbtm btn-warning sub">确认修改</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--5公告弹出层end-->
+			<!--6--充值卡层弹出start-->
+			<div id="layer-content6" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>新增充值卡</h1>
+				<div class="layer-con over-auto" style="height: 370px;">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">到期时间</label>
+							<div class="col-sm-6">
+								<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="recharCard.time" placement="bottom" style="z-index: 9999;"></Date-Picker>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">充值卡数量</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="recharCard.num">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-4 control-label">充值卡单张金额</label>
+							<div class="col-sm-6">
+								<input class="form-control disabled" v-model="recharCard.money">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<a @click="handleEnterAddCard" class="btn btn-layerbtm btn-warning sub">添加</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--6--充值卡层弹出end-->
+
+			<!--7--高级商户层弹出start-->
+			<div id="layer-content7" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>高级商户</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<radio-group v-model="merchantLevel">
+							<Radio label="n">普通商户</Radio>
+							<Radio label="a">高级商户</Radio>
+						</radio-group>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<a @click="handleEnterSetting" class="btn btn-layerbtm btn-warning sub">设置</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--7--高级商户层弹出end-->
+			<!--10--数据库层弹出start-->
+			<div id="layer-content10" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>新增数据库</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix" style="display: flex;justify-content: center;">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">数据库地址：</label>
+							<div class="col-sm-6">
+								<input class="form-control " v-model="database.address">
+							</div>
+						</div>
+						<div class="form-group  clearfix" style="display: flex;justify-content: center;margin-top: 10px;">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">数据库名称：</label>
+							<div class="col-sm-6">
+								<input class="form-control " v-model="database.name">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<a @click="handleAddDatabase" class="btn btn-layerbtm btn-warning sub">添加</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--10--数据库层弹出end-->
+			<!--11--数据库层弹出start-->
+			<div id="layer-content11" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>修改数据库</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix" style="display: flex;justify-content: center;">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">数据库地址：</label>
+							<div class="col-sm-6">
+								<input class="form-control " v-model="database.address">
+							</div>
+						</div>
+						<div class="form-group  clearfix" style="display: flex;justify-content: center;margin-top: 10px;">
+							<label class="col-sm-4 col-sm-2 col-xs-4 control-label">数据库名称：</label>
+							<div class="col-sm-6">
+								<input class="form-control " v-model="database.name">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<a @click="handleUpdateDatabase" class="btn btn-layerbtm btn-warning sub">修改</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--11--数据库层弹出end-->
+		</div>
+
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--swiper-->
+		<script src="plugins/swiper/js/swiper.min.js?v1.0.0"></script>
+		<script src="js/xlsx.full.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/tools.js?v1.0.0"></script>
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/qrcode.min.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						gameList: [],
+						addressList: [],
+						account: {
+							searchName: '',
+							isLoading: false,
+							list: [],
+							merchantList: [],
+							selectAgentId: '',
+							onlineMechantNum: 0,
+							type: '1',
+							agentNum: 0,
+							merchantNum: 0,
+							overdueNum: 0,
+							userCount: 0,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							}
+						},
+						contactInfo: {
+							phone: '',
+							QQ: '',
+							email: '',
+							canEdit: true
+						},
+						page: {
+							pageNum: 1,
+							pageSize: 3,
+							total: 0
+						},
+						addMinusMoney: {
+							account: '',
+							addMinus: '1',
+							type: '1',
+							money: '',
+							remark: '',
+							isLoading: false,
+							name: ''
+						},
+						cashApply: {
+							loginName: '',
+							list: [],
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							},
+							select: {
+								id: '',
+								remark: ''
+							}
+						},
+						cashRecord: {
+							name: '',
+							list: [],
+							isLoading: false,
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							all: 0,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							},
+							alipayAccount: '',
+							alipayUrl: ''
+						},
+						recharge: {
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							name: '',
+							list: [],
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							}
+						},
+						rechargeM: {
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							name: '',
+							list: [],
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							}
+						},
+						time: {
+							startTime: '',
+							endTime: '',
+							curTime: '',
+							isLoading: false,
+							name: '',
+							timeValue: 1,
+							timeType: 1
+						},
+						manualRecharge: {
+							isLoading: false,
+							agent: '',
+							account: '',
+							money: ''
+						},
+						qrCode: {
+							showImage: '',
+							image: '',
+							isLoading: false
+						},
+						password: {
+							account: '',
+							isLoading: false
+						},
+						stock: {
+							agent: '',
+							value: 1,
+							isLoading: false
+						},
+						log: {
+							searchType: '',
+							list: [],
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							}
+						},
+						scrollText: '',
+						isScrolling: false,
+						username: '',
+						isFreeLoading: false,
+						agent: {
+							account: '',
+							freeTime: '',
+							overMoney: '',
+							showFreeTime: '',
+							showOverMoney: ''
+						},
+						selectBtn: 1,
+						selectBtnM: 4,
+						notice: {
+							title: '',
+							content: '',
+							showTitle: '',
+							showContent: '',
+							merchantContent: '',
+							lowurl: '',
+							meurl: '',
+							hiurl: '',
+							ThousandUrl: '',
+							ThoushunUrl: '',
+							ThoustwoUrl: '',
+							isLoading: false,
+							canEdit: false
+						},
+						databaseList: [],
+						database: {
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 3,
+								total: 0
+							},
+							address: '',
+							name: '',
+							id: ''
+						},
+						recharCard: {
+							num: '',
+							money: '',
+							time: '',
+							isLoading: false,
+							keyword: '',
+							status: '',
+							cardList: [],
+							checkAll: false,
+							indeterminate: false,
+							checkList: []
+						},
+						platform: {
+							merchantUrl: '',
+							merchantAppUrl: '',
+							appUrl: '',
+							h5Url: '',
+							appInfo: {
+								appid: '',
+								appsecret: ''
+							},
+							h5Info: {
+								appid: '',
+								appsecret: ''
+							},
+							isLoading: false,
+							wechatLogin: true
+						},
+						rangeValue: 0,
+						target: {
+							account: '',
+							upAccount: '',
+							mUpAccount: '',
+							accountList: [],
+							showAccountList: []
+						},
+						gameMode: true,
+						online: {
+							list: [],
+							name: '',
+							isLoading: false,
+							pageNum: 1,
+							pageSize: 10,
+							total: 0
+						},
+						autoCash: null,
+						idDelete: false,
+						apk: {
+							version: '',
+							zip: null,
+							isLoading: false,
+							curVersion: ''
+						},
+						options3: {
+							disabledDate (date) {
+								return date && date.valueOf() > Date.now();
+							}
+						},
+						merchantLevel: 'n',
+						merchantId: '',
+						selectSaleType1: 0,
+						selectSaleType2: 0,
+						video: {
+							isLoading: false,
+							url: ''
+						},
+						saleTypeList: [
+							{
+								title: '全部',
+								value: 0
+							},
+							{
+								title: '余额直充',
+								value: 1
+							},
+							{
+								title: '库存直充',
+								value: 2
+							},
+							{
+								title: '临时直充',
+								value: 3
+							}
+						],
+						qrcode: null,
+						usdtCode: null,
+						isClearing: false,
+						h5Domain: {
+							desc: '',
+							name: '',
+							isLoading: false
+						},
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let isHighest = localStorage.getItem('isHighest');
+					switch(isHighest) {
+						case '2':
+						case '3':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					let that = this;
+
+					that.username = localStorage.getItem('loginName');
+					$('#username').html(localStorage.getItem('loginName'));
+					that.scrollText = localStorage.getItem('scrollText');
+					that.$nextTick(function() {
+						that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width);
+						that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width);
+						that.handleScroll();
+					});
+					that.handleGetData();
+					that.handleCashApply().then(function() {
+						that.autoCash = function() {
+							setTimeout(function() {
+								that.handleCashApply().then(function() {
+									that.autoCash();
+								});
+							}, 5000);
+						}
+						that.autoCash();
+					})
+					that.handleGetVideoUrl();
+					that.handleGetH5DomainName();
+					that.handleGetH5DomainDesc();
+					that.handleCashRecord();
+					that.handleRechargeList();
+					that.handleRechargeListM();
+					that.handleGetTime();
+					that.handleShowQRcode();
+					that.handleSearchLogs();
+					that.handleGetFreeTimeOverMoney();
+					that.handleGetNotice();
+					that.handleQueryDatabase();
+					that.handleGetCard();
+					that.handleGetPlatform(1);
+					that.handleGetPlatform(4);
+					that.handleGetPlatform(5);
+					that.handleGetPlatform(6);
+					that.handleGetPlatform(7);
+					that.handleGetSummary();
+					that.handleGetMerchantList();
+					that.handleGetGameList().then(function() {
+						that.gameList.forEach(item => {
+							that.handleGetAnimation(item);
+							that.handleGetGameTime(item);
+						})
+					})
+					that.handleGetAddressList();
+					that.handleGetGameMode();
+					that.handleGetAllUpAccount();
+					that.handleSearchOnline();
+					that.handleGetRange();
+					that.handleGetRedeemUrl();
+					that.handleGetMerchantRoll();
+					that.handleGetRoll();
+					that.handleGetVersion();
+				},
+				methods: {
+					handleGetVideoUrl() {
+						let that = this;
+						axios({
+							url: '/api/PlatformSetUp/GetVideoUrl'
+						}).then(function(data) {
+							if (data.data.Status == 100) {
+								that.video.url = data.data.Keyword;
+							}
+						})
+					},
+					handleUpdateVideoUrl() {
+						let that = this;
+						if (!that.video.isLoading) {
+							that.video.isLoading = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/PlatformSetUp/UpdateVideoUrn',
+								method: 'post',
+								params: {
+									url: that.video.url
+								}
+							}).then(function(data) {
+								that.video.isLoading = false;
+								if (data.data.Status == 100) {
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetVideoUrl();
+								}
+							})
+						}
+					},
+					handleUpdateH5DomainDesc() {
+						let that = this;
+						if (!that.h5Domain.isLoading) {
+							that.h5Domain.isLoading = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/AdvancedSetup/UpdateH5Description',
+								method: 'post',
+								params: {
+									description: that.h5Domain.desc
+								}
+							}).then(function(data) {
+								that.h5Domain.isLoading = false;
+								if (data.data.Status == 100) {
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetH5DomainDesc();
+								}
+							})
+						}
+					},
+					handleUpdateH5DomainName() {
+						let that = this;
+						if (!that.h5Domain.isLoading) {
+							that.h5Domain.isLoading = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/PlatformSetUp/UpdateGrantUrln',
+								method: 'post',
+								params: {
+									url: that.h5Domain.name
+								}
+							}).then(function(data) {
+								that.h5Domain.isLoading = false;
+								if (data.data.Status == 100) {
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetH5DomainName();
+								}
+							})
+						}
+					},
+					handleGetH5DomainDesc() {
+						let that = this;
+						axios({
+							url: '/api/AdvancedSetup/GetH5Description'
+						}).then(function(data) {
+							if (data.data.Status == 100) {
+								that.h5Domain.desc = data.data.Keyword;
+							}
+						})
+					},
+					handleGetH5DomainName() {
+						let that = this;
+						axios({
+							url: '/api/PlatformSetUp/GetGrantUrl'
+						}).then(function(data) {
+							if (data.data.Status == 100) {
+								that.h5Domain.name = data.data.Keyword;
+							}
+						})
+					},
+					handleClearData() {
+						let that = this;
+
+						if (!that.isClearing) {
+							that.isClearing = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/AdvancedSetup/ClearMerchant',
+								method: 'post'
+							}).then(function(data) {
+								that.isClearing = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+							})
+						}
+					},
+					handleViewAlipay(url) {
+						let that = this;
+						if (!url) {
+							return;
+						}
+						if (url.indexOf('&') != -1) {
+							let res = url.split('&');
+							that.cashRecord.alipayAccount = res[0];
+							that.cashRecord.alipayUrl = res[1];
+						} else {
+							that.cashRecord.alipayAccount = url;
+							that.cashRecord.alipayUrl = '';
+						}
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '480px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content12')
+						});
+					},
+					handleViewUsdt(url) {
+						let that = this;
+						if (!url) {
+							return;
+						}
+						that.cashRecord.alipayAccount = '';
+						that.cashRecord.alipayUrl = '';
+						if (!that.usdtCode) {
+							that.usdtCode = new QRCode(document.getElementById('show-view-usdt'), {
+								width : 480,
+								height : 480
+							});
+						}
+						that.usdtCode.makeCode(url);
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '480px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content8')
+						});
+					},
+					handleViewQRCode() {
+						let that = this;
+
+						if (!that.qrcode) {
+							that.qrcode = new QRCode(document.getElementById("qrcode"), {
+								width : 120,
+								height : 120
+							});
+						}
+						that.qrcode.makeCode(that.cashApply.select.address);
+						that.cashApply.select.showQRCode = !that.cashApply.select.showQRCode;
+					},
+					handleSlide(key) {
+						let that = this,
+							ele = null,
+							width = parseInt(getComputedStyle(document.querySelector('.swiper-wrapper')).width) / 3,
+							scroll_ = document.querySelector('.swiper-wrapper');
+						switch(key) {
+							case 'prev':
+								scroll_.scrollLeft > 0 && (scroll_.scrollLeft -= width);
+								break;
+							case 'next':
+								scroll_.scrollLeft < scroll_.scrollWidth && (scroll_.scrollLeft += width);
+								break;
+						}
+					},
+					handleGetVersion() {
+						let that = this;
+
+						axios({
+							url: '/api/PlatformSetUp/GetVersionNum'
+						}).then(function(data) {
+							if (data.data.Status == 100) {
+								that.apk.version = data.data.Keyword;
+								that.apk.curVersion = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleUpdateVersion() {
+						let that = this;
+
+						if (!that.apk.version.trim()) {
+							layer.msg('请填写版本号', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (that.apk.version == that.apk.curVersion) {
+							layer.msg('不能与上次更新的版本号相同', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.apk.zip) {
+							layer.msg('请选择上传文件', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (that.apk.zip.type.trim() != 'application/zip') {
+							layer.msg('请选择zip文件', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.apk.isLoading) {
+							that.apk.isLoading = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/PlatformSetUp/UpdateVersionNum',
+								method: 'post',
+								params: {
+									versionNum: that.apk.version
+								}
+							}).then(function(data) {
+								if (data.data.Status == 100) {
+									that.handleUpdateZip(index);
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							}).catch(function() {
+								that.apk.isLoading = false;
+							})
+						}
+					},
+					handleUpdateZip(index) {
+						let that = this,
+							formData = new FormData();
+
+						formData.append('fileinput', that.apk.zip);
+						axios({
+							url: '/api/PlatformSetUp/UpdateVersionFile',
+							method: 'post',
+							data: formData
+						}).then(function(data) {
+							that.apk.isLoading = false;
+							layer.close(index);
+							if (data.data.Status == 100) {
+								layer.msg('版本上传成功!', {
+									time: 1500
+								})
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						}).catch(function() {
+							layer.close(index);
+							that.apk.isLoading = false;
+						})
+					},
+					handleGetMerchantRoll() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetMerchantRoll'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.notice.merchantContent = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleGetRedeemUrl() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetRedeemUrl'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								const result = data.data.Model;
+								that.notice.lowurl = result.RedeemUrl;
+								that.notice.meurl = result.MeRedeemUrl;
+								that.notice.hiurl = result.HiRedeemUrl;
+								that.notice.ThousandUrl = result.ThousandUrl;
+								that.notice.ThoushunUrl = result.ThoushunUrl;
+								that.notice.ThoustwohUrl = result.ThoustwohUrl;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleGetRoll() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetRoll'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.notice.content = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleSearchMerchant() {
+						let that = this;
+						that.online.pageNum = 1;
+						that.handleSearchOnline();
+					},
+					handleSearchOnline() {
+						let that = this,
+							_param = {};
+
+						_param['start'] = that.online.pageNum;
+						_param['pageSize'] = that.online.pageSize;
+
+						if (that.online.name) {
+							_param['keyword'] = that.online.name;
+						}
+						if (!that.online.isLoading) {
+							that.online.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetMerchatOnlineInfo',
+                				params: _param
+							}).then(function(data) {
+								that.online.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.online.total = data.data.Total;
+									that.online.list = data.data.Data.map(item => {
+										return {
+											name: item.MerchantName,
+											time: item.LoginTime
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleSetUpAccount() {
+						let that = this;
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateTargetMerchant',
+								method: 'post',
+								params: {
+									merchantName: that.target.account,
+									agentName: that.target.mUpAccount
+								}
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								that.target.upAccount = '';
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetAllUpAccount() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetAllAgent'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.target.accountList = data.data.Data;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleVerifyTarget() {
+						let that = this;
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetTargetMerchant',
+								params: {
+									merchantName: that.target.account
+								}
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.target.upAccount = data.data.Keyword;
+									that.target.showAccountList = that.target.accountList.filter(item => item != data.data.Keyword);
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetGameMode() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetFormal'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.gameMode = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleModifyGameMode(mode) {
+						let that = this;
+
+						if (that.gameMode === mode)
+							return;
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateFormal',
+								method: 'post',
+								params: {
+									status: mode
+								}
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+								if (data.data.Status === 100) {
+									that.handleGetGameMode();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetRange() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetAgencyMargin'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.rangeValue = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleSetRange() {
+						let that = this;
+
+						if (!that.rangeValue) {
+							layer.msg('请输入级差', {
+								time: 1500
+							})
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+							axios({
+								url: '/api/AdvancedSetup/UpdateAgencyMargin',
+								method: 'post',
+								params: {
+									num: parseInt(that.rangeValue)
+								}
+							}).then(function(data) {
+								that.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									that.handleGetRange();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleSaveAddress(item) {
+						let that = this;
+
+						if (!that.platform.isLoading) {
+							that.platform.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/PlatformSetUp/UpdateAppUrls',
+								method: 'post',
+								data: that.addressList.map(item => {return {
+									"Url": item.address,
+									"Status": item.checked
+								}})
+							}).then(function(data) {
+								layer.close(index);
+								that.platform.isLoading = false;
+								if (data.data.Status === 100) {
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetAddressList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetAddressList() {
+						let that = this,
+							index = layer.load(2);
+
+						axios({
+							url: '/api/PlatformSetUp/GetAppUrls'
+						}).then(function(data) {
+							layer.close(index);
+							if (data.data.Status === 100) {
+								const result = data.data.Data;
+								that.addressList = result.map(item => {
+									return {
+										address: item.Url,
+										checked: item.Status
+									}
+								})
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleAddAddress() {
+						let that = this;
+
+						that.addressList.push({
+							address: '',
+							checked: false
+						})
+					},
+					handleSaveGameTime(item) {
+						let that = this;
+
+						if (!item.firstNper) {
+							layer.msg(`请填写${item.name}的每日首次开奖期号`, {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!item.firstStartTime) {
+							layer.msg(`请填写${item.name}的每日首次开奖时间`, {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!item.interval) {
+							layer.msg(`请填写${item.name}的每次开奖时间`, {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!item.dayNum) {
+							layer.msg(`请填写${item.name}的每日总期数`, {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.platform.isLoading) {
+							that.platform.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/PlatformSetUp/UpdateGameSetUp',
+								method: 'post',
+								data: {
+									GameType: item.type,
+									FirstNper: item.firstNper,
+									StartTime: item.firstStartTime,
+									Interval: item.interval,
+									DayNum: item.dayNum
+								}
+							}).then(function(data) {
+								layer.close(index);
+								that.platform.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								} else {
+									that.handleGetGameTime(item);
+								}
+							})
+						}
+					},
+					handleGetGameTime(item) {
+						let that = this;
+
+						let index = layer.load(2);
+						axios({
+							url: '/api/PlatformSetUp/GetGameSetUp',
+							params: {
+								gameType: item.type
+							}
+						}).then(function(data) {
+							layer.close(index);
+							if (data.data.Status === 100) {
+								const result = data.data.Model;
+								item.dayNum = result.DayNum;
+								item.firstNper = result.FirstNper;
+								item.interval = result.Interval;
+								item.firstStartTime = result.StartTime;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleGetGameList() {
+						let that = this;
+
+						return new Promise((resolve, reject) => {
+							axios({
+								url: '/api/AdvancedSetup/GetGameList'
+							}).then(function(data) {
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+									that.gameList = result.map(item => {
+										return {
+											type: item.GameType,
+											name: item.GameName,
+											url: '',
+											dayNum: 0,
+											firstNper: '',
+											interval: 0,
+											firstStartTime: ''
+										}
+									}).sort((a, b) => a.type - b.type);
+									resolve();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						})
+					},
+					handleQueryCash(type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								that.cashApply.page.pageNum = 1;
+								that.handleCashApply();
+							break;
+							case 2:
+								that.cashRecord.page.pageNum = 1;
+								that.handleCashRecord();
+							break;
+						}
+					},
+					handleGetAnimation(item) {
+						let that = this;
+
+						axios({
+							url: '/api/PlatformSetUp/GetGameVideoUrl',
+							params: {
+								gameType: item.type
+							}
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								item.url = data.data.Keyword;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleSaveAnimation(item) {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let ind = layer.load(2);
+
+							axios({
+								url: '/api/PlatformSetUp/UpdateGameVideoUrl',
+								method: 'post',
+								params: {
+									gameType: item.type,
+									url: item.url
+								}
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.close(ind);
+
+								if (data.data.Status === 100) {
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetAnimation(item);
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetMerchantList() {
+						let that = this;
+
+						const ind = layer.load(2);
+						axios({
+							url: '/api/AdvancedSetup/GetMerchantInfoList',
+							params: {
+								keyword: that.account.searchName,
+								start: that.account.page.pageNum,
+								pageSize: that.account.page.pageSize
+							}
+						}).then(function(data) {
+							layer.close(ind);
+							if (data.data.Status === 100) {
+								const result = data.data.Data;
+
+								that.account.page.total = data.data.Total;
+								that.account.merchantList = result.map(item => {
+									return {
+										agentName: item.DirectAgency,
+										merchantName: item.MerchantName,
+										safeCode: item.SeurityNo,
+										expireTime: item.ExpireTime,
+										lastTime: item.LastRechargeTime,
+										id: item.ID,
+										level: item.SuperStatus
+									}
+								})
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html'
+							}
+						})
+					},
+					handleResetSafeCode(id) {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let ind = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/RefreshNo',
+								params: {
+									merchantID: id
+								}
+							}).then(function(data) {
+								layer.close(ind);
+								that.account.isLoading = false;
+								if (data.data.Status === 100) {
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									that.handleGetMerchantList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleShowSetting(id, level) {
+						let that = this;
+
+						that.merchantLevel = level ? 'a' : 'n';
+						that.merchantId = id;
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '800px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content7')
+						});
+					},
+					handleEnterSetting() {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let ind = layer.load(2);
+							axios({
+								url: '/api/AdvancedSetup/UpdateMerchantStatus',
+								method: 'post',
+								params: {
+									merchantID: that.merchantId,
+									status: that.merchantLevel == 'a' ? true : false
+								}
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								if (data.data.Status === 100) {
+									layer.closeAll();
+									that.handleGetMerchantList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetSummary() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetSummary'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								const result = data.data.Model;
+								that.account.agentNum = result.AgentCount;
+								that.account.merchantNum = result.MerchantCount;
+								that.account.overdueNum = result.OverdueCount;
+								that.account.onlineMechantNum = result.MerchantOnlineCount;
+								that.account.userCount = result.UserCount;
+							}
+						})
+					},
+					handleVerifyUrl(url) {
+						let reg=/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+
+						if (!reg.test(url)) {
+							layer.msg('这不是正确的网址，请输入正确的网址。例如：http://www.google.com', {
+								time: 1500
+							})
+							return false;
+						}
+
+						return true;
+					},
+					handleGetPlatform(type) {
+						let that = this,
+							href = '';
+
+						switch(type) {
+							case 1:
+								href = '/api/PlatformSetUp/GetMerchantUrl';
+							break;
+							case 4:
+								href = '/api/PlatformSetUp/GetAppSetUp';
+							break;
+							case 5:
+								href = '/api/PlatformSetUp/GetWebSetUp';
+							break;
+							case 6:
+								href = '/api/PlatformSetUp/GetSubscription';
+							break;
+							case 7:
+								href = '/api/PlatformSetUp/GetSwitch';
+							break;
+						}
+
+						axios({
+							url: href
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								switch(type) {
+									case 1:
+										that.platform.merchantUrl = data.data.Model.MerchantUrl;
+										that.platform.appUrl = data.data.Model.MerchantAppUrl;
+										that.platform.merchantAppUrl = data.data.Model.MerchantMUrl;
+									break;
+									case 4:
+										that.platform.appInfo.appid = data.data.Model.App_AppID;
+										that.platform.appInfo.appsecret = data.data.Model.App_AppSecret;
+									break;
+									case 5:
+										that.platform.h5Info.appid = data.data.Model.Web_AppID;
+										that.platform.h5Info.appsecret = data.data.Model.Web_AppSecret;
+									break;
+									case 6:
+										that.platform.h5Url = data.data.Keyword;
+									break;
+									case 7:
+										that.platform.wechatLogin = data.data.Keyword;
+									break;
+								}
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleSavePlatform(type) {
+						let that = this,
+							vParam = {},
+							vUrl = '',
+							href = '';
+
+						switch(type) {
+							case 1:
+								if (!that.platform.merchantUrl) {
+									layer.msg('请填写商户后台登录URL', {
+										time: 1500
+									})
+									return;
+								}
+								if (that.platform.appUrl) {
+									vParam['merchantAppUrl'] = that.platform.appUrl;
+								}
+								if (that.platform.merchantAppUrl) {
+									vParam['merchantMUrl'] = that.platform.merchantAppUrl;
+								}
+								vParam['merchantUrl'] = that.platform.merchantUrl;
+								vUrl = that.platform.merchantUrl;
+								href = '/api/PlatformSetUp/UpdateMerchantUrl';
+							break;
+							case 2:
+								if (!that.platform.appUrl) {
+									layer.msg('请填写玩家APP下载地址', {
+										time: 1500
+									})
+									return;
+								}
+								if (that.platform.merchantUrl) {
+									vParam['merchantUrl'] = that.platform.merchantUrl;
+								}
+								if (that.platform.merchantAppUrl) {
+									vParam['merchantMUrl'] = that.platform.merchantAppUrl;
+								}
+								href = '/api/PlatformSetUp/UpdateMerchantUrl';
+								vUrl = that.platform.appUrl;
+								vParam['merchantAppUrl'] = that.platform.appUrl;
+							break;
+							case 3:
+								if (!that.platform.merchantAppUrl) {
+									layer.msg('请填写后台APP下载地址', {
+										time: 1500
+									})
+									return;
+								}
+								if (that.platform.merchantUrl) {
+									vParam['merchantUrl'] = that.platform.merchantUrl;
+								}
+								if (that.platform.appUrl) {
+									vParam['merchantAppUrl'] = that.platform.appUrl;
+								}
+								href = '/api/PlatformSetUp/UpdateMerchantUrl';
+								vParam['merchantMUrl'] = that.platform.merchantAppUrl;
+								vUrl = that.platform.merchantAppUrl;
+							break;
+							case 4:
+								if (!that.platform.appInfo.appid || !that.platform.appInfo.appsecret) {
+									layer.msg('请填写APP授权信息', {
+										time: 1500
+									})
+									return;
+								}
+								href = '/api/PlatformSetUp/UpdateAppSetUp';
+								vParam['appID'] = that.platform.appInfo.appid;
+								vParam['appSecret'] = that.platform.appInfo.appsecret;
+							break;
+							case 5:
+								if (!that.platform.h5Info.appid || !that.platform.h5Info.appsecret) {
+									layer.msg('请填写网页授权信息', {
+										time: 1500
+									})
+									return;
+								}
+								href = '/api/PlatformSetUp/UpdateWebSetUp';
+								vParam['appID'] = that.platform.h5Info.appid;
+								vParam['appSecret'] = that.platform.h5Info.appsecret;
+							break;
+							case 7:
+								href = '/api/PlatformSetUp/UpdateSwitch';
+								vParam['status'] = !that.platform.wechatLogin;
+							break;
+						}
+
+						if (vUrl) {
+							if (!that.handleVerifyUrl(vUrl)) {
+								return;
+							}
+						}
+
+						if (!that.platform.isLoading) {
+							that.platform.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: href,
+								method: 'post',
+								params: vParam
+							}).then(function(data) {
+								that.platform.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+								switch(type) {
+									case 1:
+									case 2:
+									case 3:
+										that.handleGetPlatform(1);
+									break;
+									case 4:
+										that.handleGetPlatform(4);
+									break;
+									case 5:
+										that.handleGetPlatform(5);
+									break;
+									case 7:
+										that.handleGetPlatform(7);
+									break;
+								}
+							})
+						}
+					},
+					handleUpdateEXAddress(type) {
+						let that = this,
+							vparams = {}
+
+						switch(type) {
+							case 1:
+								if (!that.notice.lowurl) {
+									layer.msg('请输入兑换码1500地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+							case 2:
+								if (!that.notice.meurl) {
+									layer.msg('请输入兑换码2000地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+							case 3:
+								if (!that.notice.hiurl) {
+									layer.msg('请输入兑换码3000地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+							case 4:
+								if (!that.notice.ThousandUrl) {
+									layer.msg('请输入兑换码1000地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+							case 5:
+								if (!that.notice.ThoushunUrl) {
+									layer.msg('请输入兑换码1100地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+							case 6:
+								if (!that.notice.ThoustwohUrl) {
+									layer.msg('请输入兑换码1200地址', {
+										time: 1500
+									})
+									return;
+								}
+							break;
+						}
+						vparams['lowurl'] = that.notice.lowurl;
+						vparams['meurl'] = that.notice.meurl;
+						vparams['hiurl'] = that.notice.hiurl;
+						vparams['taurl'] = that.notice.ThousandUrl;
+						vparams['thurl'] = that.notice.ThoushunUrl;
+						vparams['tturl'] = that.notice.ThoustwohUrl;
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateRedeemUrl',
+								method: 'post',
+								params: vparams
+							}).then(function(data) {
+								layer.close(index);
+								that.notice.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+								// that.notice.exchangeAddress = '';
+								that.handleGetRedeemUrl();
+							})
+						}
+					},
+					sheet2blob(sheet, sheetName) {
+						sheetName = sheetName || 'sheet1';
+						var workbook = {
+							SheetNames: [sheetName],
+							Sheets: {}
+						};
+						workbook.Sheets[sheetName] = sheet;
+						// 生成excel的配置项
+						var wopts = {
+							bookType: 'xlsx', // 要生成的文件类型
+							bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+							type: 'binary'
+						};
+						var wbout = XLSX.write(workbook, wopts);
+						var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+						// 字符串转ArrayBuffer
+						function s2ab(s) {
+							var buf = new ArrayBuffer(s.length);
+							var view = new Uint8Array(buf);
+							for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+							return buf;
+						}
+						return blob;
+					},
+					openDownloadDialog(url, saveName) {
+						if(typeof url == 'object' && url instanceof Blob)
+						{
+							url = URL.createObjectURL(url); // 创建blob地址
+						}
+						var aLink = document.createElement('a');
+						aLink.href = url;
+						aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+						var event;
+						if(window.MouseEvent) event = new MouseEvent('click');
+						else
+						{
+							event = document.createEvent('MouseEvents');
+							event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+						}
+						aLink.dispatchEvent(event);
+					},
+					handleQueryAccount() {
+						let that = this;
+
+						if (that.account.type === '1') {
+							that.page.pageNum = 1;
+							that.handleGetData();
+						} else {
+							that.account.page.pageNum = 1;
+							that.handleGetMerchantList();
+						}
+					},
+					handleExportToXLSX() {
+						let that = this,
+							vData = [['代理名称','兑换码','金额','状态','到期时间']],
+							tempData = [];
+
+						that.recharCard.cardList.forEach(item => {
+							if (item.checked) {
+								tempData.push(item.agentName);
+								tempData.push(item.code);
+								tempData.push(item.money);
+								tempData.push(item.status);
+								tempData.push(item.mTime);
+								vData.push(tempData);
+								tempData = [];
+							}
+						})
+						let sheet = XLSX.utils.aoa_to_sheet(vData);
+						that.openDownloadDialog(that.sheet2blob(sheet), '导出充值卡.xlsx');
+					},
+					handleDeleteCheckCard() {
+						let that = this;
+
+						if (!that.recharCard.checkList.length) {
+							layer.msg('没有选中任何项', {
+								time: 1000
+							})
+							return;
+						}
+						if (!that.recharCard.isLoading) {
+							that.recharCard.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/DeleteRedeem',
+								method: 'post',
+								data: that.recharCard.checkList
+							}).then(function(data) {
+								that.recharCard.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1000
+								})
+								that.handleGetCard();
+							})
+						}
+					},
+					handleCheckAll() {
+						let that = this;
+
+						if (that.recharCard.indeterminate) {
+							that.recharCard.checkAll = false;
+						} else {
+							that.recharCard.checkAll = !that.recharCard.checkAll;
+						}
+						that.recharCard.indeterminate = false;
+
+						if (that.recharCard.checkAll) {
+							that.recharCard.cardList.forEach(element => {
+								element.checked = true;
+							});
+							that.recharCard.checkList = that.recharCard.cardList.map(item => item.id);
+						} else {
+							that.recharCard.cardList.forEach(element => {
+								element.checked = false;
+							});
+							that.recharCard.checkList = [];
+						}
+					},
+					handleCheckGroup (data) {
+						data.checked = !data.checked;
+						let that = this;
+						that.$nextTick();
+						let allCheck = that.recharCard.cardList.every(item => item.checked),
+							someCheck = that.recharCard.cardList.some(item => item.checked),
+							index = that.recharCard.checkList.findIndex(item => item === data.id);
+
+						if (allCheck) {
+							that.recharCard.indeterminate = false;
+							that.recharCard.checkAll = true;
+						}
+
+						if (!allCheck && someCheck) {
+							that.recharCard.indeterminate = true;
+							that.recharCard.checkAll = false;
+						}
+
+						if (!allCheck && !someCheck) {
+							that.recharCard.indeterminate = false;
+							that.recharCard.checkAll = false;
+						}
+
+						if (index !== -1) {
+							that.recharCard.checkList.splice(index, 1);
+						} else {
+							that.recharCard.checkList.push(data.id);
+						}
+					},
+					handleGetCard() {
+						let that = this;
+
+						if (!that.recharCard.isLoading) {
+							that.recharCard.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SearchRedeemInfo',
+								params: {
+									keyword: that.recharCard.keyword,
+									status: that.recharCard.status
+								}
+							}).then(function(data) {
+								that.recharCard.isLoading = false;
+								layer.close(index);
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+									that.recharCard.cardList = result.map(item => {
+										return {
+											agentName: item.UseName,
+											code: item.RedeemCode,
+											money: item.Amount,
+											status: item.Status,
+											mTime: item.EffectiveTime,
+											id: item.ID,
+											checked: false
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleEnterAddCard() {
+						let that = this;
+
+						if (!that.recharCard.num) {
+							layer.msg('请输入充值卡数量', {
+								time: 1000
+							})
+							return;
+						}
+
+						if (!that.recharCard.money) {
+							layer.msg('请输入充值卡单张金额', {
+								time: 1000
+							})
+							return;
+						}
+
+						if (!that.recharCard.time) {
+							layer.msg('请选择充值卡到期时间', {
+								time: 1000
+							})
+							return;
+						}
+
+						if (!that.recharCard.isLoading) {
+							that.recharCard.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/AddRedeem',
+								params: {
+									count: that.recharCard.num,
+									amount: that.recharCard.money,
+									time: new Date(that.recharCard.time).pattern('yyyy-MM-dd hh:mm:ss')
+								}
+							}).then(function(data) {
+								that.recharCard.isLoading = false;
+								layer.closeAll();
+								layer.msg(data.data.Message, {
+									time: 1000
+								})
+								that.handleGetCard();
+							})
+						}
+					},
+					handleUpdateDatabase() {
+						let that = this;
+
+						if (!that.database.address) {
+							layer.msg('请输入数据库地址', {
+								time: 1000
+							});
+							return;
+						}
+						if (!that.database.name) {
+							layer.msg('请输入数据库名称', {
+								time: 1000
+							});
+							return;
+						}
+						if (!that.database.isLoading) {
+							that.database.isLoading = true;
+							let ind = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateDatabas',
+								method: 'post',
+								params: {
+									id: that.database.id,
+									path: that.database.address,
+									dbName: that.database.name
+								}
+							}).then(function(data) {
+								that.database.isLoading = false;
+								layer.closeAll();
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+								if (data.data.Status === 100) {
+									that.handleQueryDatabase();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleAddDatabase() {
+						let that = this;
+
+						if (!that.database.address) {
+							layer.msg('请输入数据库地址', {
+								time: 1000
+							});
+							return;
+						}
+						if (!that.database.name) {
+							layer.msg('请输入数据库名称', {
+								time: 1000
+							});
+							return;
+						}
+						if (!that.database.isLoading) {
+							that.database.isLoading = true;
+							let ind = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/AddDatabas',
+								method: 'post',
+								params: {
+									path: that.database.address,
+									dbName: that.database.name
+								}
+							}).then(function(data) {
+								that.database.isLoading = false;
+								layer.close(ind);
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+								if (data.data.Status === 100) {
+									that.handleQueryDatabase();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleQueryDatabase() {
+						let that = this;
+
+						axios({
+							url: '/api/AdvancedSetup/GetDatabaseList'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								const result = data.data.Data;
+
+								that.database.page.total = data.data.Total;
+								that.databaseList = result.map(item => {
+									return {
+										path: item.Address,
+										count: item.Count,
+										maxCount: item.MaxCount,
+										name: item.DBName,
+										id: item.ID
+									}
+								})
+							}
+						})
+					},
+					handleInputNumber(e, type, item) {
+						let that = this,
+							_val = '';
+
+						switch(type) {
+							case 1:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									that.manualRecharge.money = that.manualRecharge.money.substring(0, that.manualRecharge.money.length - 1);
+								}
+							break;
+							case 2:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									that.addMinusMoney.money = that.addMinusMoney.money.substring(0, that.addMinusMoney.money.length - 1);
+								}
+							break;
+							case 3:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									item.dayNum = item.dayNum.substring(0, item.dayNum.length - 1);
+								}
+							break;
+							case 4:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									item.interval = item.interval.substring(0, item.interval.length - 1);
+								}
+							break;
+							case 5:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									that.rangeValue = that.rangeValue.substring(0, that.rangeValue.length - 1);
+								}
+							break;
+						}
+					},
+					handleEnterModifyNotice() {
+						let that = this;
+
+						if (!that.notice.title) {
+							layer.msg('请输入公告标题', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.notice.content) {
+							layer.msg('请输入公告内容', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateNotice',
+								method: 'post',
+								data: {
+									Title: that.notice.title,
+									Content: that.notice.content
+								}
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.handleGetNotice();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetNotice() {
+						let that = this;
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetNotice'
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.notice.showContent = result.Content;
+									that.notice.showTitle = result.Title;
+									that.handleClosePanel();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleFreeTimeOverMoney() {
+						let that = this;
+
+						if (!that.agent.account) {
+							layer.msg('请输入下级代理账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.agent.freeTime) {
+							layer.msg('请输入下级代理免费时长', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.agent.overMoney) {
+							layer.msg('请输入下级代理超出费用', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.isFreeLoading) {
+							that.isFreeLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdateFreeAdmission',
+								method: 'post',
+								params: {
+									agentName: that.agent.account,
+									freeDuration: that.agent.freeTime,
+									excessExpenses: that.agent.overMoney
+								}
+							}).then(function(data) {
+								that.isFreeLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.handleGetFreeTimeOverMoney();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetFreeTimeOverMoney() {
+						let that = this;
+
+						if (!that.isFreeLoading) {
+							that.isFreeLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetFreeAdmission',
+								params: {
+									agenName: that.username
+								}
+							}).then(function(data) {
+								that.isFreeLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.agent.showFreeTime = result.FreeDuration;
+									that.agent.showOverMoney = result.ExcessExpenses;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleClosePanel() {
+						layer.closeAll();
+					},
+					handleShowPanel(ind, id, name) {
+						let that = this;
+
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '800px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content' + ind)
+						});
+						that.account.selectAgentId = id;
+						switch(ind) {
+							case 1:
+								that.handleGetPhone();
+							break;
+							case 2:
+								that.addMinusMoney.account = id;
+								that.addMinusMoney.name = name;
+							break;
+							case 5:
+								that.notice.title = that.notice.showTitle;
+								that.notice.content = that.notice.showContent;
+							break;
+							case 11:
+								that.database.id = id;
+							break;
+						}
+					},
+					handleChangePage(type, e) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								that.page.pageNum = e;
+								that.handleGetData();
+							break;
+							case 2:
+								that.cashApply.page.pageNum = e;
+								that.handleCashApply();
+							break;
+							case 3:
+								that.cashRecord.page.pageNum = e;
+								that.handleCashRecord();
+							break;
+							case 4:
+								that.recharge.page.pageNum = e;
+								that.handleRechargeList();
+							break;
+							case 5:
+								that.log.page.pageNum = e;
+								that.handleSearchLogs();
+							break;
+							case 6:
+								that.database.page.pageNum = e;
+								that.handleSearchLogs();
+							break;
+							case 7:
+								that.account.page.pageNum = e;
+								that.handleGetMerchantList();
+							break;
+							case 8:
+								that.online.pageNum = e;
+								that.handleSearchOnline();
+							break;
+							case 9:
+								that.rechargeM.page.pageNum = e;
+								that.handleRechargeListM();
+							break;
+						}
+					},
+					handleQueryLog() {
+						let that = this;
+
+						that.log.page.pageNum = 1;
+						that.handleSearchLogs();
+					},
+					handleResetQuery(type) {
+						let that = this;
+
+						switch(type) {
+							case 5:
+								that.log.searchType = '';
+								that.log.page.pageNum = 1;
+								that.handleSearchLogs();
+							break;
+							case 4:
+								that.account.searchName = '';
+								that.page.pageNum = 1;
+							break;
+							case 3:
+								that.recharge.name = '';
+								that.handleQueryRecharge(1);
+							break;
+							case 6:
+								that.rechargeM.name = '';
+								that.handleQueryRecharge(4);
+							break;
+						}
+					},
+					handleShowChangePrice(id) {
+						let that = this;
+						layer.prompt({title: '修改代理价格', formType: 0,skin:'myprompt'},
+						function(value, index, elem){
+							if (isNaN(value)) {
+								layer.msg("请输入数字！",{
+									time: 600
+								});
+							} else if (value <= 0) {
+								layer.msg("请输入正确的价格！",{
+									time: 600
+								});
+							} else {
+								that.handleChangePrice(id, value, index);
+							}
+						});
+					},
+					handleChangePrice(id, pri, index) {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let ind = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/UpdatePrice',
+								method: 'post',
+								params: {
+									agentID: id,
+									price: pri
+								}
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.close(ind);
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									layer.msg(`修改价格成功：¥${pri}`,{
+										time: 1500
+									});
+									that.handleGetData();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleLockAgent(id) {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/LockAgent',
+								params: {
+									agentID: id
+								}
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.close(index);
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.handleGetData();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetPhone() {
+						let that = this;
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetContactInfo',
+								params: {
+									agentID: that.account.selectAgentId
+								}
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.contactInfo.phone = result.Phone;
+									that.contactInfo.QQ = result.QQ;
+									that.contactInfo.email = result.Email;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetData() {
+						let that = this,
+							vParam = {};
+
+						if (that.account.searchName) {
+							vParam['loginName'] = that.account.searchName;
+						}
+
+						vParam['start'] = that.page.pageNum;
+						vParam['pageSize'] = that.page.pageSize
+
+						if (!that.account.isLoading) {
+							that.account.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetAllAgentInfo',
+								params: vParam
+							}).then(function(data) {
+								that.account.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.page.total = data.data.Total;
+									that.account.list = result.map(function(item) {
+										return {
+											username: item.UserName,
+											money: item.UserBalance,
+											agentPrice: item.SubAgentPrice,
+											bankId: item.BankNum,
+											ip: item.IP,
+											loginTime: item.LastLoginTime,
+											createTime: item.CreateTime,
+											agentId: item.AgentID,
+											accountName: item.Account,
+											lock: item.Status
+										}
+									})
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 1000)
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleAddMinusMoney() {
+						let that = this;
+
+						if (!parseFloat(that.addMinusMoney.money)) {
+							layer.msg('请输入正确的金额', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.addMinusMoney.isLoading) {
+							that.addMinusMoney.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/AgentDeduction',
+								method: 'post',
+								params: {
+									agentID: that.addMinusMoney.account,
+									status: that.addMinusMoney.addMinus,
+									type: that.addMinusMoney.type,
+									amount: that.addMinusMoney.money,
+									reason: that.addMinusMoney.remark
+								}
+							}).then(function(data) {
+								that.addMinusMoney.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.addMinusMoney.addMinus = '1';
+									that.addMinusMoney.type = '1';
+									that.addMinusMoney.money = '';
+									that.addMinusMoney.remark = '';
+									that.handleGetData();
+									that.handleRechargeList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleResetMPassword(id) {
+						let that = this;
+
+						let ind = layer.confirm('确定要重置商户登录密码为<i class="color-orange">888888</i>吗？', {
+							btn: ['确定','取消'], //按钮
+							shade: 0.6,
+							title:'温馨提示',
+							skin:'myconfim'
+						}, function(){
+							if (!that.addMinusMoney.isLoading) {
+								that.addMinusMoney.isLoading = true;
+								let index = layer.load(2);
+
+								axios({
+									url: '/api/AdvancedSetup/RefreshMerchantPwd',
+									params: {
+										merchantID: id
+									}
+								}).then(function(data) {
+									that.addMinusMoney.isLoading = false;
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									layer.close(ind);
+									if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						});
+					},
+					handleResetMLockPwd(id) {
+						let that = this;
+
+						let ind = layer.confirm('确定要重置商户锁屏密码为<i class="color-orange">888888</i>吗？', {
+							btn: ['确定','取消'], //按钮
+							shade: 0.6,
+							title:'温馨提示',
+							skin:'myconfim'
+						}, function(){
+							if (!that.addMinusMoney.isLoading) {
+								that.addMinusMoney.isLoading = true;
+								let index = layer.load(2);
+
+								axios({
+									url: '/api/AdvancedSetup/RefreshMerchantSecurityPwd',
+									params: {
+										merchantID: id
+									}
+								}).then(function(data) {
+									that.addMinusMoney.isLoading = false;
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									layer.close(ind);
+									if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						});
+					},
+					handleResetSafePassword(id) {
+						let that = this;
+
+						let ind = layer.confirm('确定要重置代理安全密码为<i class="color-orange">888888</i>吗？', {
+							btn: ['确定','取消'], //按钮
+							shade: 0.6,
+							title:'温馨提示',
+							skin:'myconfim'
+						}, function(){
+							if (!that.addMinusMoney.isLoading) {
+								that.addMinusMoney.isLoading = true;
+								let index = layer.load(2);
+
+								axios({
+									url: '/api/AdvancedSetup/RefreshAgentSafePwd',
+									params: {
+										targetAgentID: id
+									}
+								}).then(function(data) {
+									that.addMinusMoney.isLoading = false;
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									layer.close(ind);
+									if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						});
+					},
+					handleResetPassword(id) {
+						let that = this;
+
+						let ind = layer.confirm('确定要重置代理登录密码为<i class="color-orange">88888888</i>吗？', {
+							btn: ['确定','取消'], //按钮
+							shade: 0.6,
+							title:'温馨提示',
+							skin:'myconfim'
+						}, function(){
+							if (!that.addMinusMoney.isLoading) {
+								that.addMinusMoney.isLoading = true;
+								let index = layer.load(2);
+
+								axios({
+									url: '/api/AdvancedSetup/ResetPwd',
+									method: 'post',
+									params: {
+										agentID: id
+									}
+								}).then(function(data) {
+									that.addMinusMoney.isLoading = false;
+									layer.close(index);
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+									layer.close(ind);
+									if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						});
+					},
+					showRecordView(item) {
+						let that = this;
+
+						if (!that.cashApply.isLoading) {
+							that.cashApply.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetRequestCashInfo',
+								params: {
+									id: item.id
+								}
+							}).then(function(data) {
+								that.cashApply.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+									const path = result.Path;
+
+									that.cashApply.select = {
+										id: item.id,
+										remark: '',
+										agentName: result.AgentName,
+										amount: result.Amount,
+										type: result.ApplyType,
+										bankNum: result.BankNum,
+										payName: result.PayName,
+										transfer: result.Transfer,
+										QRCode: result.QRCode ? (result.QRCode.indexOf('://') != -1 ? result.QRCode : ('/' + result.QRCode)) : '',
+										address: path ? (path.CurrencyInfo[0].CurrencyPath) : '',
+										showQRCode: false
+									}
+									
+									if (that.cashApply.select.type === 1) {
+										that.handleShowPanel(4);
+									} else if (that.cashApply.select.type === 2) {
+										that.handleShowPanel(3);
+									} else {
+										that.handleShowPanel(9);
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleCashApply() {
+						let that = this,
+							vParam = {};
+
+						return new Promise((resolve, reject) => {
+							if (that.cashApply.loginName) {
+								vParam['loginName'] = that.cashApply.loginName;
+							}
+
+							vParam['start'] = that.cashApply.page.pageNum;
+							vParam['pageSize'] = that.cashApply.page.pageSize;
+
+							if (!that.cashApply.isLoading) {
+								that.cashApply.isLoading = true;
+
+								axios({
+									url: '/api/AdvancedSetup/RequestCash',
+									params: vParam
+								}).then(function(data) {
+									that.cashApply.isLoading = false;
+
+									if (data.data.Status === 100) {
+										const result = data.data.Data;
+
+										that.cashApply.page.total = data.data.Total;
+										that.cashApply.list = result.map(function(item) {
+											return {
+												id: item.ID,
+												loginName: item.Name,
+												money: item.Amount,
+												balance: item.Balance,
+												time: item.ApplyTime
+											}
+										})
+										resolve();
+									} else if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						})
+					},
+					handleOperate(id, type) {
+						let that = this,
+							vParam = {},
+							vUrl = '';
+
+						if (that.cashApply.select.remark) {
+							vParam['opinion'] = that.cashApply.select.remark;
+						}
+
+						vParam['id'] = that.cashApply.select.id;
+
+						if (type) {
+							vUrl = '/api/AdvancedSetup/ConfirmationRequest';
+						} else {
+							vUrl = '/api/AdvancedSetup/RefuseRequest';
+						}
+
+						if (!that.cashApply.isLoading) {
+							that.cashApply.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: vUrl,
+								method: 'post',
+								params: vParam
+							}).then(function(data) {
+								that.cashApply.isLoading = false;
+								layer.close(index);
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									setTimeout(function() {
+										that.cashApply.select = {};
+										layer.closeAll();
+									}, 1500)
+									that.handleCashApply();
+									that.handleCashRecord();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleCashRecord() {
+						let that = this,
+							vParam = {};
+
+						if (that.cashRecord.name) {
+							vParam['loginName'] = that.cashRecord.name;
+						}
+
+						if (that.cashRecord.startTime) {
+							vParam['startTime'] = that.cashRecord.startTime;
+						} else {
+							layer.Message('请选择记录开始时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (that.cashRecord.endTime) {
+							vParam['endTime'] = that.cashRecord.endTime;
+						} else {
+							layer.Message('请选择记录结束时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						vParam['start'] = that.cashRecord.page.pageNum;
+						vParam['pageSize'] = that.cashRecord.page.pageSize;
+
+						if (!that.cashRecord.isLoading) {
+							that.cashRecord.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/RequestRecord',
+								params: vParam
+							}).then(function(data) {
+								that.cashRecord.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.cashRecord.page.total = data.data.Total;
+									that.cashRecord.list = result.map(function(item) {
+										return {
+											name: item.Name,
+											money: item.Amount,
+											balance: item.Balance,
+											applyTime: item.ApplyTime,
+											handleTime: item.HandleTime,
+											type: item.Type,
+											status: item.Status,
+											url: item.Url,
+											showUrl: false
+										}
+									})
+									that.cashRecord.all = data.data.Summary;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleRechargeList(e, startTime, endTime) {
+						let that = this,
+							vParam = {};
+
+						if (that.recharge.startTime) {
+							vParam['startTime'] = that.recharge.startTime;
+						}
+
+						if (that.recharge.endTime) {
+							vParam['endTime'] = that.recharge.endTime;
+						}
+
+						if (startTime) {
+							vParam['startTime'] = startTime;
+						}
+
+						if (endTime) {
+							vParam['endTime'] = endTime;
+						}
+
+						if (that.recharge.name) {
+							vParam['loginName'] = that.recharge.name;
+						}
+
+						if (that.selectSaleType1) {
+							vParam['salesType'] = that.selectSaleType1;
+						}
+
+						vParam['start'] = that.recharge.page.pageNum;
+						vParam['pageSize'] = that.recharge.page.pageSize;
+
+						if (!that.recharge.isLoading) {
+							that.recharge.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SearchRecharge',
+								params: vParam
+							}).then(function(data) {
+								that.recharge.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.recharge.page.total = data.data.Total;
+									that.recharge.list = result.map(function(item) {
+										return {
+											id: item.ID,
+											name: item.RechargeName,
+											agent: item.DirectName,
+											money: item.Amount,
+											actMoney: item.ActualAmount,
+											type: item.OrderType,
+											status: item.Status,
+											applyTime: item.ApplyTime,
+											isHandle: item.IsHandle,
+											handleTime: item.HandleTime
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleRechargeListM(e, startTime, endTime) {
+						let that = this,
+							vParam = {};
+
+						if (that.rechargeM.startTime) {
+							vParam['startTime'] = that.rechargeM.startTime;
+						}
+
+						if (that.rechargeM.endTime) {
+							vParam['endTime'] = that.rechargeM.endTime;
+						}
+
+						if (startTime) {
+							vParam['startTime'] = startTime;
+						}
+
+						if (endTime) {
+							vParam['endTime'] = endTime;
+						}
+
+						if (that.rechargeM.name) {
+							vParam['keyword'] = that.rechargeM.name;
+						}
+
+						if (that.selectSaleType2) {
+							vParam['salesType'] = that.selectSaleType2;
+						}
+
+						vParam['start'] = that.rechargeM.page.pageNum;
+						vParam['pageSize'] = that.rechargeM.page.pageSize;
+
+						if (!that.rechargeM.isLoading) {
+							that.rechargeM.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SearchMerchantRecharge',
+								params: vParam
+							}).then(function(data) {
+								that.rechargeM.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.rechargeM.page.total = data.data.Total;
+									that.rechargeM.list = result.map(function(item) {
+										return {
+											name: item.MerchantName,
+											agent: item.AgentName,
+											money: item.Amount,
+											type: item.PayType,
+											applyTime: item.MaturityTime,
+											handleTime: item.OperationTime
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleConfirmArr(vid) {
+						let that = this;
+
+						if (!that.recharge.isLoading) {
+							that.recharge.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/ConfirmationArrival',
+								method: 'post',
+								params: {
+									id: vid
+								}
+							}).then(function(data) {
+								that.recharge.isLoading = false;
+								layer.close(index);
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.handleRechargeList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleQueryRecharge(type) {
+						let that = this,
+							dateNow = new Date(),
+							preDate = null,
+							sevenDate = null;
+
+						if (type <= 3) {
+							that.selectBtn = type;
+							that.recharge.page.pageNum = 1;
+						} else {
+							that.selectBtnM = type;
+							that.rechargeM.page.pageNum = 1;
+						}
+						switch(type) {
+							case 1:
+								that.recharge.startTime = new Date().pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.recharge.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeList(null);
+							break;
+							case 2:
+								preDate = new Date(dateNow.setDate(dateNow.getDate() - 1));
+								that.recharge.startTime = preDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.recharge.endTime = preDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeList(null);
+							break;
+							case 3:
+								sevenDate = new Date(dateNow.setDate(dateNow.getDate() - 7));
+								that.recharge.startTime = sevenDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.recharge.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeList(null);
+							break;
+							case 4:
+								that.rechargeM.startTime = new Date().pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.rechargeM.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeListM(null);
+							break;
+							case 5:
+								preDate = new Date(dateNow.setDate(dateNow.getDate() - 1));
+								that.rechargeM.startTime = preDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.rechargeM.endTime = preDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeListM(null);
+							break;
+							case 6:
+								sevenDate = new Date(dateNow.setDate(dateNow.getDate() - 7));
+								that.rechargeM.startTime = sevenDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.rechargeM.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.handleRechargeListM(null);
+							break;
+						}
+					},
+					handleQuery() {
+						let that = this;
+
+						that.recharge.page.pageNum = 1;
+						that.handleRechargeList();
+					},
+					handleQueryM() {
+						let that = this;
+
+						that.rechargeM.page.pageNum = 1;
+						that.handleRechargeListM();
+					},
+					handleGetTime() {
+						let that = this;
+
+						if (!that.time.isLoading) {
+							that.time.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetSetTime'
+							}).then(function(data) {
+								that.time.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.time.curTime = data.data.Keyword;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleSetTime() {
+						let that = this;
+
+						if (!that.time.startTime) {
+							layer.msg('请选择开始时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.time.endTime) {
+							layer.msg('请选择结束时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.time.isLoading) {
+							that.time.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SetPayTime',
+								method: 'post',
+								params: {
+									startTime: [new Date().pattern('yyyy-MM-dd').toString(), that.time.startTime].join(' '),
+									endTime: new Date().pattern('yyyy-MM-dd').toString() + ' ' + that.time.endTime
+								}
+							}).then(function(data) {
+								that.time.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.time.startTime = '';
+									that.time.endTime = '';
+									that.handleGetTime();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleAddMinusTime() {
+						let that = this;
+
+						if (!that.time.name) {
+							layer.msg('请输入客户账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.time.timeValue) {
+							layer.msg('请输入加扣时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.time.isLoading) {
+							that.time.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SetDeductionTime',
+								method: 'post',
+								params: {
+									cusName: that.time.name,
+									num: that.time.timeValue,
+									type: that.time.timeType
+								}
+							}).then(function(data) {
+								that.time.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.time.name = '';
+									that.time.timeValue = 1;
+									that.time.timeType = '1';
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleManualRecharge() {
+						let that = this;
+
+						if (!that.manualRecharge.agent) {
+							layer.msg('请输入代理账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.manualRecharge.account) {
+							layer.msg('请输入客户账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.manualRecharge.money) {
+							layer.msg('请输入代理扣费金额', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.manualRecharge.isLoading) {
+							that.manualRecharge.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/ManualRecharge',
+								method: 'post',
+								params: {
+									agentName: that.manualRecharge.agent,
+									merchantName: that.manualRecharge.account,
+									amount: that.manualRecharge.money
+								}
+							}).then(function(data) {
+								that.manualRecharge.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.manualRecharge.agent = '';
+									that.manualRecharge.account = '';
+									that.manualRecharge.money = '';
+									that.handleGetData();
+									that.handleRechargeList();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleChangeQrCode(type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								that.qrCode.image = that.$refs['upload-QRCode1'].files[0];
+							break;
+							case 2:
+								that.platform.h5Url = that.$refs['upload-QRCode2'].files[0];
+							break;
+							case 3:
+								that.apk.zip = that.$refs['upload-update-file'].files[0];
+							break;
+						}
+					},
+					handleChangeSwitch(e, type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+							if (e.target.checked && !that.qrCode.showImage) {
+								layer.msg('请先上传收款二维码，再预览', {
+									time: 1500
+								})
+								setTimeout(function() {
+									that.$refs['switch01'].click();
+								}, 1400)
+								return;
+							}
+
+							if (e.target.checked && that.qrCode.showImage) {
+								layer.photos({
+									photos: {
+										"title": "", //相册标题
+										"id": 123, //相册id
+										"start": 0, //初始显示的图片序号，默认0
+										"data": [   //相册包含的图片，数组格式
+											{
+											"alt": "",
+											"pid": 666, //图片id
+											"src": that.qrCode.showImage, //原图地址
+											"thumb": "" //缩略图地址
+											}
+										]
+									}
+									,anim: 5
+									,end: function() {
+										that.$refs['switch01'].click();
+									}
+								});
+							}
+							break;
+							case 2:
+								if (e.target.checked && !that.platform.h5Url) {
+									layer.msg('请先上传收款二维码，再预览', {
+										time: 1500
+									})
+									setTimeout(function() {
+										that.$refs['switch02'].click();
+									}, 1400)
+									return;
+								}
+
+								if (e.target.checked && that.platform.h5Url) {
+									layer.photos({
+										photos: {
+											"title": "", //相册标题
+											"id": 123, //相册id
+											"start": 0, //初始显示的图片序号，默认0
+											"data": [   //相册包含的图片，数组格式
+												{
+												"alt": "",
+												"pid": 666, //图片id
+												"src": that.platform.h5Url, //原图地址
+												"thumb": "" //缩略图地址
+												}
+											]
+										}
+										,anim: 5
+										,end: function() {
+											that.$refs['switch02'].click();
+										}
+									});
+								}
+							break;
+							case 3:
+								that.handleSavePlatform(7);
+							break;
+						}
+					},
+					handleSetQRcode(type) {
+						let that = this,
+							formData = new FormData(),
+							img = null,
+							href = '';
+
+						switch(type) {
+							case 1:
+								img = that.qrCode.image;
+								href = '/api/AdvancedSetup/SetReceivables';
+							break;
+							case 2:
+								img = that.platform.h5Url;
+								href = '/api/PlatformSetUp/UpdateSubscription';
+							break;
+						}
+
+						if (!img || typeof img == 'string') {
+							layer.msg('请选择上传二维码', {
+								time: 1500
+							})
+							return;
+						} else if (img.size > 5 * 1024 * 1024) {
+							layer.msg('上传二维码不能大于5M', {
+								time: 1500
+							})
+							return;
+						} else {
+							formData.append('fileinput', img);
+						}
+
+						if (!that.qrCode.isLoading) {
+							that.qrCode.isLoading = false;
+							let index = layer.load(2);
+
+							axios({
+								url: href,
+								method: 'post',
+								data: formData
+							}).then(function(data) {
+								that.qrCode.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									switch(type) {
+										case 1:
+											that.$refs['upload-QRCode1'].value = '';
+											that.handleShowQRcode();
+										break;
+										case 2:
+											that.$refs['upload-QRCode2'].value = '';
+											that.handleGetPlatform(6);
+										break;
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleShowQRcode() {
+						let that = this;
+
+						if (!that.qrCode.isLoading) {
+							that.qrCode.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/PreviewFile'
+							}).then(function(data) {
+								that.qrCode.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.qrCode.showImage = data.data.Keyword ? (data.data.Keyword.indexOf('://') != -1 ? data.data.Keyword : ('/' + data.data.Keyword)) : '';
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleResetPWByName() {
+						let that = this;
+
+						if (!that.password.account) {
+							layer.msg('请输入客户账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.password.isLoading) {
+							that.password.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/ResetCustomerPwd',
+								method: 'post',
+								params: {
+									cusName: that.password.account
+								}
+							}).then(function(data) {
+								that.password.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.password.account = '';
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleAddMinusStock() {
+						let that = this;
+
+						if (!that.stock.agent) {
+							layer.msg('请输入代理账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.stock.value) {
+							layer.msg('请输入月卡数', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.stock.isLoading) {
+							that.stock.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/OperationMonthly',
+								method: 'post',
+								params: {
+									agentName: that.stock.agent,
+									num: that.stock.value
+								}
+							}).then(function(data) {
+								that.stock.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.stock.agent = '';
+									that.stock.value = 1;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetScrollText() {
+						let that = this;
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetScrollText'
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.scrollText = data.data.Keyword;
+									localStorage.setItem('scrollText', that.scrollText);
+									that.$nextTick(function() {
+										that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+										that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+										that.handleScroll();
+									});
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					handleUpdateNotice(type) {
+						let that = this,
+							vParam = {},
+							href = '';
+
+						switch(type) {
+							case 1:
+								if (!that.notice.content) {
+									layer.msg('请输入销售后台滚动公告内容', {
+										time: 1500
+									})
+									return;
+								}
+								vParam['notice'] = that.notice.content;
+								href = '/api/AdvancedSetup/UpdateRoll';
+							break;
+							case 2:
+								if (!that.notice.merchantContent) {
+									layer.msg('请输入商户后台滚动公告内容', {
+										time: 1500
+									})
+									return;
+								}
+								vParam['notice'] = that.notice.merchantContent;
+								href = '/api/AdvancedSetup/UpdateMerchantRoll';
+							break;
+						}
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: href,
+								method: 'post',
+								params: vParam
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									switch(type) {
+										case 1:
+											// that.notice.content = '';
+											that.handleGetRoll();
+										break;
+										case 2:
+											// that.notice.merchantContent = '';
+											that.handleGetMerchantRoll();
+										break;
+									}
+									that.handleGetScrollText();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleSearchLogs() {
+						let that = this,
+							vParam = {};
+
+						if (that.log.searchType) {
+							vParam['type'] = that.log.searchType;
+						}
+
+						vParam['start'] = that.log.page.pageNum;
+						vParam['pageSize'] = that.log.page.pageSize;
+
+						if (!that.log.isLoading) {
+							that.log.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/SearchOperationLogs',
+								params: vParam
+							}).then(function(data) {
+								that.log.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.log.page.total = data.data.Total;
+									that.log.list = result.map(function(item) {
+										return {
+											time: item.OperationTime,
+											name: item.OperationName,
+											ip: item.IP,
+											type: item.OperationType,
+											status: item.Status,
+											remark: item.Remark
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

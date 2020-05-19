@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/iview.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/iview.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+				<div id="header"></div>
+
+				<script>
+					$(function(){
+						$('#header').load('common/header.html');
+					})
+				</script>
+				<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li class="active">
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+							<script>
+								(function() {
+									var username = localStorage.getItem('loginName');
+									$('#username-min').html(username);
+									if (localStorage.getItem('isHighest') == '3') {
+										$('#high-level').remove();
+									} else {
+										$('#high-level').show();
+									}
+								})();
+							</script>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">下级管理</li>
+					</ol>
+					<!--面包屑当前位置end-->
+
+					<!--数据区域start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<div class="model-cate">
+								<div class="tab-hd">
+									<span class="cur"><a>下级管理</a></span>
+									<span><a>已创建商户</a></span>
+								</div>
+								<div class="tab-bd">
+									<!--选项一下级管理start-->
+									<div class="cate-boxcon cur">
+										<div class="site-opearea clearfix">
+											<div class="btns-group btns-group-green pull-left clearfix mg-btm10 m-float-none">
+												<a @click="handleQueryRecharge(1)" :class="['btn', 'btn-sm', selectBtn === 1 ? 'btn-success' : 'btn-default']">今天</a>
+												<a @click="handleQueryRecharge(2)" :class="['btn', 'btn-sm', selectBtn === 2 ? 'btn-success' : 'btn-default']">昨天</a>
+												<a @click="handleQueryRecharge(3)" :class="['btn', 'btn-sm', selectBtn === 3 ? 'btn-success' : 'btn-default']">近7天</a>
+											</div>
+											<div class="dis-flex mg-btm10 pull-left">
+												<div class="flex-1 flex-item pull-left">
+													<!-- <input class="date-normal" type="text" id="datestart" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="subInfo.startTime"></Date-Picker>
+												</div>
+												<div class="flex-none pull-left lineheight">-</div>
+												<div class="flex-1 flex-item pull-left" style="margin-right: 10px">
+													<!-- <input class="date-normal end" type="text" id="dateend" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="subInfo.endTime"></Date-Picker>
+												</div>
+											</div>
+											<div class="input-full mg-btm10 pull-left">
+												<input class="ope-input" type="text" v-model="subInfo.searchName" placeholder="输入用户名">
+											</div>
+											<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+												<div class="flex-1 flex-item pull-left">
+													<a @click="handleQuery" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+												</div>
+												<div class="flex-1 flex-item pull-left">
+													<a @click="handleResetQuery(1)" class="btn btn-sm btn-default">重置</a>
+												</div>
+											</div>
+										</div>
+
+										<!--表格数据 start-->
+										<div class="table-area mg-btm20">
+											<table class="table-normal table-bordered">
+			                                    <thead>
+			                                    <tr>
+			                                        <th>用户名</th>
+			                                        <th>代理价格</th>
+			                                        <th>下级人数</th>
+			                                        <th>团队销量</th>
+			                                        <th>最后登录时间</th>
+			                                        <th>创建时间</th>
+			                                        <th>操作</th>
+			                                    </tr>
+			                                    </thead>
+			                                    <tbody>
+													<tr v-for="(item, index) in subInfo.list" :key="index">
+														<td><span v-text="item.name"></span></td>
+														<td><span v-text="item.price"></span></td>
+														<td><span v-text="item.outNum"></span></td>
+														<td><span v-text="item.salesNum"></span></td>
+														<td><span v-text="item.time"></span></td>
+														<td><span v-text="item.createTime"></span></td>
+														<td>
+															<a @click="handleLock(item.id)" v-bind:class="['btn', 'btn-sm', item.status == 1 ? 'btn-success' : 'btn-warning']"><span v-text="item.status == 1 ? '锁定' : '解锁'"></span></a>
+															<a @click="handleModifyPrice(item.id)" class="btn btn-sm btn-success showshadow chgprice">修改价格</a>
+														</td>
+													</tr>
+			                                    </tbody>
+			                                </table>
+										</div>
+										<!--表格数据  end-->
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="subInfo.page.total" show-total :page-size="subInfo.page.pageSize" :current="subInfo.page.pageNum" @on-change="handleChangePage(1, $event)"/>
+										</div>
+									</div>
+									<!--选项一下级管理end-->
+
+									<!--选项二已充值客户信息start-->
+									<div class="cate-boxcon">
+										<div class="site-opearea clearfix">
+											<div class="input-full mg-btm10 pull-left">
+												<input class="ope-input" type="text" v-model="recharged.searchName" placeholder="请输入客户账号">
+											</div>
+											<div class="btn-full pull-left dis-flex pull-left clearfix mg-btm10">
+												<div class="flex-1 flex-item pull-left">
+													<a @click="handleQueryRech" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+												</div>
+												<div class="flex-1 flex-item pull-left">
+													<a @click="handleResetQuery(2)" class="btn btn-sm btn-default">重置</a>
+												</div>
+											</div>
+										</div>
+										<!--表格数据 start-->
+										<div class="table-area mg-btm20">
+											<table class="table-normal table-bordered">
+			                                    <thead>
+			                                    <tr>
+													<th>商户账号</th>
+													<th>创建时间</th>
+													<th>最后登录时间</th>
+			                                        <th>最近一次充值</th>
+			                                        <th>到期时间</th>
+			                                    </tr>
+			                                    </thead>
+			                                    <tbody>
+													<tr v-for="(item, index) in recharged.list" :key="index">
+														<td><span v-text="item.name"></span></td>
+														<td><span v-text="item.createTime"></span></td>
+														<td><span v-text="item.lastLogin"></span></td>
+														<td><span v-text="item.lastTime"></span></td>
+														<td><span v-text="item.time"></span></td>
+													</tr>
+			                                    </tbody>
+			                                </table>
+										</div>
+										<!--表格数据  end-->
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="recharged.page.total" show-total :page-size="recharged.page.pageSize" :current="recharged.page.pageNum" @on-change="handleChangePage(2, $event)"/>
+										</div>
+									</div>
+									<!--选项二已充值客户信息end-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--数据区域   end-->
+
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+		</div>
+
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/tools.js?v1.0.0"></script>
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						subInfo: {
+							isLoading: false,
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							searchName: '',
+							page: {
+								pageNum: 1,
+								pageSize: 10,
+								total: 0
+							},
+							list: []
+						},
+						recharged: {
+							isLoading: false,
+							searchName: '',
+							list: [],
+							page: {
+								pageNum: 1,
+								pageSize: 10,
+								total: 0
+							}
+						},
+						username: '',
+						scrollText: '',
+						selectBtn: 1,
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let isHighest = localStorage.getItem('isHighest');
+					switch(isHighest) {
+						case '2':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+						case '3':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					if (localStorage.getItem('isHighest') == '3') {
+						$('#high-level').remove();
+					} else {
+						$('#high-level').show();
+					}
+					let that = this;
+
+					that.username = localStorage.getItem('loginName');
+					$('#username').html(localStorage.getItem('loginName'));
+					that.scrollText = localStorage.getItem('scrollText');
+					that.$nextTick(function() {
+						that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+						that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+						that.handleScroll();
+					});
+					that.handleGetData(null, new Date().pattern('yyyy-MM-dd') + ' 00:00', new Date().pattern('yyyy-MM-dd') + ' 23:59');
+					that.handleGetRecord();
+				},
+				methods: {
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					handleQueryRech() {
+						let that = this;
+
+						that.recharged.page.pageNum = 1;
+						that.handleGetRecord();
+					},
+					handleChangePage(type, e) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								that.subInfo.page.pageNum = e;
+								that.handleGetData();
+							break;
+							case 2:
+								that.recharged.page.pageNum = e;
+								that.handleGetRecord();
+							break;
+						}
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleResetQuery(type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								that.subInfo.searchName = '';
+								that.handleQueryRecharge(1);
+							break;
+							case 2:
+								that.recharged.searchName = '';
+								that.recharged.page.pageNum = 1;
+								that.handleGetRecord();
+							break;
+						}
+					},
+					handleQueryRecharge(type) {
+						let that = this,
+							dateNow = new Date();
+
+						that.selectBtn = type;
+						that.subInfo.page.pageNum = 1;
+						switch(type) {
+							case 1:
+								that.subInfo.startTime = new Date().pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.subInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+							case 2:
+								let preDate = new Date(dateNow.setDate(dateNow.getDate() - 1));
+								that.subInfo.startTime = preDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.subInfo.endTime = preDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+							case 3:
+								let sevenDate = new Date(dateNow.setDate(dateNow.getDate() - 7));
+								that.subInfo.startTime = sevenDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+								that.subInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+						}
+						that.handleGetData(null);
+					},
+					handleQuery() {
+						let that = this;
+
+						that.subInfo.page.pageNum = 1;
+						that.handleGetData();
+					},
+					handleGetData(e, startTime, endTime) {
+						let that = this,
+							vParam = {};
+
+						if (that.subInfo.startTime) {
+							vParam['startTime'] = that.subInfo.startTime;
+						}
+
+						if (that.subInfo.endTime) {
+							vParam['endTime'] = that.subInfo.endTime;
+						}
+
+						if (startTime) {
+							vParam['startTime'] = startTime;
+						}
+
+						if (endTime) {
+							vParam['endTime'] = endTime;
+						}
+
+						if (that.subInfo.searchName) {
+							vParam['name'] = that.subInfo.searchName;
+						}
+
+						vParam['start'] = that.subInfo.page.pageNum;
+						vParam['pageSize'] = that.subInfo.page.pageSize;
+
+						if (!that.subInfo.isLoading) {
+							that.subInfo.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Subordinate/SearchSubAccount',
+								params: vParam
+							}).then(function(data) {
+								that.subInfo.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.subInfo.page.total = data.data.Total;
+
+									that.subInfo.list = result.map(function(item) {
+										return {
+											id: item.AgentID,
+											name: item.LoginName,
+											price: item.AgentPrice,
+											outNum: item.SubOutNum,
+											salesNum: item.SalesNum,
+											time: item.LastLoginTime,
+											createTime: item.CreateTime,
+											status: item.Status
+										}
+									})
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleLock(id) {
+						let that = this;
+
+						if (!that.subInfo.isLoading) {
+							that.subInfo.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Subordinate/LockAgent',
+								params: {
+									agentID: id
+								}
+							}).then(function(data) {
+								that.subInfo.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.handleGetData();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleModifyPrice(id) {
+						let that = this;
+
+						layer.prompt({title: '修改代理价格', formType: 0,skin:'myprompt'}, 
+						function(value, index, elem){
+							if (isNaN(value)) {
+								layer.msg("请输入数字！",{
+									time: 600
+								});
+							} else if (value <= 0) {
+								layer.msg("请输入正确的价格！",{
+									time: 600
+								});
+							} else {
+								if (!that.subInfo.isLoading) {
+									that.subInfo.isLoading = true;
+									let ind = layer.load(2);
+
+									axios({
+										url: '/api/Subordinate/UpdatePrice',
+										method: 'post',
+										params: {
+											agentID: id,
+											price: value
+										}
+									}).then(function(data) {
+										that.subInfo.isLoading = false;
+										layer.close(index);
+										layer.msg(data.data.Message, {
+											time: 1500
+										})
+
+										if (data.data.Status === 100) {
+											that.handleGetData();
+										} else if (data.data.Status === 301) {
+											window.location.href = window.location.origin + '/login.html'
+										}
+									})
+								}
+							}
+						});
+					},
+					handleGetRecord() {
+						let that = this,
+							vParam = {};
+
+						if (that.recharged.searchName) {
+							vParam['name'] = that.recharged.searchName;
+						}
+
+						vParam['start'] = that.recharged.page.pageNum;
+						vParam['pageSize'] = that.recharged.page.pageSize;
+
+						if (!that.recharged.isLoading) {
+							that.recharged.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Subordinate/SearchMerchantRecharge',
+								params: vParam
+							}).then(function(data) {
+								that.recharged.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.recharged.page.total = data.data.Total;
+
+									that.recharged.list = result.map(function(item) {
+										return {
+											name: item.Name,
+											createTime: item.CreateTime,
+											lastLogin: item.LastLoginTime,
+											lastTime: item.LastRechargeTime,
+											time: item.MaturityTime
+										}
+									})
+
+									if (!result.length && that.recharged.searchName) {
+										layer.msg('没有查询到与' + that.recharged.searchName + '相关的信息', {
+											time: 1500
+										})
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+
+</html>

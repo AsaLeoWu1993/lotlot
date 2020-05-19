@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baccarat</name>
+    </assembly>
+    <members>
+        <member name="T:Baccarat.Controllers.GameInfoController">
+            <summary>
+            游戏信息
+            </summary>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.OnConnectedAsync">
+            <summary>
+            连接时添加redis
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.Heart(System.String)">
+            <summary>
+            心跳机制
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            断开连接
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.JoinRoom(System.String,System.String,System.Int32,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            加入游戏房间
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="znum">桌号</param>
+            <param name="baccaratGameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.JoinRoomList(System.String,System.String)">
+            <summary>
+            加入游戏房间列表
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.UserBetMessage(System.String,System.String,System.Int32,System.String,Entity.BaccaratModel.BaccaratGameType,System.String)">
+            <summary>
+            用户下注
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="znum">桌号</param>
+            <param name="message">消息</param>
+            <param name="gameType">游戏类型</param>
+            <param name="oid">标识</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Hubs.ChatHub.SendShamUserApply(System.String,System.String,System.Int32)">
+            <summary>
+            定时确认上下分
+            </summary>
+            <param name="recordID"></param>
+            <param name="merchantID"></param>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Interactive.GameStatic">
+            <summary>
+            游戏房间状态
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.ZNum">
+            <summary>
+            房间号
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.Cstate">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.Scene">
+            <summary>
+            场次
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.Ttime">
+            <summary>
+            倒计时
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.GameType">
+            <summary>
+            游戏类型
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.Url">
+            <summary>
+            视频地址
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.ZName">
+            <summary>
+            桌名
+            </summary>
+        </member>
+        <member name="P:Baccarat.Interactive.GameStatic.History">
+            <summary>
+            历史记录
+            </summary>
+        </member>
+        <member name="T:Baccarat.Manipulate.Common">
+            <summary>
+            公共方法
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.Common.GetVideoGameStatus(System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            游戏房间是否开启
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Manipulate.Common.GetGameList">
+            <summary>
+            刷新游戏房间列表
+            </summary>
+        </member>
+        <member name="T:Baccarat.Manipulate.DistributionLow">
+            <summary>
+            下发任务
+            </summary>
+        </member>
+        <member name="P:Baccarat.Manipulate.DistributionLow.GameTaskStatus">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.DistributionLow.DistributionAsync(Baccarat.RedisModel.TaskDistributionModel)">
+            <summary>
+            中奖处理
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Manipulate.DistributionLow.TaskStatusEnum">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="F:Baccarat.Manipulate.DistributionLow.TaskStatusEnum.开启">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:Baccarat.Manipulate.DistributionLow.TaskStatusEnum.关闭">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.DistributionLow.GetWinningDetails(Entity.BaccaratModel.BaccaratLottery,System.String,System.String)">
+            <summary>
+            获取游戏结算
+            </summary>
+            <param name="lottery"></param>
+            <param name="merchantID"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Manipulate.DistributionLow.GetMembershipScore(System.String,System.String,Entity.BaccaratModel.BaccaratGameType,System.Int32)">
+            <summary>
+            账单内容
+            </summary>
+            <param name="merchantID"></param>
+            <param name="message"></param>
+            <param name="gameType"></param>
+            <param name="znum"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Manipulate.Monitor">
+            <summary>
+            监听
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.Monitor.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.Monitor.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Manipulate.QuartzJob">
+            <summary>
+            定时任务
+            </summary>
+        </member>
+        <member name="T:Baccarat.Manipulate.QuartzJob.SendShamUserApplyJob">
+            <summary>
+            假人申请信息处理
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.QuartzJob.SendShamUserApplyJob.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            处理数据
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Manipulate.RabbitMQHelper">
+            <summary>
+            消息队列
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendMould(System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveMould(System.String,System.Action{System.String})">
+            <summary>
+            接收消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendBaccaratAdminMessage(System.String,System.String,System.Int32,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message">消息内容</param>
+            <param name="merchantID">商户id</param>
+            <param name="znum">桌号</param>
+            <param name="gameType">游戏类型</param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveBaccaratAdminMessage(Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            接收管理员消息
+            </summary>
+            <param name="hubContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendGameStatus(System.String)">
+            <summary>
+            发送游戏状态
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveGameStatus(Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            接收游戏状态
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendUserMessage(System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType,System.Int32)">
+            <summary>
+            发送用户消息
+            </summary>
+            <param name="message">消息</param>
+            <param name="userID">用户id</param>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="znum">桌号</param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveSendUserMessage(Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            接收玩家信息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendUserPointChange(System.String,System.String)">
+            <summary>
+            发送玩家积分
+            </summary>
+            <param name="userID"></param>
+            <param name="merchantID"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveUserPointChange(Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            接收玩家积分
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendTaskDistribution(Baccarat.RedisModel.TaskDistributionModel)">
+            <summary>
+            发送任务分发
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveTaskDistribution">
+            <summary>
+            接收任务分发
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendOverallMessage(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            发送大厅消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="methodModelName"></param>
+            <param name="znum"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.ReceiveOverallMessage(Microsoft.AspNetCore.SignalR.IHubContext{Baccarat.Hubs.ChatHub})">
+            <summary>
+            接收大厅消息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RabbitMQHelper.SendBaccaratUserMessage(System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message">消息内容</param>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="gameType">游戏类型</param>
+        </member>
+        <member name="T:Baccarat.Manipulate.RedisHub">
+            <summary>
+            redis连接池
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.RedisHub.ServerToCompany">
+            <summary>
+            监听推送
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.RedisHub.GameLottery(Entity.BaccaratModel.BaccaratGameType,System.String,System.String,System.Int32)">
+            <summary>
+            发送开奖任务
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号</param>
+            <param name="lottery">开奖结果</param>
+            <param name="znum">桌号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baccarat.Manipulate.RedisHub.TaskRetransmission(System.Collections.Generic.List{Baccarat.RedisModel.TaskDistributionModel})">
+            <summary>
+            补发任务
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:Baccarat.Manipulate.RedisHub.ShowPorker(System.String)">
+            <summary>
+            牌型转换
+            </summary>
+            <param name="porkers">开牌</param>
+            <returns></returns>
+        </member>
+        <member name="T:Baccarat.Manipulate.RedisHub.PorkerClass">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Baccarat.Manipulate.RedisHub.PorkerClass.Porker">
+            <summary>
+            牌型
+            </summary>
+        </member>
+        <member name="P:Baccarat.Manipulate.RedisHub.PorkerClass.Point">
+            <summary>
+            点数
+            </summary>
+        </member>
+        <member name="M:Baccarat.Manipulate.RedisHub.RefreshGameStatus(System.Int32,System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType,System.String)">
+            <summary>
+            刷新游戏状态
+            </summary>
+            <param name="tid">房间码</param>
+            <param name="status">状态</param>
+            <param name="scene">场次</param>
+            <param name="ttime">倒计时</param>
+            <param name="gameType">游戏类型</param>
+            <param name="history">历史开奖</param>
+        </member>
+        <member name="T:Baccarat.RedisModel.DeskStatusModel">
+            <summary>
+            游戏信息
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Cid">
+            <summary>
+            厅号
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Gid">
+            <summary>
+            游戏
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Tid">
+            <summary>
+            桌号
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Ch">
+            <summary>
+            靴
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Ci">
+            <summary>
+            铺
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Tname">
+            <summary>
+            桌名
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Xh">
+            <summary>
+            网络最高限红
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Dx">
+            <summary>
+            网络最低限红
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Txh">
+            <summary>
+            现场最高限红
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Tdx">
+            <summary>
+            现场最低限红
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Monopolize">
+            <summary>
+            包台1为包台中
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Ttime">
+            <summary>
+            倒计时秒数
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Cstate">
+            <summary>
+            桌子状态 free init stop close openning ,init 状态可以下注
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Bt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Vt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Va">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Inittime">
+            <summary>
+            计时开始时间
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.Vmoney">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.DeskStatusModel.vcount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baccarat.RedisModel.TaskDistributionModel">
+            <summary>
+            游戏开奖下发任务信息
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.Nper">
+            <summary>
+            期号 
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.GameType">
+            <summary>
+            游戏类型
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.Lottery">
+            <summary>
+            开奖信息
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.ZNum">
+            <summary>
+            桌号
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.MerchantIDList">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:Baccarat.RedisModel.TaskDistributionModel.UUID">
+            <summary>
+            唯一码
+            </summary>
+        </member>
+    </members>
+</doc>

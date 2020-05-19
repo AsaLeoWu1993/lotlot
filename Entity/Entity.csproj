@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AgentModel\BankInfo.cs~RF1135498a.TMP" />
+    <None Remove="AgentModel\CashWithdrawal.cs~RF338de13a.TMP" />
+    <None Remove="AgentModel\Contact.cs~RF1121f01c.TMP" />
+    <None Remove="AgentModel\Contact.cs~RF4ec5ac1.TMP" />
+    <None Remove="AgentModel\MerchantTestRecord.cs~RF2f790324.TMP" />
+    <None Remove="AgentModel\PlatformSetUp.cs~RFde059ea.TMP" />
+    <None Remove="AgentModel\VirtualCurrency.cs~RF1de6f05e.TMP" />
+    <None Remove="Distribution.cs~RF198d3502.TMP" />
+    <None Remove="ErrorRecord.cs~RF5165ad5.TMP" />
+    <None Remove="Merchant.cs~RF13c4edd6.TMP" />
+    <None Remove="MerchantSheet.cs~RFb02a1b3.TMP" />
+    <None Remove="RoomGameInfos.cs~RF14d2f6de.TMP" />
+    <None Remove="RoomGameItem.cs~RF14e31f09.TMP" />
+    <None Remove="SendFlying.cs~RF68d74d5.TMP" />
+    <None Remove="SendFlying.cs~RF8afeea9.TMP" />
+    <None Remove="SignalRModel\RoomList.cs~RF3428e05d.TMP" />
+    <None Remove="UserBetInfo.cs~RF14bb3265.TMP" />
+    <None Remove="UserBetInfo.cs~RF14eef791.TMP" />
+    <None Remove="UserBetInfo.cs~RF1b23cfa.TMP" />
+    <None Remove="WebModel\WebAppGameInfos.cs~RF333001.TMP" />
+    <None Remove="WebModel\WebGameHistory.cs~RF1674fe01.TMP" />
+    <None Remove="WebModel\WebMerchantInternal.cs~RF6926abb.TMP" />
+    <None Remove="WebModel\WebRoom.cs~RF23454a3a.TMP" />
+    <None Remove="WebModel\WebUser.cs~RF15c29507.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
+  </ItemGroup>
+
+</Project>

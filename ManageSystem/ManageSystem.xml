@@ -1,0 +1,3800 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ManageSystem</name>
+    </assembly>
+    <members>
+        <member name="T:ManageSystem.Controllers.AgentBackwaterController">
+            <summary>
+            回水
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.GetAgentUserList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取代理用户表
+            </summary>
+            <param name="keyword">关键字</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：主要id
+                        UserID：用户id
+                        Avatar：头像 （需要前端拼接）api地址+返回地址
+                        IsAgent：是否为代理
+                        NickName：昵称
+                        LoginName：登录名称
+                        UserMoney：余额
+                        RoomNum：房间号
+                        Racing：赛车回水率
+                        Airship：飞艇回水率
+                        TimeHonored：时时彩回水率
+                        ExtremeSpeed：极速回水率
+                        Aus10：澳10回水率
+                        Aus5：澳5回水率
+                        Xyft168：幸运飞艇168
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.GetAgentInfo(System.String)">
+            <summary>
+            获取回水率
+            </summary>
+            <param name="id">id</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model:
+                    {
+                        ID：主要id
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.UpdateAgentInfo(Entity.WebModel.WebAgentBackwater)">
+             <summary>
+             修改回水率
+             </summary>
+             <param name="webAgentBackwater"></param>
+             <remarks>
+            ##  参数说明
+                 ID：主要id
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.GetOfflineUsers(System.String)">
+            <summary>
+            获取下线列表
+            </summary>
+            <param name="id">id</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：主要id
+                        UserID：用户id
+                        NickName：昵称
+                        LoginName：登录名称
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.AddOfflineUser(System.String,System.String)">
+            <summary>
+            添加下线
+            </summary>
+            <param name="id">id</param>
+            <param name="userID">下级用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.AgentBackwaterController.DeleteOfflineUser(System.String,System.String)">
+            <summary>
+            取消下线
+            </summary>
+            <param name="id"></param>
+            <param name="userID">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.BackwaterSetupController">
+            <summary>
+            回水信息
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.GetBackwaterList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取彩票回水设置数据
+            </summary>
+            <param name="name">方案名称</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.AddBackwater(Entity.WebModel.WebBackwaterSetup)">
+             <summary>
+             添加彩票返水
+             </summary>
+             <param name="webBackwater"></param>
+             <remarks>
+            ##  参数说明
+                 GameType：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5
+                 Maxrecord：最大统计
+                 Minrecord：最小统计
+                 Odds：返水比例
+                 Pattern：模式  1：流水模式 2：输赢模式
+                 Name：方案名称
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.GetBackwaterByID(System.String)">
+            <summary>
+            获取返水数据
+            </summary>
+            <param name="backID"></param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        ID:id
+                        GameType：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5
+                        Maxrecord：最大统计
+                        Minrecord：最小统计
+                        Odds：返水比例
+                        Pattern：模式  1：流水模式 2：输赢模式
+                        UserType：用户类型 1：黄铜  2：白银  3：黄金  4：铂金  5：钻石  6：银皇冠  7：金皇冠
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.UpdateBackwater(Entity.WebModel.WebBackwaterSetup)">
+             <summary>
+             修改返水
+             </summary>
+             <param name="webBackwater"></param>
+             <remarks>
+            ##  参数说明
+                 ID：id
+                 GameType：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5
+                 Maxrecord：最大统计
+                 Minrecord：最小统计
+                 Odds：返水比例
+                 Pattern：模式  1：流水模式 2：输赢模式
+                 UserType：用户类型 1：黄铜  2：白银  3：黄金  4：铂金  5：钻石  6：银皇冠  7：金皇冠
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.DeleteBackwaterByID(System.String)">
+            <summary>
+            删除返水
+            </summary>
+            <param name="backID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.GetVideoBackwaterList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取视讯游戏回水
+            </summary>
+            <param name="name">方案名称</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.AddVideoBackwater(Entity.WebModel.WebVideoBackwaterSetup)">
+             <summary>
+             添加视讯返水
+             </summary>
+             <param name="model"></param>
+             <remarks>
+            ##  参数说明
+                 GameType：游戏类型 1：百家乐
+                 Maxrecord：最大统计
+                 Minrecord：最小统计
+                 Odds：返水比例
+                 Pattern：模式  1：流水模式 2：输赢模式
+                 Name：方案名称
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.GetVideoBackwaterByID(System.String)">
+            <summary>
+            获取返水数据
+            </summary>
+            <param name="backID"></param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        ID:id
+                        GameType：游戏类型 1：百家乐
+                        Maxrecord：最大统计
+                        Minrecord：最小统计
+                        Odds：返水比例
+                        Pattern：模式  1：流水模式 2：输赢模式
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.UpdateVideoBackwater(Entity.WebModel.WebVideoBackwaterSetup)">
+             <summary>
+             修改视讯返水
+             </summary>
+             <param name="model"></param>
+             <remarks>
+            ##  参数说明
+                 ID：id
+                 GameType：游戏类型 1：百家乐
+                 Maxrecord：最大统计
+                 Minrecord：最小统计
+                 Odds：返水比例
+                 Pattern：模式  1：流水模式 2：输赢模式
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.BackwaterSetupController.DeleteVideoBackwaterByID(System.String)">
+            <summary>
+            删除视讯返水
+            </summary>
+            <param name="backID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.MerchantController">
+            <summary>
+            商户处理
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            
+            </summary>
+            <param name="hub"></param>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.MerchantLogin(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            商户登录
+            </summary>
+            <param name="name">商户名称</param>
+            <param name="password">商户密码</param>
+            <param name="code">验证码</param>
+            <param name="type">登录类型 !:电脑 2:手机</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        MeName：商户名称
+                        MerchantID：安全码
+                        RoomNum：房间号
+                        SeurityNo：安全码
+                        Tips：登录时间超过一天
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.MerchantLoginApp(System.String,System.String,System.Int32)">
+            <summary>
+            app登录商户
+            </summary>
+            <param name="name">商户名称</param>
+            <param name="password">商户密码</param>
+            <param name="type">登录类型 1:电脑 2:手机</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        MeName：商户名称
+                        MerchantID：安全码
+                        RoomNum：房间号
+                        SeurityNo：安全码
+                        Tips：登录时间超过一天
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.MixVerifyCode">
+            <summary>
+            获取验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.MerchantExit">
+            <summary>
+            商户退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetSetupInfo">
+            <summary>
+            获取商户基础设置
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        ID：id
+                        CustomMsg：自定义时间 
+                        CustomTime：自定义消息
+                        EntertainedAfterMsg：封盘后消息
+                        EntertainedAfterTime：封盘后时间
+                        EntertainedFrontMsg：封盘前消息
+                        EntertainedFrontTime：封盘前时间
+                        LotteryFrontTime：开奖前时间
+                        {
+                            Type：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5  6种都要封装
+                            LotteryTime：时间
+                        }
+                        LotteryFrontMsg：开奖前消息
+                        MembershipScore：会员积分
+                        WinningDetails：中奖明细
+                        ProhibitChe：禁止撤单
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetVideoSetupInfo">
+            <summary>
+            获取视讯基础设置
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        ID：id
+                        CustomMsg：自定义时间 
+                        CustomTime：自定义消息
+                        EntertainedAfterMsg：封盘后消息
+                        EntertainedAfterTime：封盘后时间
+                        EntertainedFrontMsg：封盘前消息
+                        EntertainedFrontTime：封盘前时间
+                        LotteryFrontMsg：开奖前消息
+                        MembershipScore：会员积分
+                        WinningDetails：中奖明细
+                        ProhibitChe：禁止撤单
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateSetupInfo(Entity.WebModel.WebFoundationSetup)">
+             <summary>
+             修改基础设置
+             </summary>
+             <param name="data"></param>
+             <remarks>
+            ##  参数说明
+                         ID：id
+                         CustomMsg：自定义时间 
+                         CustomTime：自定义消息
+                         EntertainedAfterMsg：封盘后消息
+                         EntertainedAfterTime：封盘后时间
+                         EntertainedFrontMsg：封盘前消息
+                         EntertainedFrontTime：封盘前时间
+                         LotteryFrontTime：开奖前时间
+                         {
+                             Type：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5  6种都要封装
+                             LotteryTime：时间
+                         }
+                         LotteryFrontMsg：开奖前消息
+                         MembershipScore：会员积分
+                         WinningDetails：中奖明细
+                         ProhibitChe：禁止撤单
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateVideoSetupInfo(Entity.WebModel.WebFoundationSetup)">
+             <summary>
+             修改视讯基础设置
+             </summary>
+             <param name="data"></param>
+             <remarks>
+            ##  参数说明
+                         ID：id
+                         CustomMsg：自定义时间 
+                         CustomTime：自定义消息
+                         EntertainedAfterMsg：封盘后消息
+                         EntertainedAfterTime：封盘后时间
+                         EntertainedFrontMsg：封盘前消息
+                         EntertainedFrontTime：封盘前时间
+                         LotteryFrontMsg：开奖前消息
+                         MembershipScore：会员积分
+                         WinningDetails：中奖明细
+                         ProhibitChe：禁止撤单
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetBetLimitInfo(Entity.GameOfType)">
+             <summary>
+             获取商户限额信息
+             </summary>
+             <param name="gameType">游戏类型</param>
+             <remarks>
+            ##  参数说明
+                 gameType：游戏类型
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id 
+                         GuessNum：数字
+                         GuessDxds：大小单双
+                         GuessLongHu：龙虎
+                         GuessGYHDxds：冠亚和大小单双
+                         GuessGYHNum：冠亚和数字
+                         GuessBanshun：半顺
+                         GuessBaozi：豹子
+                         GuessHe：和
+                         GuessShunzi：顺子
+                         GuessZaliu：杂六
+                         {
+                             MinBet:最小投注限额
+                             MaxBet:最大投注限额
+                             AllMaxBet：所有人最大投注
+                             SingleBet：网盘单手限额
+                         }
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetVideoBetLimitInfo(Entity.BaccaratModel.BaccaratGameType)">
+             <summary>
+             获取视讯游戏限额
+             </summary>
+             <param name="gameType">游戏类型 1：百家乐 2：牛牛 3：龙虎</param>
+             <remarks>
+            ##  参数说明
+                 gameType：游戏类型 1：百家乐 2：牛牛 3：龙虎
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id
+                         AllTotalQuotas：所有玩法上限 
+                         GuessAPPair：任意/完美对子
+                         GuessBPPair：庄/闲对子
+                         GuessHe：和
+                         GuessQueue：庄/闲/大/小
+                         TotalSingleLimit：单个玩家限额
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateBetLimitInfo(System.Object,System.String,Entity.GameOfType)">
+            <summary>
+            修改限额
+            </summary>
+            <param name="data">对应限额json数据</param>
+            <param name="id">对应id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateVideoBetLimitInfo(Entity.WebModel.WebVideoBetLimit,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            修改视讯限额
+            </summary>
+            <param name="model"></param>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetOddsInfo(Entity.GameOfType)">
+            <summary>
+            获取商户游戏赔率
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetVideoOddsInfo(Entity.BaccaratModel.BaccaratGameType)">
+             <summary>
+             获取视讯游戏赔率
+             </summary>
+             <param name="gameType">游戏类型 1：百家乐 2：牛牛 3：龙虎</param>
+             <remarks>
+            ##  参数说明
+                 gameType：游戏类型 1：百家乐 2：牛牛 3：龙虎
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id
+                         AnyPair：任意对子 
+                         Banker：庄家
+                         BankerPair：庄对
+                         Da：大
+                         He：和
+                         PerfectPair：完美对子 
+                         Player：闲家
+                         PlayerPair：闲对
+                         Xiao：小
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateOddsInfo(System.Object,System.String,Entity.GameOfType)">
+            <summary>
+            修改赔率
+            </summary>
+            <param name="data">对应限额json数据</param>
+            <param name="id">对应id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateVideoOddsInfo(Entity.WebModel.WebOddsBaccarat,System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            修改视讯赔率
+            </summary>
+            <param name="model"></param>
+            <param name="id">id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetUserApply">
+            <summary>
+            获取用户申请上下分
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：id 
+                        Amount：金额
+                        ApplyTime：申请时间
+                        Avatar：头像
+                        ChangeType：上下分 1：上分 2：下分
+                        LoginName：登录名称
+                        Management：状态  1：已同意 2：已拒绝 3：未审批
+                        Message：上分/下分
+                        Status：用户状态
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetTotalScore">
+            <summary>
+            获取今日总上下分
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.AgreeOperate(System.String)">
+            <summary>
+            同意操作
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.RefuseOperate(System.String)">
+            <summary>
+            拒绝操作
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetMerchantInfos">
+            <summary>
+            获取页头商户信息等
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetAllAndOnline">
+            <summary>
+            获取总人数和在线人数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetUnfinished">
+            <summary>
+            获取今日未结注单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetConfiguration">
+            <summary>
+            获取系统配置
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetAgentNotice">
+            <summary>
+            获取销售后台滚动公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetGameList">
+            <summary>
+            获取游戏信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.OnlineSupport">
+            <summary>
+            实时刷新商户状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdatePassword(System.String,System.String)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="oldPwd">旧密码</param>
+            <param name="newPwd">新密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateSecurityStatus(System.Boolean)">
+            <summary>
+            设置安全密码开关
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.UpdateSecurityPwd(System.String,System.String)">
+            <summary>
+            设置安全密码
+            </summary>
+            <param name="newPwd">新密码</param>
+            <param name="oldPwd">旧密码   第一次密码不需要填写</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.VerificationSecurityPwd(System.String)">
+            <summary>
+            验证安全密码
+            </summary>
+            <param name="pwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetMerchantCurrency">
+            <summary>
+            获取商户火星币
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MerchantController.GetGameInfos">
+            <summary>
+            获取游戏信息状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.MonitoController">
+            <summary>
+            记录
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GetProfitLossByType(System.Nullable{Entity.GameOfType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String,System.Int32,System.Int32)">
+            <summary>
+            现场监控
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GetVideoProfitLossByType(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String,System.Nullable{System.Int32},System.Int32,System.Int32)">
+            <summary>
+            视讯现场监控
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <param name="znum">桌号</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GetProfitLossInfo(System.Nullable{Entity.GameOfType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String)">
+            <summary>
+            获取现场监控流水和盈亏  游戏即将开奖期号
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GetVideoProfitLossInfo(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String,System.Nullable{System.Int32})">
+            <summary>
+            获取视讯现场监控流水和盈亏
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <param name="znum">桌号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.RevokeNoteList(System.Nullable{Entity.GameOfType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String)">
+            <summary>
+            撤销注单
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.RevokeVideoNoteList(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Int32,System.Nullable{Entity.UserStatusEnum},System.String,System.DateTime,System.DateTime,System.String,System.Nullable{System.Int32})">
+            <summary>
+            撤销视讯注单
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="betType">注单 1：所有  2：未开奖 3：已开奖</param>
+            <param name="userType">用户类型 1：正式 4：虚拟</param>
+            <param name="userKeyword">查询用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="nper">期号</param>
+            <param name="znum">桌号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.SearchReport(System.Nullable{Entity.GameOfType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            获取回水报表数据
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.SearchVideoReport(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            获取回水报表数据
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.DeleteRecords(System.Nullable{Entity.GameOfType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            删除记录
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.DeleteVideoRecords(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            删除记录
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GhostReport(System.Nullable{Entity.GameOfType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            一键回水所有游戏
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GhostVideoReport(System.Nullable{Entity.BaccaratModel.BaccaratGameType},System.Nullable{Entity.UserStatusEnum},System.Nullable{Entity.PatternEnum},System.String,System.DateTime,System.DateTime)">
+            <summary>
+            一键回水所有游戏
+            </summary>
+            <param name="gameType">游戏类型 所有传空</param>
+            <param name="userType">用户类型  1：真人  4：假人  所有传空</param>
+            <param name="pattern">回水模式 1：流水 2：输赢 所有传空</param>
+            <param name="userKeyword">用户关键字</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.SearchAgentReport(System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            查询代理报表
+            </summary>
+            <param name="time">查询时间  日期</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GetOfflineReport(System.DateTime,System.String)">
+            <summary>
+            获取下线数据
+            </summary>
+            <param name="time">时间</param>
+            <param name="agentID">代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.MonitoController.GhostUserReport(System.DateTime)">
+            <summary>
+            一键回水代理报表
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.GetRoomInfo">
+             <summary>
+             获取房间信息
+             </summary>
+             <remarks>
+            ##  参数说明
+                 
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：房间id 
+                         QQ：QQ
+                         WeChat：微信号
+                         SubAccount：上分帐户
+                         {
+                             WeChatNum：微信帐号
+                             WeChatQRcode：微信二维码
+                             AlipayNum：支付宝帐号
+                             AlipayQRcode：支付宝二维码
+                             ShamOnfirm：虚拟玩家自动确认上下分请求
+                             ShamOnfirmTime：虚拟玩家自动确认上下分请求时间
+                             AdminPortrait：管理员头像
+                         }
+                         Online：在线人数
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateRoomCus(System.String,System.String,System.String,System.Boolean,System.Int32)">
+            <summary>
+            修改客服
+            </summary>
+            <param name="roomID">房间id</param>
+            <param name="qq">qq</param>
+            <param name="weChat">微信号</param>
+            <param name="shamOnfirm">虚拟玩家自动确认上下分请求</param>
+            <param name="shamOnfirmTime">虚拟玩家自动确认上下分请求时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateRoomOnline(System.String,System.Int32)">
+            <summary>
+            修改在线人数
+            </summary>
+            <param name="roomID">房间id</param>
+            <param name="num">修改人数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateRoomWeChatPayment(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            修改微信上分帐户
+            </summary>
+            <param name="roomID">房间号</param>
+            <param name="fileinput">图片文件</param>
+            <param name="weChat">微信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateRoomAlipayPayment(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            修改支付宝上分帐户
+            </summary>
+            <param name="roomID">房间号</param>
+            <param name="fileinput">图片文件</param>
+            <param name="alipay">支付宝</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateAdminPortrait(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改管理员头像
+            </summary>
+            <param name="roomID"></param>
+            <param name="fileinput"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateCustomerUrl(System.String,System.String,System.Boolean)">
+            <summary>
+            修改客服800地址
+            </summary>
+            <param name="roomID"></param>
+            <param name="url"></param>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.GetGameOfRoomInfo(Entity.GameOfType)">
+             <summary>
+             获取对应游戏房间设置
+             </summary>
+             <param name="gameType">游戏类型</param>
+              /// <remarks>
+            ##  参数说明
+                 gameType：游戏类型
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id
+                         GameRoomName：游戏房间名称 
+                         GameRoomNum：游戏房号码
+                         Status：状态  1：开启  2：关闭
+                         Minin：上进入房间最低金额
+                         Che：撤销
+                         Back：回水通知
+                         RInfoItems：
+                         {
+                             Index：信息 1：积分  2：输赢  3：流水  4：投注  5：使用
+                             Open：是否开启
+                         }
+                         MinimumAmount：账单显示最低金额
+                         Bill：账单  1：单排  2：双排
+                         SwitchBackwater：回水设置 
+                         KaiEquality：开和  10球游戏为空
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.GetVideoGameOfRoomInfo(Entity.BaccaratModel.BaccaratGameType)">
+             <summary>
+             获取视讯游戏房间设置
+             </summary>
+             <param name="gameType">游戏类型 1：百家乐 2：牛牛 3：龙虎</param>
+             <remarks>
+            ##  参数说明
+                 gameType：游戏类型
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id
+                         GameRoomName：游戏房间名称 
+                         GameRoomNum：游戏房号码
+                         Status：状态  1：开启  2：关闭
+                         Minin：上进入房间最低金额
+                         Che：撤销
+                         Back：回水通知
+                         MinimumAmount：账单显示最低金额
+                         Bill：账单  1：单排  2：双排
+                         SwitchBackwater：回水设置 
+                         KaiEquality：开和  1：全退 2：退一半 3：通杀
+                         LotteryRecord：彩票飞单  1：不飞单 2：高级  3：外部
+                         VideoRecord：视讯飞单
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateGameofRoomInfo(Entity.GameOfType,Entity.WebModel.WebRoomGameKai)">
+             <summary>
+             修改时时彩游戏房间信息
+             </summary>
+             <param name="gameType">游戏类型</param>
+             <param name="webRoom"></param>
+             <remarks>
+            ##  参数说明
+                 ID：id
+                 GameRoomName：游戏房间名称 
+                 GameRoomNum：游戏房号码
+                 Status：状态  1：开启  2：关闭
+                 Minin：上进入房间最低金额
+                 Che：撤销
+                 Back：回水通知
+                 RInfoItems：
+                 {
+                      Index：信息 1：积分  2：输赢  3：流水  4：投注  5：使用
+                      Open：是否开启
+                  }
+                  MinimumAmount：账单显示最低金额
+                  Bill：账单  1：单排  2：双排
+                  KaiEquality：开和  1：返还本金  2：通杀龙虎
+                  Revoke：禁止撤单
+                  Instructions：app赔率
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.UpdateVideoGameofRoomInfo(Entity.BaccaratModel.BaccaratGameType,Entity.WebModel.WebVideoRoomGame)">
+             <summary>
+             修改视讯游戏房间信息
+             </summary>
+             <param name="gameType">游戏类型</param>
+             <param name="model">数据集合</param>
+             <remarks>
+            ##  参数说明
+                 ID：id
+                 GameRoomName：游戏房间名称 
+                 GameRoomNum：游戏房号码
+                 Status：状态  1：开启  2：关闭
+                 Minin：上进入房间最低金额
+                 Che：撤销
+                 Back：回水通知
+                 MinimumAmount：账单显示最低金额
+                 Bill：账单  1：单排  2：双排
+                 SwitchBackwater：回水设置 
+                 KaiEquality：开和  1：全退 2：退一半 3：通杀
+                  Revoke：禁止撤单
+                  Instructions：app赔率
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.GetGameIDs">
+            <summary>
+            获取对应商户下游戏id
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：id
+                        Type：1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5
+                        Status：状态  1：开启  2：关闭
+                    }
+                    Total：数据数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.SwitchGames(System.String,Entity.GameOfType)">
+            <summary>
+            切换游戏开关状态
+            </summary>
+            <param name="gameID"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.SwitchVideoGames(System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            切换视讯游戏开关状态
+            </summary>
+            <param name="gameID">游戏id</param>
+            <param name="type">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.RoomController.GetRoomNum">
+            <summary>
+            获取房间号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.SetupController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddMeaage(Entity.WebModel.WebAdminMessage)">
+             <summary>
+             添加管理员消息
+             </summary>
+             <param name="webAdminMessage"></param>
+             <remarks>
+            ##  参数说明
+                model
+                {
+                     Racing:赛车
+                     Airship:飞艇
+                     TimeHonored:时时彩
+                     ExtremeSpeed:极速
+                     Aus10:澳10
+                     Aus5:澳5
+                     Content:内容
+                }
+                其它不传
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetShamUserListInfo(System.Int32,System.Int32)">
+            <summary>
+            获取虚假用户列表信息
+            </summary>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：虚假用户id 
+                        UserID：用户id
+                        Avatar：头像
+                        LoginName：登录名称
+                        NickName：昵称
+                        LowerScore：上分
+                        UpperScore：下分
+                        GameBetInfo：游戏信息
+                        {
+                            GameType：游戏类型 1：赛车 2：飞艇 3：时时彩 4：极速 5：澳10  6：澳5  6种都要封装
+                            Check：是否选中
+                            BetInfo：投注内容
+                        }
+                        OnlyCode：唯一码
+                        Derail：开关
+                    }
+                    Total：数据数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.OpenGameNames(System.String,System.String)">
+            <summary>
+            获取选择游戏
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetShamUserInfo(System.String)">
+            <summary>
+            获取虚假用户信息
+            </summary>
+            <param name="id">id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.PutShamUserInfo(System.String,System.String,Entity.WebModel.WebShamRobot)">
+            <summary>
+            修改虚假用户绑定行为
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="nickName">昵称</param>
+            <param name="gameCheckInfo">行为绑定信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetBehaviorManage">
+            <summary>
+            获取行为管理列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetBehaviorInfo(System.String)">
+            <summary>
+            获取行为信息
+            </summary>
+            <param name="behaviorID">行为id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetBehaviorList">
+            <summary>
+            获取行为下拉列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.PutBehaviorInfo(Entity.WebModel.WebBehaviorInfo)">
+            <summary>
+            修改行为信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddBehaviorInfo(Entity.WebModel.WebBehaviorInfo)">
+            <summary>
+            添加行为信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.DeleteBehavior(System.String)">
+            <summary>
+            删除行为
+            </summary>
+            <param name="behaviorID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetProgramList(System.String)">
+            <summary>
+            获取方案列表
+            </summary>
+            <param name="behaviorID">行为id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetProgramInfo(System.String)">
+            <summary>
+            获取方案信息
+            </summary>
+            <param name="programID">方案id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddProgramInfo(Entity.WebModel.WebRobotProgram)">
+            <summary>
+            添加方案信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.PutProgramInfo(Entity.WebModel.WebRobotProgram)">
+            <summary>
+            修改方案信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.DeleteProgramInfo(System.String)">
+            <summary>
+            删除方案信息
+            </summary>
+            <param name="programID">方案id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddShamUser(System.String,System.Boolean)">
+            <summary>
+            添加虚假用户
+            </summary>
+            <param name="userName">名称</param>
+            <param name="derail">是否开启</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ShamUserAllOpenOrClost(System.Boolean)">
+            <summary>
+            虚假用户全部开启或关闭
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ShamUserOpenOrClose(System.String)">
+            <summary>
+            控制假人开启关闭
+            </summary>
+            <param name="id">对应id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetSensitiveInfos(System.Int32,System.Int32)">
+            <summary>
+            获取敏感操作日志
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：编号
+                        Type：类型
+                        Location：操作位置
+                        OpBcontent：操作前内容
+                        OpAcontent：操作后内容
+                        CreateTime：时间
+                    }
+                    Total：数据数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ManualUpper(System.String,System.Decimal,System.String)">
+            <summary>
+            手动上分
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="branch">上分金额</param>
+            <param name="remark">备注</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ManualLower(System.String,System.Decimal,System.String)">
+            <summary>
+            手动下分
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="branch">下分金额</param>
+            <param name="remark">备注</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetUpDownUserList(System.Boolean)">
+            <summary>
+            获取用户下拉列表（正常用户）
+            </summary>
+            <param name="status">true：包含假人和正常用户 false：只包含正常用户</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetIntegralRecord(System.String,System.Nullable{System.Int32},System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            获取历史上下分记录
+            </summary>
+            <param name="keyword">关键字</param>
+            <param name="status">条件 1：申请上分 2：申请下分 3：手动上分 4：手动下分  全部传空</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：编号
+                        LoginName：登录名称
+                        NickName：昵称
+                        Amount：金额
+                        ApplyTime：申请时间
+                        OrderStatus：状态
+                        Remark：备注
+                        Management：管理操作
+                        Status：用户状态
+                    }
+                    Total：数据数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetTotalIntegral(System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            获取上下分数量总数及总分数
+            </summary>
+            <param name="status">条件 1：申请上分 2：申请下分 3：手动上分 4：手动下分  全部传空</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddArticle(Entity.WebModel.WebArticle)">
+            <summary>
+            添加公告
+            </summary>
+            <param name="context">公告内容</param>
+            <remarks>
+                ArticleType：类型  1：公告  2：消息
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetArticleList">
+            <summary>
+            获取公告列表
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        ID：编号
+                        Type：类型
+                        Content：内容
+                    }
+                    Total：数据数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetArticleByID(System.String)">
+            <summary>
+            获取公告信息
+            </summary>
+            <param name="id">公告id</param>
+            <response>
+            ## 返回结果
+                ID：编号
+                Type：类型
+                Content：内容
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.DeleteArticleByID(System.String)">
+            <summary>
+            删除公告
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.UpdateArticle(System.String,Entity.WebModel.WebArticle)">
+            <summary>
+            修改公告
+            </summary>
+            <param name="id">公告id</param>
+            <param name="content">公告内容(只传Content)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.OpenArticle(System.String)">
+            <summary>
+            开启公告
+            </summary>
+            <param name="articleID">公告id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.CloseArticle(System.String)">
+            <summary>
+            关闭公告
+            </summary>
+            <param name="articleID">公告id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.SearchGameLottery(System.String,Entity.GameOfType,System.Int32,System.Int32)">
+            <summary>
+            获取游戏历史
+            </summary>
+            <param name="nper">期号</param>
+            <param name="gameType">游戏类型</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页面数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetGameLotteryDetailed(Entity.GameOfType,System.String)">
+            <summary>
+            获取游戏当期用户下注明细
+            </summary>
+            <param name="gameType"></param>
+            <param name="nper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddGameLottery10(Entity.GraspModel.Grasp10,Entity.GameOfType)">
+            <summary>
+            添加10球游戏
+            </summary>
+            <param name="grasp10"></param>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddGameLottery5(Entity.GraspModel.Grasp5,Entity.GameOfType)">
+            <summary>
+            添加5球游戏
+            </summary>
+            <param name="grasp5"></param>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ManualAward(System.String,Entity.GameOfType)">
+            <summary>
+            手动开奖
+            </summary>
+            <param name="nper"></param>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetReplySetUp">
+            <summary>
+            获取特殊设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.UpdateReplySetUp(Entity.WebModel.WebReplySetUp)">
+            <summary>
+            修改特殊设置
+            </summary>
+            <param name="webReply"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetFlySheetInfo">
+            <summary>
+            获取飞单信息
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        AdvanceTime：封盘提前时间
+                        SeurityNo：安全码
+                        AutoSyn：自动同步状态
+                        Password：密码
+                        Remind：声音提示开关
+                        OpenSheet：飞单开启状态
+                        LowFraction：分数限制
+                        MerchantName：商户名称
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.AddSheetMerchant(System.String,System.String,System.String,System.String)">
+            <summary>
+            飞单账号添加信息
+            </summary>
+            <param name="seurityNo">安全码</param>
+            <param name="merchantName">账号名称</param>
+            <param name="merchantPwd">账号密码</param>
+            <param name="roomNum">房间号</param>
+            <response>
+                Model
+                {
+                    UserID：目标用户Id
+                    TargetID：目标商户id
+                }
+            </response> 
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.SheetSynchronization(System.Int32)">
+            <summary>
+            飞单同步
+            </summary>
+            <param name="time">提前时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.SheetAutoCorrection(System.Boolean)">
+            <summary>
+            自动修正封盘时间
+            </summary>
+            <param name="islock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.FlySingleOpen(System.Boolean)">
+            <summary>
+            飞单开启
+            </summary>
+            <param name="open"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.TipsLimit(System.Decimal)">
+            <summary>
+            设置声音提示分数界限
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.TipsOpen(System.Boolean)">
+            <summary>
+            提示开关
+            </summary>
+            <param name="open"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetMerchantSheetInfos(System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            获取飞单列表
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start"></param>
+            <param name="pageSize"></param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        UserName：玩家名称
+                        GameType：游戏名称
+                        Nper：期号
+                        Remark：下注内容
+                        UseMoney：注单金额
+                        Time：下注时间
+                        Status：状态
+                    }
+                    Total：数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetFlySheetFail(System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            获取外部飞单失败记录
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Data
+                    {
+                        GameName：游戏名称
+                        Nper：期号
+                        UUID：uuid标识   要显示
+                        Status：状态
+                        Time：下注时间
+                        Orders：
+                        {
+                            content：下注内容
+                            money：使用金额
+                        }
+                    }
+                    Total：数量
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetAllShamUser">
+            <summary>
+            获取所有虚拟用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.ShamUserSendMessage(System.String,Entity.GameOfType,System.String)">
+            <summary>
+            机器人发送消息
+            </summary>
+            <param name="userID"></param>
+            <param name="gameType"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.GetDomainInfo">
+            <summary>
+            获取域名信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SetupController.UpdateDomain(System.String,System.String,System.String)">
+            <summary>
+            设置商户h5url地址
+            </summary>
+            <param name="url"></param>
+            <param name="seurityNo"></param>
+            <param name="roomNum"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.SwUserController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub},Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="hub"></param>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserRegister(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            用户注册
+            </summary>
+            <param name="loginName">登录名</param>
+            <param name="password">密码</param>
+            <param name="nickName">昵称</param>
+            <param name="code">验证码</param>
+            <param name="seurityNo">安全码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.MixVerifyCode">
+            <summary>
+            获取验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.SetUpCode(System.String)">
+            <summary>
+            验证安全码
+            </summary>
+            <param name="code">安全码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserLogin(System.String,System.String,System.String)">
+             <summary>
+             用户登录
+             </summary>
+             <param name="loginName">登录名称</param>
+             <param name="password">登录密码</param>
+             <param name="seurityNo">安全码</param>
+             <remarks>
+            ##  参数说明
+                 loginName：登录名称
+                 password：登录密码
+                 seurityNo：安全码
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         UserID：用户id
+                         MerchantID：商户id
+                         LoginName：用户登录名
+                         NickName：用户昵称
+                         UserMoney：用户积分
+                         Avatar：头像
+                         OnlyCode：唯一码
+                         RoomNum：房间码
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserWeChatLogin(System.String,System.String)">
+            <summary>
+            微信端登录
+            </summary>
+            <param name="unionid">unionid</param>
+            <param name="seurityNo">安全码</param>
+            <returns></returns> 
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.RoomListInit(Entity.GameOfType)">
+            <summary>
+            获取游戏状态
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        IssueNum：期号
+                        Number：号码
+                        Surplus：剩余时间 秒
+                        Status：游戏状态  等待中 = 1,封盘中 = 2,开奖中 = 3,已停售 = 4,未开奖 = 5,已关闭 = 6
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserSendMessage(Entity.GameOfType,System.String,System.String)">
+            <summary>
+            用户发送消息
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="message">消息</param>
+            <param name="uuid">标识</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.VideoUserSendMessage(Entity.BaccaratModel.BaccaratGameType,System.String,System.Int32,System.String)">
+            <summary>
+            视讯游戏发送消息
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="message">消息</param>
+            <param name="znum">桌号</param>
+            <param name="uuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserIntegral">
+            <summary>
+            获取用户积分
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetGameHistory(Entity.GameOfType,System.Int32,System.Int32)">
+            <summary>
+            获取游戏历史记录
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="start">开始页</param>
+            <param name="pageSize">每页数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetQRCode">
+            <summary>
+            获取上分二维码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetGameOdds(Entity.GameOfType)">
+            <summary>
+            获取各个游戏赔率
+            </summary>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetVideoGameOdds(Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            获取视讯游戏赔率
+            </summary>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserAccountChange(System.DateTime)">
+            <summary>
+            获取用户帐变记录
+            </summary>
+            <param name="time">查询时间</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        Amount：变动分数
+                        Balance：变动后分数
+                        Time：时间
+                        Type：类型
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserImpulse(System.Boolean)">
+            <summary>
+            获取用户充值记录
+            </summary>
+            <param name="history">true:今日  false:历史</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserWithdrawal(System.Boolean)">
+            <summary>
+            获取用户提现记录
+            </summary>
+            <param name="history">true:今日  false:历史</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserAccountInfo">
+            <summary>
+            获取用户绑定帐户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UpdateUserWeChat(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改用户微信帐户
+            </summary>
+            <param name="weChat">微信帐户</param>
+            <param name="fileinput">图片</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UpdateUserAlipay(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改用户支付宝帐户
+            </summary>
+            <param name="alipay">支付宝帐户</param>
+            <param name="fileinput">图片</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserExit">
+            <summary>
+            用户退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.SetUserRoomNum(System.String)">
+            <summary>
+            设置房间号（推广码）
+            </summary>
+            <param name="roomNum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetCustomerInfo">
+            <summary>
+            获取客服信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.JoinGameRoom(Entity.GameOfType)">
+            <summary>
+            进入游戏房间
+            </summary>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.ChatMessage(System.String,Entity.GameOfType)">
+            <summary>
+            用户聊天 
+            </summary>
+            <param name="message">消息</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetHeadList">
+            <summary>
+            获取头像列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UpdateUserHead(System.String)">
+            <summary>
+            修改用户头像
+            </summary>
+            <param name="pagName">图片名称(只传名称和格式  1.png)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UserApplyBack(Entity.GameOfType)">
+            <summary>
+            用户申请回水
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetAccountChange">
+            <summary>
+            获取积分  盈亏  流水
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        Integral：积分
+                        Flow：流水
+                        ProLoss：盈亏
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetBetInfo(System.DateTime,System.Nullable{Entity.GameOfType},System.Nullable{Entity.BaccaratModel.BaccaratGameType})">
+            <summary>
+            获取下注信息
+            </summary>
+            <param name="betTime">时间</param>
+            <param name="gameType">游戏类型  全部传空</param>
+            <param name="vgameType">视讯游戏类型  全部传空</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        GameType：游戏类型
+                        Nper：期号
+                        Remark：投注内容
+                        BetStatus：状态
+                        ProLoss：盈亏,
+                        Flow：流水,
+                        VGameType：视讯游戏类型
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.ApplyIntegral(Entity.ChangeTypeEnum,System.Decimal)">
+            <summary>
+            申请上下分
+            </summary>
+            <param name="type">上下分  1：上分  2：下分</param>
+            <param name="amount">金额</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.SearchRechargeList(Entity.ChangeTypeEnum,System.DateTime)">
+            <summary>
+            获取上下分记录
+            </summary>
+            <param name="type">上下分  1：上分  2：下分</param>
+            <param name="time">申请时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.UpdateUesrPwdInfo(System.String,System.String,System.String)">
+            <summary>
+            修改用户密码
+            </summary>
+            <param name="loginName">登录名称</param>
+            <param name="nickName">昵称</param>
+            <param name="password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.VerifyAccount(System.String,System.String)">
+            <summary>
+            验证帐号
+            </summary>
+            <param name="loginName">登录名称</param>
+            <param name="password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetSwitch">
+            <summary>
+            获取微信开关
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetRoomName(Entity.GameOfType)">
+            <summary>
+            获取房间名称
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetGameVideoUrl(Entity.GameOfType)">
+            <summary>
+            获取游戏视频地址
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetGameList">
+            <summary>
+            获取游戏信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetAppUrls">
+            <summary>
+            随机获取一个可使用域名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetUserAgentInfo(System.DateTime,System.Nullable{Entity.GameOfType})">
+            <summary>
+            获取用户代理报表
+            </summary>
+            <param name="dateTime">时间  日期</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetVersionInfo">
+            <summary>
+            获取版本号信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetArticle">
+            <summary>
+            获取开启公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetDomainInfo">
+            <summary>
+            获取域名信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.SwUserController.GetVideoZnumCount">
+            <summary>
+            获取视讯游戏桌子数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Controllers.UserController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            
+            </summary>
+            <param name="hostingEnvironment"></param>
+            <param name="hub"></param>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.AddUserInfo(Entity.WebModel.WebAddUser)">
+             <summary>
+             添加用户
+             </summary>
+             <remarks>
+            ##  参数说明
+                model
+                {
+                     LoginName:用户登录名称
+                     Password:登录密码
+                     Level:用户级别  1：黄铜  2：白银  3：黄金  4：铂金  5：钻石  6：银皇冠  7：金皇冠
+                     NickName:昵称
+                }
+                其它不传
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.SearchUserInfo(System.String,System.Nullable{Entity.UserStatusEnum},System.Int32,System.Int32)">
+             <summary>
+             查询用户列表
+             </summary>
+             <param name="loginName">登录名称</param>
+             <param name="status">用户状态 1：正常 2：冻结 4：假人</param>
+             <param name="start">页码</param>
+             <param name="pageSize">页数</param>
+             <remarks>
+            ##  参数说明
+                 loginName：登录名称
+                 status：用户状态 1：正常 2：冻结 4：假人
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Total：数据总数量
+                     Data
+                     {
+                         ID：用户id  不显示
+                         Avatar：头像 （需要前端拼接）api地址+返回地址
+                         IsAgent：是否为代理
+                         NickName：昵称
+                         Record：飞单状态
+                         UserMoney：余额
+                         Level：用户级别
+                         LoginName：登录名称
+                         OnlyCode：唯一码
+                         BetGameName：下注游戏名称
+                         ProLoss：盈亏
+                         IsSupport：人托
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.TransformationData(System.Collections.Generic.List{Entity.User})">
+            <summary>
+            数据转换
+            </summary>
+            <param name="users"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.RecordOperation(System.String)">
+            <summary>
+            飞单操作
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.AvatarOperation(System.String)">
+            <summary>
+            代理操作
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.DummyOperation(System.String)">
+            <summary>
+            假人操作
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.FrozenOperation(System.String)">
+            <summary>
+            冻结操作
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.DeleleUser(System.String)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="userID">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetUserInfo(System.String)">
+             <summary>
+             获取用户信息
+             </summary>
+             <param name="userID">用户id</param>
+             <remarks>
+            ##  参数说明
+                 userID：用户id
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Model
+                     {
+                         ID：id
+                         LoginName：登录名称 
+                         Level：等级 1：黄铜  2：白银  3：黄金  4：铂金  5：钻石  6：银皇冠  7：金皇冠
+                         LoginTime：最近登录时间
+                         NickName：昵称
+                         Remark：备注
+                         Talking：用户发言
+                         UserMoney：余额
+                         OnlyCode：唯一码
+                         ProgrammeID：回水id
+                         IsSupport：机器人托
+                         MemoName：备注名
+                         ShowType：显示名称方式 true:昵称  false:备注名
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.UpdateUserInfo(Entity.WebModel.WebGetUserInfo,System.Decimal,System.Decimal)">
+            <summary>
+            修改用户信息及上分下分
+            </summary>
+            <param name="webGetUserInfo">用户信息</param>
+            <param name="up">上分</param>
+            <param name="down">下分</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetGrogrammeList">
+            <summary>
+            获取方案下拉
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetVideoGrogrammeList">
+            <summary>
+            获取视讯方案下拉
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.UpdateUserImages(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传用户头像
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="fileinput"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetUserBalance(System.String)">
+            <summary>
+            获取用户余额
+            </summary>
+            <param name="loginName">登录名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetUserBrancHis(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            获取用户上下分记录
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetUserAccountChange(System.String,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            获取用户帐变记录
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页面数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetUserReceivables(System.String)">
+            <summary>
+            获取用户收款帐户
+            </summary>
+            <param name="userID">用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetHeadList">
+            <summary>
+            获取头像列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.UpdateUserHead(System.String,System.String)">
+            <summary>
+            修改用户头像
+            </summary>
+            <param name="pagName">图片名称(只传名称和格式  1.png)</param>
+            <param name="userID">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GetExistingCount">
+            <summary>
+            获取现有正式玩家人数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.UserController.GenerateAccount(System.String,System.String)">
+            <summary>
+            生成登录账号
+            </summary>
+            <param name="userID"></param>
+            <param name="loginName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.WeChatController.WeChatAppAction(System.String,System.String,System.Int32)">
+            <summary>
+            code传输
+            </summary>
+            <param name="code"></param>
+            <param name="seurityNo">安全码</param>
+            <param name="type">类型 1:app 2:web</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Controllers.WeChatController.GetAppInfos">
+            <summary>
+            获取app微信端appid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Hubs.ChatHub">
+            <summary>
+            长连接
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.OnConnectedAsync">
+            <summary>
+            连接时添加redis
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.InitRoomGame(System.String,System.String,Entity.GameOfType)">
+            <summary>
+            创建进入房间初始化
+            </summary>
+            <param name="userId">用户id</param>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.LeaveRoomGame(System.String,System.String,Entity.GameOfType)">
+            <summary>
+            关闭游戏房间连接
+            </summary>
+            <param name="userId"></param>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.InitRoomList(System.String,System.String)">
+            <summary>
+            创建房间列表初始化
+            </summary>
+            <param name="userId">用户id</param>
+            <param name="merchantID">商户id</param>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.LeaveRoomList(System.String,System.String)">
+            <summary>
+            关闭房间列表连接
+            </summary>
+            <param name="userId"></param>
+            <param name="merchantID"></param>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.AdminSendMessage(System.String,System.String,Entity.GameOfType,System.String)">
+            <summary>
+            管理员发送消息
+            </summary>
+            <param name="message"></param>
+            <param name="userID"></param>
+            <param name="gameType"></param>
+            <param name="merchantID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.LeaveBackstage(System.String)">
+            <summary>
+            关闭连接
+            </summary>
+            <param name="merchantID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.Heart(System.String)">
+            <summary>
+            心跳机制
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            断开连接
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.MerchantSheetLogin(System.String,System.String,System.String)">
+            <summary>
+            商户后台登录
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="targetID">目标商户id</param>
+            <param name="userID">目标用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.MerchantSheetExit">
+            <summary>
+            商户飞单退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.SheetLogin(System.String,System.String)">
+            <summary>
+            飞单
+            </summary>
+            <param name="merchantName"></param>
+            <param name="merchantPwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.SheetCallBack(System.String)">
+            <summary>
+            飞单回调   删除数据
+            </summary>
+            <param name="uuid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.JoinRoom(System.String,System.String,System.Int32,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            加入游戏房间
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="znum">桌号</param>
+            <param name="baccaratGameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.LeaveBaccaratRoom(System.String,System.String,System.Int32)">
+            <summary>
+            离开百家乐房间
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <param name="znum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Hubs.ChatHub.JoinRoomList(System.String,System.String)">
+            <summary>
+            加入游戏房间列表
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.BackwaterKind">
+            <summary>
+            回水模块
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.GameBackwater(System.String,System.Collections.Generic.List{System.String},System.DateTime,System.DateTime,Entity.GameOfType,Entity.PatternEnum)">
+            <summary>
+            回水
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userIDList"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <param name="gameType"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.VideoGameBackwater(System.String,System.Collections.Generic.List{System.String},System.DateTime,System.DateTime,Entity.BaccaratModel.BaccaratGameType,Entity.PatternEnum)">
+            <summary>
+            回水
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userIDList"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <param name="gameType"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.BackwaterSetup(System.String,System.String,System.DateTime,System.DateTime,Entity.GameOfType,Entity.PatternEnum,Entity.BackwaterSetup)">
+            <summary>
+            流水
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <param name="gameType"></param>
+            <param name="pattern"></param>
+            <param name="setup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.VideoBackwaterSetup(System.String,System.String,System.DateTime,System.DateTime,Entity.BaccaratModel.BaccaratGameType,Entity.PatternEnum,Entity.VideoBackwaterSetup)">
+            <summary>
+            流水
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <param name="gameType"></param>
+            <param name="pattern"></param>
+            <param name="setup"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.BackwaterKind.Backwaterencaps">
+            <summary>
+            回水信息
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.BackwaterKind.Backwaterencaps.UserID">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.BackwaterKind.Backwaterencaps.Account">
+            <summary>
+            使用金额
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.BackwaterKind.Backwaterencaps.Money">
+            <summary>
+            剩余
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.AgentBackwater(System.String,System.DateTime,System.Nullable{Entity.GameOfType},System.Nullable{Entity.BaccaratModel.BaccaratGameType})">
+            <summary>
+            代理回水
+            </summary>
+            <param name="merchantID"></param>
+            <param name="time"></param>
+            <param name="gameType"></param>
+            <param name="vgameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.UserBackwaterAsync(System.String,Entity.GameOfType,System.String)">
+            <summary>
+            用户回水
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="merchantID">商户号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.UserVideoBackwaterAsync(System.String,Entity.BaccaratModel.BaccaratGameType,System.String)">
+            <summary>
+            用户回水
+            </summary>
+            <param name="userID">用户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="merchantID">商户号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.BackwaterKind.SearchUserBet(System.String,Entity.AgentBackwater,System.DateTime)">
+            <summary>
+            获取当天用户下注信息
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="agent">代理id</param>
+            <param name="time">时间</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.CentralProcess">
+            <summary>
+            公共方法
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.ToDateTimeOffset(System.DateTime)">
+            <summary>
+            设置时间偏移
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.SetExtensionCode">
+            <summary>
+            生成6位数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.GetIP(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取ip
+            </summary>
+            <param name="HttpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.GetMerchantRedisCookie(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取商户redis缓存信息
+            </summary>
+            <param name="HttpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.GetUserRedisCookie(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取商户redis缓存信息
+            </summary>
+            <param name="HttpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.GetMerchantHandicap(System.String,System.String)">
+            <summary>
+            获取对应商户盘口信息
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.CentralProcess.Replacement(Entity.SendFlying,System.String,Entity.GameOfType,System.String,System.Int32)">
+            <summary>
+            补发飞单任务
+            </summary>
+            <param name="model">飞单模型</param>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号 </param>
+            <param name="retry">重试次数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.Common.GetVideoGameStatus(System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            游戏房间是否开启
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.Common.GetGameList">
+            <summary>
+            刷新游戏房间列表
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.Common.SendShamUserApply(System.String,System.String,System.Int32)">
+            <summary>
+            机器人自动确认
+            </summary>
+            <param name="recordID"></param>
+            <param name="merchantID"></param>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.DeskStatusModel">
+            <summary>
+            游戏信息
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Cid">
+            <summary>
+            厅号
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Gid">
+            <summary>
+            游戏
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Tid">
+            <summary>
+            桌号
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Ch">
+            <summary>
+            靴
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Ci">
+            <summary>
+            铺
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Tname">
+            <summary>
+            桌名
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Xh">
+            <summary>
+            网络最高限红
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Dx">
+            <summary>
+            网络最低限红
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Txh">
+            <summary>
+            现场最高限红
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Tdx">
+            <summary>
+            现场最低限红
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Monopolize">
+            <summary>
+            包台1为包台中
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Ttime">
+            <summary>
+            倒计时秒数
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Cstate">
+            <summary>
+            桌子状态 free init stop close openning ,init 状态可以下注
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Bt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Vt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Va">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Inittime">
+            <summary>
+            计时开始时间
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.Vmoney">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DeskStatusModel.vcount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.ContainerJobActivator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ContainerJobActivator.#ctor(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ContainerJobActivator.ActivateJob(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="jobType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.DistributionLow">
+            <summary>
+            下发任务
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.DistributionLow.GameTaskStatus">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.DistributionLow.limit">
+            <summary>
+            数量分组
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.DistributionLow.TaskStatusEnum">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.DistributionLow.TaskStatusEnum.开启">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.DistributionLow.TaskStatusEnum.关闭">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.DistributionLow.DistributionAsync(ManageSystem.Manipulate.TaskDistributionModel)">
+            <summary>
+            下发任务
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.TaskDistributionModel">
+            <summary>
+            任务下发类
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.TaskDistributionModel.Nper">
+            <summary>
+            期号 
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.TaskDistributionModel.GameType">
+            <summary>
+            游戏类型
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.TaskDistributionModel.Lottery">
+            <summary>
+            开奖信息
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.TaskDistributionModel.MerchantIDList">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.TaskDistributionModel.UUID">
+            <summary>
+            唯一码
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.ExceptionHandlerMiddleWare">
+            <summary>
+            处理异常中间层
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ExceptionHandlerMiddleWare.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            中间层处理
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ExceptionHandlerMiddleWare.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ExceptionHandlerMiddleWare.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.ExceptionHandlerMiddleWare.WriteExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.FlyingSheet">
+            <summary>
+            飞单
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.FlyingSheet.FlyingSheetMethod(System.String,System.String,Entity.GameOfType)">
+            <summary>
+            飞单
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="nper">期号</param>
+            <param name="gameType">游戏高达</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.FlyingSheet.SendAndDeleteBeoverdue(System.String,System.String,Entity.GameOfType)">
+            <summary>
+            发送并删除与这期不相当数据
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="issueNum">期号</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.FlyingSheet.ProhibitionWithdrawal(System.String,Entity.GameOfType,Entity.BetRemarkInfo,System.String)">
+            <summary>
+            禁撤回时发送内容
+            </summary>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="oddNum"></param>
+            <param name="nper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.FlyingSheet.MerchantInternalSheet(System.String,System.String,System.String,System.String,Entity.GameOfType,System.String,System.String)">
+            <summary>
+            外部商户飞单下注
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="targetID">目标商户id</param>
+            <param name="userID">用户id</param>
+            <param name="targetUserID">目标用户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="betInfo">下注内容</param>
+            <param name="nper">期号</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.GameCollection">
+            <summary>
+            游戏采集
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameCollection.timeSpan">
+            <summary>
+            游戏重试时间
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameCollection.interval">
+            <summary>
+            间隔时间
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.GameCollection.dicUrls">
+            <summary>
+            游戏对应连接
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.GameLottery(Entity.GameOfType,System.String,System.String)">
+            <summary>
+            发送开奖任务
+            </summary>
+            <param name="gameType"></param>
+            <param name="nper"></param>
+            <param name="lottery"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.TaskRetransmission(System.Collections.Generic.List{ManageSystem.Manipulate.TaskDistributionModel})">
+            <summary>
+            补发任务
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.VideoGameLottery(Entity.BaccaratModel.BaccaratGameType,System.String,System.String,System.Int32)">
+            <summary>
+            发送开奖任务
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号</param>
+            <param name="lottery">开奖结果</param>
+            <param name="znum">桌号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendVideoGameLotteryMsg(Entity.BaccaratModel.BaccaratGameType,System.String,System.Int32,System.Int32)">
+            <summary>
+            发送开奖任务
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号</param>
+            <param name="znum">桌号</param>
+            <param name="type">类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.VideoTaskRetransmission(System.Collections.Generic.List{ManageSystem.Manipulate.VideoTaskDistributionModel})">
+            <summary>
+            补发视讯任务
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="F:ManageSystem.Manipulate.GameCollection.GameLock">
+            <summary>
+            游戏对应锁定
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.StartGameCollect(Entity.GameOfType)">
+            <summary>
+            添加游戏定时器
+            </summary>
+            <param name="gameType"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.StartGameTimer(Entity.GameOfType)">
+            <summary>
+            开启采集
+            </summary>
+            <param name="gameType"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.GameStart(Entity.GameOfType)">
+            <summary>
+            开启游戏
+            </summary>
+            <param name="gameType">游戏类型</param>
+        </member>
+        <member name="F:ManageSystem.Manipulate.GameCollection.GameNper">
+            <summary>
+            采集进程
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.GameCollection.GameJobID">
+            <summary>
+            游戏任务id
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.GetGrasp(System.String,Operation.Common.Utils.GameNextLottery,Entity.GameOfType,System.Int32,Hangfire.Server.PerformContext)">
+            <summary>
+            获取采集游戏信息
+            </summary>
+            <param name="urlName"></param>
+            <param name="lotteryInfo"></param>
+            <param name="gameType"></param>
+            <param name="errorCount"></param>
+            <param name="context">传空 hangfire会自动识别</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendGameMsg(System.String,Entity.GameOfType,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            发送游戏消息
+            </summary>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="userConns"></param>
+            <param name="addressID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.DataRefresh(System.Nullable{Entity.GameOfType})">
+            <summary>
+            开启游戏状态实时刷新
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.GameTypeAsync(System.String,Entity.GameOfType,Operation.Common.Utils.GameNextLottery)">
+            <summary>
+            推送各个商户游戏状态消息
+            </summary>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="gameStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendListMessage(System.String,System.String,Entity.GameOfType,System.Collections.Generic.List{System.String})">
+            <summary>
+            推送消息
+            </summary>
+            <param name="Message"></param>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="userConns"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendMonitorMessage(System.String,System.String)">
+            <summary>
+            向管理后台发送消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendAdminMessage(System.String,System.String,Entity.GameOfType)">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SealUpCheckMsg(System.String,Entity.GameOfType,System.String,System.String)">
+            <summary>
+            封盘确认
+            </summary>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="message"></param>
+            <param name="nper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.FlyingTask(System.String,Entity.GameOfType,System.String)">
+            <summary>
+            飞单任务
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.OtherThinks">
+            <summary>
+            其它事件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.NewShamUserSendBetInfo(System.String,Entity.WebModel.WebAppGameInfos)">
+            <summary>
+            假人
+            </summary>
+            <param name="merchantID">商户号</param>
+            <param name="gameInfos">游戏信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.IncomeDistribution(System.String,Entity.WebModel.WebAppGameInfos)">
+            <summary>
+            清分
+            </summary>
+            <param name="merchantID">商户Id</param>
+            <param name="gameInfos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.UpDivisionHandle(Entity.User,System.String,Entity.RobotBehavior,Entity.ReplySetUp,Entity.GameOfType,System.String,System.Decimal,System.TimeSpan)">
+            <summary>
+            假人上分
+            </summary>
+            <param name="user"></param>
+            <param name="merchantID"></param>
+            <param name="behavior"></param>
+            <param name="reply"></param>
+            <param name="gameType"></param>
+            <param name="nper"></param>
+            <param name="amount"></param>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.DownDivisionHandle(System.String,System.String,Entity.ReplySetUp,Entity.GameOfType,System.Decimal,System.TimeSpan)">
+            <summary>
+            假人下分
+            </summary>
+            <param name="userID"></param>
+            <param name="merchantID"></param>
+            <param name="reply"></param>
+            <param name="gameType"></param>
+            <param name="amount"></param>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.SendShamUserMessage(System.String,System.String,System.String,Entity.GameOfType)">
+            <summary>
+            机器人发送消息
+            </summary>
+            <param name="message">消息内容</param>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.WinningBid(System.Double)">
+            <summary>
+            是否中标
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.AutoRevise">
+            <summary>
+            自动修正当前登录商户对应高级商户封盘时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameCollection.BaccaratMsgHandle(System.String,System.String,System.Int32,Entity.BaccaratModel.BaccaratGameType,System.Collections.Generic.List{System.String})">
+            <summary>
+            百家乐消息推送
+            </summary>
+            <param name="merchantID"></param>
+            <param name="nper"></param>
+            <param name="znum"></param>
+            <param name="gameType"></param>
+            <param name="conns"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.GraspDatas">
+            <summary>
+            数据抓取
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GraspDatas.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GraspDatas.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GraspDatas.HandleData">
+            <summary>
+            添加部分数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.MerchantAuthenticationAttribute">
+            <summary>
+            权限验证
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.MerchantAuthenticationAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.MerchantAuthenticationAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.MerchantAuthenticationAttribute.CheckMethod(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
+            <summary>
+            判断方法是否单独加特性
+            </summary>
+            <param name="descriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.NotMerchantAuthenticationAttribute">
+            <summary>
+            不进行验证
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.UserAuthenticationAttribute">
+            <summary>
+            用户权限验证
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.UserAuthenticationAttribute.CheckMethod(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
+            <summary>
+            判断方法是否单独加特性
+            </summary>
+            <param name="descriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.NotUserAuthenticationAttribute">
+            <summary>
+            不进行用户验证
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.MyAuthorizationFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.MyAuthorizationFilter.Authorize(Hangfire.Dashboard.DashboardContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.SendAdminMessageJob.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.GameBetConfirmationJob">
+            <summary>
+            游戏下注确认
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.GameBetConfirmationJob.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.FlyingTaskJob">
+            <summary>
+            飞单任务
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.FlyingTaskJob.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.ReplacementJob">
+            <summary>
+            飞单补发任务 
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.SendShamUserApplyJob">
+            <summary>
+            假人申请信息处理
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.SendShamUserApplyJob.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            处理数据
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.RegularLottery10Job">
+            <summary>
+            10球采集任务
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.RabbitMQHelper">
+            <summary>
+            消息队列
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendMould(System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveMould(System.String,System.Action{System.String})">
+            <summary>
+            接收消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendJobMould(System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveJobMould(System.String,System.Action{System.String})">
+            <summary>
+            接收消息
+            </summary>
+            <param name="methodName"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendAdminMessage(System.String,System.String,Entity.GameOfType,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+            <param name="isColl"></param>
+            <param name="userConns"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveAdminMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收管理员消息
+            </summary>
+            <param name="hubContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendUserPointChange(System.String,System.String)">
+            <summary>
+            发送玩家积分
+            </summary>
+            <param name="userID"></param>
+            <param name="merchantID"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveUserPointChange(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收玩家积分
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendUserMessage(System.String,System.String,System.String,Entity.GameOfType)">
+            <summary>
+            发送用户消息
+            </summary>
+            <param name="message"></param>
+            <param name="userID"></param>
+            <param name="merchantID"></param>
+            <param name="gameType"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveSendUserMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收玩家信息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendVideoUserMessage(System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType,System.Int32)">
+            <summary>
+            发送用户消息
+            </summary>
+            <param name="message">消息</param>
+            <param name="userID">用户id</param>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="znum">桌号</param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveVideoSendUserMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收玩家信息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendOverallMessage(System.String,System.String,System.String)">
+            <summary>
+            发送大厅消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="methodModelName"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveOverallMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收大厅消息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendGameMessage(System.String,System.String,System.String,System.Nullable{Entity.GameOfType},System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            发送游戏消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="methodModelName"></param>
+            <param name="gameType"></param>
+            <param name="userID"></param>
+            <param name="userConns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveGameMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收游戏消息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendAllinMessage(System.String,System.String,System.String)">
+            <summary>
+            发送所有用户消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="methodModelName"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveAllinMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收所有用户消息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendFlyingSheet(System.String,Entity.GameOfType,System.String,Entity.SendFlying,System.Int32)">
+            <summary>
+            发送飞单
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="gameType">游戏类型</param>
+            <param name="nper">期号</param>
+            <param name="result"></param>
+            <param name="retry">重试次数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveFlyingSheet(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收飞单消息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendMerchantHandicap(System.String,System.String)">
+            <summary>
+            发送用户盘口信息
+            </summary>
+            <param name="merchantID"></param>
+            <param name="userID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveMerchantHandicap(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收用户盘口信息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendMerchantBetInfo(System.String,System.String,System.String,System.String)">
+            <summary>
+            发送商户飞单用户下注信息
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="targetID">目标id</param>
+            <param name="userID">用户id</param>
+            <param name="message">信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveMerchantBetInfo(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收商户飞单用户下注信息
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendTaskDistribution(ManageSystem.Manipulate.TaskDistributionModel)">
+            <summary>
+            发送任务分发
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveTaskDistribution">
+            <summary>
+            接收任务分发
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendVideoTaskDistribution(ManageSystem.Manipulate.VideoTaskDistributionModel)">
+            <summary>
+            发送任务分发
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveVideoTaskDistribution">
+            <summary>
+            接收任务分发
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendBaccaratAdminMessage(System.String,System.String,System.Nullable{System.Int32},Entity.BaccaratModel.BaccaratGameType,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message"></param>
+            <param name="merchantID"></param>
+            <param name="znum"></param>
+            <param name="gameType"></param>
+            <param name="list"></param>
+            <param name="userID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendBaccaratUserMessage(System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType)">
+            <summary>
+            发送管理员消息
+            </summary>
+            <param name="message">消息内容</param>
+            <param name="merchantID">商户id</param>
+            <param name="userID">用户id</param>
+            <param name="gameType">游戏类型</param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveBaccaratAdminMessage(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收管理员消息
+            </summary>
+            <param name="hubContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendGameStatus(System.String)">
+            <summary>
+            发送游戏状态
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveGameStatus(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收游戏状态
+            </summary>
+            <param name="hubContext"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.SendBaccaratStartBet(System.Collections.Generic.List{System.String},System.Int32,Entity.BaccaratModel.BaccaratGameType,System.String,System.Int32)">
+            <summary>
+            发送各个商户信息
+            </summary>
+            <param name="merchantIDs"></param>
+            <param name="znum"></param>
+            <param name="gameType"></param>
+            <param name="nper"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RabbitMQHelper.ReceiveBaccaratStartBet(Microsoft.AspNetCore.SignalR.IHubContext{ManageSystem.Hubs.ChatHub})">
+            <summary>
+            接收开始下注信息
+            </summary>
+            <param name="hubContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.RedisHub">
+            <summary>
+            redis连接池
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RedisHub.ServerToCompany">
+            <summary>
+            监听推送
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RedisHub.ShowPorker(System.String)">
+            <summary>
+            牌型转换
+            </summary>
+            <param name="porkers">开牌</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.RedisHub.PorkerClass">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.RedisHub.PorkerClass.Porker">
+            <summary>
+            牌型
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.RedisHub.PorkerClass.Point">
+            <summary>
+            点数
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.RedisHub.RefreshGameStatus(System.Int32,System.String,System.String,System.String,Entity.BaccaratModel.BaccaratGameType,System.String)">
+            <summary>
+            刷新游戏状态
+            </summary>
+            <param name="tid">房间码</param>
+            <param name="status">状态</param>
+            <param name="scene">场次</param>
+            <param name="ttime">倒计时</param>
+            <param name="gameType">游戏类型</param>
+            <param name="history">历史开奖</param>
+        </member>
+        <member name="T:ManageSystem.Manipulate.GameStatic">
+            <summary>
+            游戏房间状态
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.ZNum">
+            <summary>
+            房间号
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.Cstate">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.Scene">
+            <summary>
+            场次
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.Ttime">
+            <summary>
+            倒计时
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.GameType">
+            <summary>
+            游戏类型
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.Url">
+            <summary>
+            视频地址
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.ZName">
+            <summary>
+            桌名
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.GameStatic.History">
+            <summary>
+            历史记录
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.VideoDistributionLow">
+            <summary>
+            下发任务
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoDistributionLow.GameTaskStatus">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Manipulate.VideoDistributionLow.DistributionAsync(ManageSystem.Manipulate.VideoTaskDistributionModel)">
+            <summary>
+            中奖处理
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageSystem.Manipulate.VideoDistributionLow.TaskStatusEnum">
+            <summary>
+            游戏任务状态
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.VideoDistributionLow.TaskStatusEnum.开启">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="F:ManageSystem.Manipulate.VideoDistributionLow.TaskStatusEnum.关闭">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Manipulate.VideoTaskDistributionModel">
+            <summary>
+            游戏开奖下发任务信息
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.Nper">
+            <summary>
+            期号 
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.GameType">
+            <summary>
+            游戏类型
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.Lottery">
+            <summary>
+            开奖信息
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.ZNum">
+            <summary>
+            桌号
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.MerchantIDList">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:ManageSystem.Manipulate.VideoTaskDistributionModel.UUID">
+            <summary>
+            唯一码
+            </summary>
+        </member>
+        <member name="T:ManageSystem.Program">
+            <summary>
+            项目启动文件
+            </summary>
+        </member>
+        <member name="M:ManageSystem.Program.Main(System.String[])">
+            <summary>
+            主程序
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:ManageSystem.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            中间层处理
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

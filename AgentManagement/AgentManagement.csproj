@@ -1,0 +1,177 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>F:\Project\LotteryWebServer\AgentManagement\AgentManagement.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>F:\Project\LotteryWebServer\AgentManagement\AgentManagement.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="app.config~RF53c5bbd9.TMP" />
+    <None Remove="Controllers\AgentUserController.cs~RF49be5c2b.TMP" />
+    <None Remove="Controllers\AgentUserController.cs~RF56bc1.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\build\.DS_Store" />
+    <None Include="wwwroot\build\common.js" />
+    <None Include="wwwroot\build\dataProcess.js" />
+    <None Include="wwwroot\build\electron.js" />
+    <None Include="wwwroot\build\installer.nsh" />
+    <None Include="wwwroot\build\logo.icns" />
+    <None Include="wwwroot\build\main.js" />
+    <None Include="wwwroot\build\main.js.map" />
+    <None Include="wwwroot\build\pc\.DS_Store" />
+    <None Include="wwwroot\build\pc\ico\.DS_Store" />
+    <None Include="wwwroot\build\proload.js" />
+    <None Include="wwwroot\build\proload.js.map" />
+    <None Include="wwwroot\build\renderer.js" />
+    <None Include="wwwroot\build\service-worker.js" />
+    <None Include="wwwroot\build\static\js\antd-icons.b4a44027.chunk.js" />
+    <None Include="wwwroot\build\static\js\main.544d6c6b.js" />
+    <None Include="wwwroot\css\fonts\ionicons.woff2" />
+    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\fonts\nginx-1.16.0.lnk" />
+    <None Include="wwwroot\html\flash\flowplayer-3.2.8.swf" />
+    <None Include="wwwroot\html\flash\flowplayer-controls-3.2.8.swf" />
+    <None Include="wwwroot\html\flash\flowplayer.rtmp-3.2.8.swf" />
+    <None Include="wwwroot\html\js\app.1577952585984.js" />
+    <None Include="wwwroot\html\js\app.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\app.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-117e6ea1.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-117e6ea1.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-117e6ea1.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-16547a8c.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-16547a8c.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-19b63ee2.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-19b63ee2.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-1ea86520.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-1ea86520.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-1eb451d6.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-1eb451d6.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-1eb451d6.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-23abe0d8.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-23abe0d8.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-23abe0d8.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-24598c99.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-24598c99.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-26dd1ffd.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-26dd1ffd.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-2a3051e4.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-2a3051e4.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-2c13600c.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-2c13600c.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-2c13600c.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-2f297a4e.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-2f297a4e.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-2f297a4e.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-3038c27c.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-3038c27c.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-3cd934f9.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-3cd934f9.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-42ec8838.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-42ec8838.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-42ec8838.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-500f1af6.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-500f1af6.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-55c83a75.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-55c83a75.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-582171e6.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-582171e6.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-6acd7146.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-6acd7146.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-6e08ff1e.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-6e08ff1e.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-6e08ff1e.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-79c3252b.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-79c3252b.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-79c3252b.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-838bd3d2.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-838bd3d2.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-838bd3d2.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-8a2525b2.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-8a2525b2.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-93254a40.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-93254a40.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-d5d3baa0.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-d5d3baa0.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-d5d3baa0.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-e19180b6.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-e19180b6.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-e19180b6.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-eab95464.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-eab95464.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-eee9ce4e.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-eee9ce4e.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-f909b270.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-f909b270.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-f909b270.1577952585984.js.map" />
+    <None Include="wwwroot\html\js\chunk-vendors.1577952585984.js" />
+    <None Include="wwwroot\html\js\chunk-vendors.1577952585984.js.gz" />
+    <None Include="wwwroot\html\js\chunk-vendors.1577952585984.js.map" />
+    <None Include="wwwroot\html\static\signalr.js" />
+    <None Include="wwwroot\html\static\signalr.js.gz" />
+    <None Include="wwwroot\js\axios.min.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\common.js" />
+    <None Include="wwwroot\js\iview.min.js" />
+    <None Include="wwwroot\js\jquery-3.1.1.min.js" />
+    <None Include="wwwroot\js\qrcode.min.js" />
+    <None Include="wwwroot\js\tools.js" />
+    <None Include="wwwroot\js\vue.min.js" />
+    <None Include="wwwroot\js\xlsx.full.min.js" />
+    <None Include="wwwroot\plugins\laydate\laydate.js" />
+    <None Include="wwwroot\plugins\laydate\theme\default\font\iconfont.svg" />
+    <None Include="wwwroot\plugins\layer\layer.js" />
+    <None Include="wwwroot\plugins\leftnav\js\jquery.mmenu.all.min.js" />
+    <None Include="wwwroot\plugins\slimscroll\jquery.slimscroll.js" />
+    <None Include="wwwroot\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <None Include="wwwroot\plugins\swiper\js\maps\swiper.jquery.min.js.map" />
+    <None Include="wwwroot\plugins\swiper\js\maps\swiper.jquery.umd.min.js.map" />
+    <None Include="wwwroot\plugins\swiper\js\maps\swiper.min.js.map" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.jquery.js" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.jquery.min.js" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.jquery.umd.js" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.jquery.umd.min.js" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.js" />
+    <None Include="wwwroot\plugins\swiper\js\swiper.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="NLog.Config" Version="4.6.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj" />
+    <ProjectReference Include="..\Operation\Operation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\AdminImages\" />
+    <Folder Include="wwwroot\AlipayImages\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+</Project>

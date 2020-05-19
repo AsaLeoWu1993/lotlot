@@ -1,0 +1,458 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+				<div id="header"></div>
+
+				<script>
+					$(function(){
+						$('#header').load('common/header.html');
+					})
+				</script>
+				<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li class="active">
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+							<script>
+								(function() {
+									var username = localStorage.getItem('loginName');
+									$('#username-min').html(username);
+									if (localStorage.getItem('isHighest') == '3') {
+										$('#high-level').remove();
+									} else {
+										$('#high-level').show();
+									}
+								})();
+							</script>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">创建账号</li>
+					</ol>
+					<!--面包屑当前位置end-->
+					<!--数据区域start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<div class="model-cate">
+								<div class="tab-hd">
+									<span class="cur"><a>创建代理账号</a></span>
+									<span><a>创建客户账号</a></span>
+								</div>
+								<div class="tab-bd">
+									<!--选项一代理账号start-->
+									<div class="cate-boxcon cur">
+										<div class="form-common">
+											<div class="form-group  clearfix">
+												<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>用户名</label>
+												<div class="col-sm-4">
+													<input class="form-control" v-model="agentName" type="text" placeholder="请输入用户名">
+												</div>
+											</div>
+											<div class="form-group  clearfix">
+												<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>密码</label>
+												<div class="col-sm-4">
+													<input class="form-control" v-model="agentPassword" type="text" placeholder="请输入密码">
+												</div>
+											</div>
+											<div class="form-group  clearfix">
+												<label class="col-sm-offset-2 col-sm-2 col-xs-12 m-text-left control-label"><em>*</em>代理价格</label>
+												<div class="col-sm-4 col-xs-8">
+													<input class="form-control" v-model="agentDownPrice" @input="handleInputNumber($event, 1)" placeholder="请输入代理价格">
+												</div>
+												<div class="col-sm-3 col-xs-4" style="padding: 0;">
+			                                        <span class="f-12 tiptext" style="word-break: keep-all;">我的代理价格<i class="f-12 color-gray color-orange">{{agentPrice}}</i>元</span>
+			                                    </div>
+											</div>
+											<div class="form-group  clearfix mg-btm20">
+												<div class="col-sm-offset-4 col-sm-4">
+													<p class="tipmsg">
+														<span class="color-orange">说明：</span>
+														设定代理价格就是设定下级售卡的成本，下级的价格减去我的代理价格就是下级团队每售一套月卡我得到的返利
+													</p>
+													<p class="tipmsg">
+														<span class="color-orange">级差说明：</span>
+														设定代理价格就是设定下级售卡的成本，下级的价格减去我的代理价格就是下级团队每售一套月卡我得到的返利
+													</p>
+												</div>
+											</div>
+											<div class="form-group  clearfix">
+												<div class="col-sm-offset-4 col-sm-8 col-xs-12 btn-full">
+													<a class="btn btn-md btn-success" @click="handleAddAgent">立即开户</a>
+													<span class="subtip">剩余可创建账号<i>{{surplusCreate}}</i>（总共可创建账号<i>{{allCreate}}</i>个）</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--选项一代理账号  end-->
+									<!--选项二客户账号start-->
+									<div class="cate-boxcon">
+										<div class="form-common">
+											<div class="form-group  clearfix">
+												<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>用户名</label>
+												<div class="col-sm-4">
+													<input class="form-control" v-model="userName" type="text" placeholder="请输入用户名">
+												</div>
+											</div>
+											<div class="form-group  clearfix">
+												<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>密码</label>
+												<div class="col-sm-4">
+													<input class="form-control" v-model="userPassword" type="text" placeholder="请输入密码">
+												</div>
+											</div>
+											<div class="form-group  clearfix mg-btm20">
+												<div class="col-sm-offset-4 col-sm-4">
+													<p class="tipmsg">
+														<span class="color-orange">客户账号：</span>
+														该账号即创建直接客户登录操作后台的账号
+													</p>
+													<p class="tipmsg">
+														<span class="color-orange">登录地址：</span>
+														<span @click="handleJump" style="cursor: pointer;text-decoration: underline">{{loginAddress}}</span>
+													</p>
+												</div>
+											</div>
+											<div class="form-group  clearfix">
+												<div class="col-sm-offset-4 col-sm-8 col-xs-12 btn-full">
+													<a class="btn btn-md btn-success" @click="handleAddUser">立即开户</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--选项二客户账号  end-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--数据区域   end-->
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+		</div>
+
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						loginAddress: '',
+						surplusCreate: 0,
+						allCreate: 0,
+						agentPrice: 0,
+						agentName: '',
+						agentPassword: '',
+						agentDownPrice: 0,
+						userName: '',
+						userPassword: '',
+						isLoading: false,
+						username: '',
+						scrollText: '',
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let isHighest = localStorage.getItem('isHighest');
+					switch(isHighest) {
+						case '2':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+						case '3':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					if (localStorage.getItem('isHighest') == '3') {
+						$('#high-level').remove();
+					} else {
+						$('#high-level').show();
+					}
+					let that = this;
+
+					that.username = localStorage.getItem('loginName');
+					$('#username').html(localStorage.getItem('loginName'));
+					that.scrollText = localStorage.getItem('scrollText');
+					that.$nextTick(function() {
+						that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+						that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+						that.handleScroll();
+					});
+					that.getCreateLimit();
+					that.handleGetMerchantUrl();
+				},
+				methods: {
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					handleJump() {
+						let that = this;
+
+						window.open(that.loginAddress, '');
+					},
+					handleGetMerchantUrl() {
+						let that = this;
+
+						axios({
+							url: '/api/PlatformSetUp/GetMerchantUrl'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.loginAddress = data.data.Model.MerchantUrl;
+							}
+						})
+					},
+					handleInputNumber(e, type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									that.agentDownPrice = that.agentDownPrice.substring(0, that.agentDownPrice.length - 1);
+								}
+							break;
+							case 2:
+								if (e.data && !e.data.replace(/\D/g, '')) {
+									that.rangeValue = that.rangeValue.substring(0, that.rangeValue.length - 1);
+								}
+							break;
+						}
+					},
+					getCreateLimit() {
+						let that = this;
+
+						axios({
+							url: '/api/AgentUser/GetAgentUpperLimit'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								that.surplusCreate = data.data.Model.OpenAgentNum - data.data.Model.UserNum;
+								that.allCreate = data.data.Model.OpenAgentNum;
+								that.agentPrice = data.data.Model.SubAgentPrice;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html'
+							}
+						})
+					},
+					handleAddAgent() {
+						let that = this;
+
+						if (!that.agentName) {
+							layer.msg('请输入用户名', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.agentPassword || that.agentPassword.length < 6) {
+							layer.msg('请输入至少6位数的密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.agentDownPrice) {
+							layer.msg('请输入代理价格', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (that.agentDownPrice > (parseInt(that.agentPrice) + 400) || that.agentDownPrice > 1800) {
+							layer.msg('代理价格超过上限，请重新输入', {
+								time: 1500
+							});
+							that.agentDownPrice = '';
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/CreateAgentAccount',
+								method: 'post',
+								params: {
+									loginName: that.agentName.trim(),
+									password: that.agentPassword,
+									price: that.agentDownPrice
+								}
+							})
+							.then(function (data) {
+								that.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+
+								if (data.data.Status === 100) {
+									that.agentName = '';
+									that.agentPassword = '';
+									that.agentDownPrice = 0;
+									that.getCreateLimit();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							});
+						}
+					},
+					handleAddUser() {
+						let that = this;
+
+						if (!that.userName) {
+							layer.msg('请输入用户名', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.userPassword) {
+							layer.msg('请输入密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/CreateCustomer',
+								method: 'post',
+								params: {
+									loginName: that.userName.trim(),
+									password: that.userPassword
+								}
+							})
+							.then(function (data) {
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+
+								if (data.data.Status === 100) {
+									that.userName = '';
+									that.userPassword = '';
+									that.getCreateLimit();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							});
+						}
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+
+</html>

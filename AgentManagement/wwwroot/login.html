@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>登录</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/animate.css" />
+		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+	</head>
+
+	<body class="signin v2">
+		<div id="app" class="login-wrap animated fadeInUpNoaph">
+			<div class="login-con">
+				<div class="box">
+					<h1 class="login-tit">
+						用户登录
+						<span class="en">LOGIN</span>
+					</h1>
+					<div class="mb20">
+						<input type="text" name="login_account" class="input-ctrl icon-usr" v-model="username" @blur="handleGetVerifyPass" placeholder="请输入用户名">
+					</div>
+					<div class="mb20">
+							<div class="code-area">
+								<div class="left">
+									<input type="password" name="login_password" :class="['input-ctrl','icon-psw',verifyPassImg ? '' : '']" v-model="password" placeholder="请输入登录密码">
+								</div>
+								<div class="right" v-if="showImg">
+									<img @click="reloadVerifyPass" class="pic-code" :src="verifyPassImg" @error="handleLoadImgError"/>
+								</div>
+							</div>
+					</div>
+					<div class="mb20">
+						<div class="code-area">
+							<div class="left">
+								<input type="text" name="login_account" class="input-ctrl icon-chkcode" v-model="verifyCode" placeholder="请输入验证码">
+							</div>
+							<div class="right">
+								<img @click="reloadVerifyCode" v-show="verifyCodeImg" class="pic-code" :src="verifyCodeImg"/>
+							</div>
+						</div>
+					</div>
+					<button  class="login_btn" @click="handleLogin">登录</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				data() {
+					return {
+						username: '',
+						password: '',
+						verifyCode: '',
+						verifyCodeImg: '',
+						verifyPassImg: '',
+						isLoading: false,
+						showImg: true
+					}
+				},
+				mounted() {
+					let that = this;
+
+					// that.handleGetEXAddress();
+					that.reloadVerifyCode();
+					window.addEventListener('keydown', that.enterClick);
+				},
+				methods: {
+					handleLoadImgError() {
+						let that = this;
+
+						that.showImg = false;
+					},
+					enterClick(e) {
+						let that = this;
+
+						if (e.keyCode === 13) {
+							that.handleLogin();
+						}
+					},
+					handleExit() {
+						let that = this;
+						axios({
+							url: '/api/AgentUser/UserExit'
+						}).then(function(data) {
+							that.reloadVerifyCode();
+						})
+					},
+					handleGetVerifyPass() {
+						let that = this;
+
+						if (!that.username) {
+							layer.msg('请输入用户名', {
+								time: 1500
+							});
+							return;
+						}
+
+						that.showImg = true;
+						that.verifyPassImg = '/api/AgentUser/GetPwdPosition?loginName=' + that.username;
+					},
+					handleLogin() {
+						let that = this;
+
+						if (!that.username) {
+							layer.msg('请输入用户名', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.username) {
+							layer.msg('请输入密码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.verifyCode) {
+							layer.msg('请输入验证码', {
+								time: 1500
+							});
+							return;
+						}
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/AgentUserLogin',
+								params: {
+									loginName: that.username,
+									password: that.password,
+									code: that.verifyCode
+								}
+							})
+							.then(function (data) {
+								that.isLoading = false;
+								layer.msg(data.data.Message, {
+									time: 1500
+								});
+								layer.close(index);
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+									localStorage.setItem('loginName', result.LoginName);
+									localStorage.setItem('isHighest', result.Type);
+									// Type 1:超级管理员  2：账务 3：普通用户
+									switch (result.Type) {
+										case 2:
+											window.location.href = window.location.origin + '/finance_manager.html'
+											break;
+										default:
+											window.location.href = window.location.origin + '/home.html'
+											break;
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							});
+						}
+					},
+					reloadVerifyCode() {
+						let that = this;
+
+						that.verifyCodeImg = '/api/AgentUser/MixVerifyCode?time=' + new Date().getTime();
+					},
+					reloadVerifyPass() {
+						let that = this;
+
+						that.verifyPassImg = '/api/AgentUser/GetPwdPosition?loginName=' + that.username + '&time=' + new Date().getTime();
+					},
+					handleGetEXAddress() {
+						let that = this;
+
+						let ind = layer.load(2);
+						axios({
+							url: '/api/AdvancedSetup/GetRedeemUrl'
+						}).then(function(data) {
+							layer.close(ind);
+							if (data.data.Status === 100) {
+								window.location.href = window.location.origin + '/home.html';
+							} else {
+								that.reloadVerifyCode();
+							}
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

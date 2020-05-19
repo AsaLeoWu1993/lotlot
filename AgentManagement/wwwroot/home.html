@@ -1,0 +1,1741 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/iview.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/iview.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper" style="display: none;">
+			<div id="header"></div>
+			<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<span class="mobile-logo">平台logo</span>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li class="active">
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li id="high-level" style="display: none;">
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a id="high-level" style="display: none">
+							</liid="high-level">
+							<li class="mobile-user">
+								<span class="username" id="username-min"></span>
+								<a onclick="vm.handleExit()" class="btn btn-success btn-md">退出登录</a>
+							</li>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice" ref="notice">
+						<!-- <marquee direction="" scrollamount="3"><span v-html="scrollText"></span></marquee> -->
+						<div class="notice-bulletin" behavior="scroll" id="bulletin">
+							<div ref="box-poptip" class="box-poptip" v-html="scrollText"></div>
+						</div>
+					</div>
+					<!--顶部公告   end-->
+					<!--第一行start-->
+					<div class="panel-groups">
+						<div class="row clearfix">
+							<!--信息栏-->
+							<div class="col-sm-8">
+								<div class="row clearfix pan-row">
+									<div class="col-xs-6 pan-col">
+										<div class="layui-card">
+											<div class="layui-card-header">
+												<i class="fa fa-address-book" aria-hidden="true"></i>我的账号（APP）
+											</div>
+											<div class="layui-card-body layuiadmin-card-list">
+												<p class="layuiadmin-big-font" v-text="info.name"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-6 pan-col">
+										<div class="layui-card">
+											<div class="layui-card-header">
+												<i class="fa fa-wifi" aria-hidden="true"></i>上次登录IP
+											</div>
+											<div class="layui-card-body layuiadmin-card-list">
+												<p class="layuiadmin-big-font" v-text="info.ip"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-xs-12 pan-col">
+										<div class="layui-card">
+											<div class="layui-card-header">
+												<i class="fa fa-diamond" aria-hidden="true"></i>我的余额
+											</div>
+											<div class="layui-card-body layuiadmin-card-list clearfix">
+												<p class="layuiadmin-big-font"><span v-text="info.balance"></span><i>元</i></p>
+												<div class="acc-infobtns clearfix pull-right">
+													<a @click="handleShowPanel(1)" class="btn btn-primary pull-left layer-btn">充值</a>
+													<a @click="handleShowPanel(2)" class="btn btn-warning pull-left layer-btn">提现</a>
+													<a @click="handleShowPanel(3)" class="btn btn-warning pull-left layer-btn">转账</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-6 pan-col hidden-xs">
+										<div class="layui-card">
+											<div class="layui-card-header">
+												<i class="fa fa-credit-card"></i>我的销售（今日）
+											</div>
+											<div class="layui-card-body layuiadmin-card-list">
+												<p class="layuiadmin-big-font"><span v-text="info.saleNum"></span><i>套</i></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--统计栏-->
+							<div class="col-sm-4">
+								<div class="panelcolor-card">
+									<div class="card-body">
+										<div class="iteminline clearfix">
+											<div class="item hidden-sm hidden-md hidden-lg">
+												<i class="tit">我的销售（今日）</i>
+												<b><span v-text="info.saleNum"></span><em>套</em></b>
+											</div>
+											<div class="item">
+												<i class="tit">团队成员</i>
+												<b><span v-text="info.teamNum"></span><em>人</em></b>
+											</div>
+											<div class="item">
+												<i class="tit">团队余额</i>
+												<b><span v-text="info.teamBalance"></span><em>元</em></b>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!--第一行end-->
+
+					<!--第二行查询条件start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<div class="site-opearea clearfix">
+								<div class="ope-item index-btngroups pull-left clearfix">
+									<span class="query-tit pull-left">快速查看（团队）：</span>
+									<div class="pull-left btns-group btns-group-green clearfix">
+										<a @click="handleQueryRecharge(1)" v-bind:class="['btn', 'btn-sm', selectType == 1 ? 'btn-success' : 'btn-default']">今天</a>
+										<a @click="handleQueryRecharge(2)" v-bind:class="['btn', 'btn-sm', selectType == 2 ? 'btn-success' : 'btn-default']">昨天</a>
+										<a @click="handleQueryRecharge(3)" v-bind:class="['btn', 'btn-sm', selectType == 3 ? 'btn-success' : 'btn-default']">最近7天</a>
+										<a @click="handleQueryRecharge(4)" v-bind:class="['btn', 'btn-sm', selectType == 4 ? 'btn-success' : 'btn-default']">最近30天</a>
+									</div>
+								</div>
+								<div class="ope-item pull-right clearfix">
+									<span class="query-tit pull-left">筛选日期：</span>
+									<div class="dis-flex mg-btm10 pull-left">
+										<div class="flex-1 flex-item pull-left">
+											<!-- <input class="date-normal" type="text" id="datestart" value=""> -->
+											<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="teamInfo.startTime"></Date-Picker>
+										</div>
+										<div class="flex-none pull-left lineheight">-</div>
+										<div class="flex-1 flex-item pull-left" style="margin-right: 10px;">
+											<!-- <input class="date-normal end" type="text" id="dateend" value=""> -->
+											<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" v-model="teamInfo.endTime"></Date-Picker>
+										</div>
+									</div>
+									<div class="btn-full pull-left dis-flex pull-left clearfix">
+										<div class="flex-1 flex-item pull-left">
+											<a @click="handleGetTeamInfo" class="btn btn-sm btn-success"><i class="fa fa-search"></i>查 询</a>
+										</div>
+										<div class="flex-1 flex-item pull-left">
+											<a @click="handleResetQuery" class="btn btn-sm btn-default clear-mg-r">重置</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--第二行查询条件   end-->
+
+					<!--第三行查询数据展示start-->
+					<div class="detailarea-wrap mg-btm20">
+						<div class="detailarea clearfix">
+							<div class="det-item col-sm-2 col-xs-6">
+								<b><span v-text="teamInfo.info.merchantNum"></span></b><i>新增商户（人）</i>
+							</div>
+							<div class="det-item col-sm-2 col-xs-6">
+								<b><span v-text="teamInfo.info.addNum"></span></b><i>新增代理（人）</i>
+							</div>
+							<div class="det-item col-sm-2 col-xs-6">
+								<b><span v-text="teamInfo.info.salesNum"></span></b><i>销售月卡（套）</i>
+							</div>
+							<div class="det-item col-sm-2 col-xs-6">
+								<b><span v-text="teamInfo.info.cashNum"></span></b><i>提现量（元）</i>
+							</div>
+							<div class="det-item col-sm-2 col-xs-6">
+								<b><span v-text="teamInfo.info.accountNum"></span></b><i>团队返利（元）</i>
+							</div>
+						</div>
+					</div>
+					<!--第三行查询数据展示  end-->
+
+					<!--第四行公告及充值start-->
+					<div class="row clearfix">
+						<div class="col-sm-6">
+							<div class="msg-area widget-box box-withope">
+								<div class="header">
+									<i class="fa fa-volume-down" style="font-size: 18px;"></i>公告
+									<div class="righttext">
+										<i class="fa fa-clock-o"></i><span v-text="notice.showTime"></span>
+									</div>
+								</div>
+								<div class="body art-wrap">
+									<div class="art-session">
+										<h1 class="art-tit"><span v-text="notice.showTitle"></span></h1>
+										<div style="word-break: break-all" v-html="notice.showContent"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<!--选项卡start-->
+							<div class=" widget-box">
+								<div class="model-cate withpadding fixheight">
+									<div class="tab-hd">
+										<span class="cur"><a>测试用户充值</a></span>
+										<span><a>用户月卡充值</a></span>
+										<span><a>用户火星币充值</a></span>
+									</div>
+									<div class="tab-bd">
+										<!--测试用户充值start-->
+										<div class="cate-boxcon cur">
+											<div class="form-common">
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值账号</label>
+													<div class="col-sm-6">
+														<input id="" class="form-control" v-model="duration.account" placeholder="请输入客户账号">
+													</div>
+												</div>
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值时长</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<div class="btns-group btns-group-blue clearfix">
+																<a @click="handleDuration(4)" :class="['btn', 'btn-sm', duration.timeType === 4 ? 'btn-primary' : 'btn-default']">4小时</a>
+																<a @click="handleDuration(8)" :class="['btn', 'btn-sm', duration.timeType === 8 ? 'btn-primary' : 'btn-default']">8小时</a>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">使用金额</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="duration.price"></span>元
+															<span class="tip-ext">（剩余可免费充值时长<i class="color-orange" v-text="duration.count"></i>小时）</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>安全密码</label>
+													<div class="col-sm-6">
+														<input type="password" class="form-control" v-model="duration.safePW" placeholder="请输入安全密码">
+													</div>
+												</div>
+												<div class="form-group  clearfix">
+													<div class="col-sm-offset-4 col-sm-6">
+														<a @click="handleVeirfySafePW(2)" class="btn btn-success btn-ope sub">立即充值</a>
+													</div>
+												</div>
+
+												<div class="tipintab col-sm-offset-1">
+													<p class="color-orange">说明：</p>
+													<p>1、充值对象只能是未充值通过月卡的软件用户</p>
+													<p>2、代理账户每天赠送累计可充值50个小时的测试时间，超出后扣减余额</p>
+													<p>3、每个软件账号累计充值的测试时间不能超过20小时</p>
+												</div>
+											</div>
+										</div>
+										<!--测试用户充值end-->
+
+										<!--用户月卡充值start-->
+										<div class="cate-boxcon">
+											<div class="form-common">
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值账号</label>
+													<div class="col-sm-6">
+														<input id="" class="form-control" v-model="duration.monthAccount" placeholder="请输入客户账号">
+													</div>
+												</div>
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值类型</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<div class="btns-group btns-group-blue clearfix">
+																<a class="btn btn-sm btn-primary">月卡</a>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">我的库存</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="duration.agentNum"></span>套
+															<span class="tip-ext">（优先扣除库存）</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">使用金额</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="duration.agentMoney"></span>元
+															<span class="tip-ext">（使用金额为当前账户代理价格）</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>安全密码</label>
+													<div class="col-sm-6">
+														<input type="password" class="form-control" v-model="duration.safePW1" placeholder="请输入安全密码">
+													</div>
+												</div>
+												<div class="form-group  clearfix">
+													<div class="col-sm-offset-4 col-sm-6">
+														<a @click="handleVeirfySafePW(3)" class="btn btn-success btn-ope sub">立即充值</a>
+													</div>
+												</div>
+
+												<div class="tipintab col-sm-offset-1">
+													<p class="color-orange">说明：</p>
+													<p>1、该功能可直接对软件用户充值月卡</p>
+													<p>2、充值时优先扣除库存，无库存则按照代理价格扣除账户余额</p>
+													<p>3、库存只有官方活动发放，无其他获取渠道</p>
+												</div>
+											</div>
+										</div>
+										<!--用户月卡充值end-->
+
+										<!--用户火星币充值start-->
+										<div class="cate-boxcon">
+											<div class="form-common">
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值账号</label>
+													<div class="col-sm-6">
+														<input id="" class="form-control" v-model="duration.marsAccount" placeholder="请输入客户账号">
+													</div>
+												</div>
+												<!-- <div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值类型</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<div class="btns-group btns-group-blue clearfix">
+																<a class="btn btn-sm btn-primary">月卡</a>
+															</div>
+														</div>
+													</div>
+												</div> -->
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">我的余额</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="info.balance"></span>元
+															<!-- <span class="tip-ext">（优先扣除库存）</span> -->
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>充值金额</label>
+													<div class="col-sm-6">
+														<input type="number" class="form-control disabled" placeholder="请输入充值金额" v-model="duration.marsMoney">
+														<span class="tip-ext">{{`实扣金额：${(duration.marsMoney * 0.99).toFixed(2)}元`}}</span>
+													</div>
+												</div>
+
+												<!-- <div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">我的库存</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="duration.agentNum"></span>套
+															<span class="tip-ext">（优先扣除库存）</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right">使用金额</label>
+													<div class="col-sm-6">
+														<div class="only-text">
+															<span class="color-red text-bold text-big" v-text="duration.agentMoney"></span>元
+															<span class="tip-ext">（使用金额为当前账户代理价格）</span>
+														</div>
+													</div>
+												</div> -->
+
+												<div class="form-group  clearfix">
+													<label class="col-sm-4 control-label text-right"><em>*</em>安全密码</label>
+													<div class="col-sm-6">
+														<input type="password" class="form-control" v-model="duration.safePW2" placeholder="请输入安全密码">
+													</div>
+												</div>
+												<div class="form-group  clearfix">
+													<div class="col-sm-offset-4 col-sm-6">
+														<a @click="handleVeirfySafePW(4)" class="btn btn-success btn-ope sub">立即充值</a>
+													</div>
+												</div>
+
+												<!-- <div class="tipintab col-sm-offset-1">
+													<p class="color-orange">说明：</p>
+													<p>1、该功能可直接对软件用户充值火星币</p>
+													<p>2、充值时优先扣除库存，无库存则按照代理价格扣除账户余额</p>
+													<p>3、库存只有官方活动发放，无其他获取渠道</p>
+												</div> -->
+											</div>
+										</div>
+										<!--用户火星币充值end-->	
+									</div>
+								</div>
+							</div>
+							<!--选项卡end-->
+						</div>
+					</div>
+					<!--第四行公告及充值end-->
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+
+			<!--1充值弹出层start-->
+			<div id="layer-content1" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>充值</h1>
+				<div class="layer-con over-auto" style="max-height: 550px">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label">我的账号</label>
+							<div class="col-sm-6">
+								<input  class="form-control disabled" disabled="disabled" v-model="info.name">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label">当前余额</label>
+							<div class="col-sm-6">
+								<input  class="form-control disabled" disabled="disabled" v-model="info.balance">
+							</div>
+						</div>
+
+						<div class="form-group clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>支付方式</label>
+							<div class="col-sm-6">
+								<div class="btns-group choosebtns">
+									<a @click="handleChangePayWay(1)" :class="['btn', 'btn-sm', 'payway', payInfo.payWay == 1 ? 'btn-warning' : 'btn-default']">支付宝扫码</a>
+									<a @click="handleChangePayWay(2)" :class="['btn', 'btn-sm', 'payway', payInfo.payWay == 2 ? 'btn-warning' : 'btn-default']">兑换码充值</a>
+									<a class="getcode" @click="handleJumpExAddress">获取兑换码</a>
+								</div>
+							</div>
+						</div>
+
+						<div v-show="payInfo.payWay == 1">
+							<div class="form-group  clearfix">
+								<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>二维码</label>
+								<div class="col-sm-6">
+									<img class="pay-alicode" :src="payInfo.qrCode"/>
+								</div>
+							</div>
+							<div class="form-group  clearfix">
+								<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>充值金额</label>
+								<div class="col-sm-6">
+									<input type="number" class="form-control disabled" placeholder="请输入充值金额" v-model="payInfo.money">
+								</div>
+							</div>
+							<div class="form-group  clearfix">
+								<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>转账姓名</label>
+								<div class="col-sm-6">
+									<input  class="form-control disabled" placeholder="请输入转账姓名" v-model="payInfo.name">
+								</div>
+							</div>
+						</div>
+						<div v-show="payInfo.payWay == 2" class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>兑换码</label>
+							<div class="col-sm-6">
+								<input  class="form-control disabled" placeholder="请输入兑换码" v-model="payInfo.code">
+							</div>
+						</div>
+
+						<div v-show="payInfo.payWay == 1" class="form-group  clearfix">
+							<div class="col-sm-offset-4 col-sm-6 tipintab">
+								<p class="color-orange">说明：</p>
+								<p>扫码支付时必须按照二维码上方显示的金额准确支付，否则无法到账</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleRecharge" class="btn btn-layerbtm btn-warning sub">提交</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--1充值弹出层end-->
+
+			<!--2提现弹出层start-->
+			<div id="layer-content2" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<div class="col-xs-12 text-center">
+								<div class="tip color-orange">
+									<span class="glyphicon glyphicon-info-sign"></span> 今日可提现次数（<span v-text="card.cashNum"></span>）次
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 col-xs-4 control-label m-text-left">当前余额</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text formtext-only">
+									<span v-text="info.balance"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 col-xs-4 control-label m-text-left">可提现额度</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text formtext-only">
+									<span v-text="card.cashMoney"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>我的收款账户</label>
+							<div class="col-sm-6">
+								<select class="select-control" v-model="card.type">
+									<option value="1" v-show="card.bankNum" v-text="card.bankName + '[' + (card.bankNum.substr(0, 4) + '**** ****' + card.bankNum.substr(13, 4)) + ']'"></option>
+									<option value="2" v-show="card.aliPayName" v-text="'支付宝[' + ('*' + card.aliPayName.substr(card.aliPayName.length - 1, 1)) + ']'"></option>
+									<option value="3" v-show="card.address" v-text="'数字货币(USDT/ERC20)[' + card.address + ']'"></option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>提现金额</label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control disabled" placeholder="请输入提现金额" v-model="card.money">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control disabled" placeholder="请输入安全密码" v-model="card.safePW">
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<div class="col-sm-offset-4 col-sm-6 tipintab">
+								<p class="color-orange">说明：</p>
+								<p v-text="'提现请求每天统一出款时间为' + card.cashTime"></p>
+								<p>该时间段以后的申请顺延到次日处理，请合理安排时间。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleVeirfySafePW(1)" class="btn btn-layerbtm btn-warning sub">立即提现</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--2提现弹出层end-->
+			<!--3转账弹出层start-->
+			<div id="layer-content3" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 col-xs-4 control-label m-text-left">当前余额</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text formtext-only">
+									<span v-text="info.balance"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>下级代理账号</label>
+							<div class="col-sm-6">
+								<!-- <select class="select-control" v-model="card.type">
+									<option value="1" v-show="card.bankNum" v-text="card.bankName + '[' + (card.bankNum.substr(0, 4) + '**** ****' + card.bankNum.substr(13, 4)) + ']'"></option>
+									<option value="2" v-show="card.aliPayName" v-text="'支付宝[' + ('*' + card.aliPayName.substr(card.aliPayName.length - 1, 1)) + ']'"></option>
+									<option value="3" v-show="card.address" v-text="'数字货币(USDT/ERC20)[' + card.address + ']'"></option>
+								</select> -->
+								<input class="form-control disabled" placeholder="请输入下级代理账号" v-model="trans.agent">
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>转账金额</label>
+							<div class="col-sm-6">
+								<input type="number" class="form-control disabled" placeholder="请输入转账金额" v-model="trans.money">
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-2 col-sm-2 control-label"><em>*</em>安全密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control disabled" placeholder="请输入安全密码" v-model="trans.safePW">
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<div class="col-sm-offset-4 col-sm-6 tipintab">
+								<p class="color-orange">说明：</p>
+								<p>只能对自己的下级代理账号转账</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom">
+					<a @click="handleVeirfySafePW(5)" class="btn btn-layerbtm btn-warning sub">立即转账</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--3转账弹出层end-->
+			<!--3转账弹出层start-->
+			<div id="layer-content4" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>兑换码地址</h1>
+				<div class="layer-bottom">
+					<a v-show="address.ThousandUrl" @click="handleOpenAddress(4)" class="exchange btn btn-layerbtm btn-warning sub">兑换码1000</a>
+					<a v-show="address.ThoushunUrl" @click="handleOpenAddress(5)" class="exchange btn btn-layerbtm btn-warning sub">兑换码1100</a>
+					<a v-show="address.ThoustwohUrl" @click="handleOpenAddress(6)" class="exchange btn btn-layerbtm btn-warning sub">兑换码1200</a>
+					<a v-show="address.RedeemUrl" @click="handleOpenAddress(1)" class="exchange btn btn-layerbtm btn-warning sub exchange-no-bottom">兑换码1500</a>
+					<a v-show="address.MeRedeemUrl" @click="handleOpenAddress(2)" class="exchange btn btn-layerbtm btn-warning sub exchange-no-bottom">兑换码2000</a>
+					<a v-show="address.HiRedeemUrl" @click="handleOpenAddress(3)" class="exchange btn btn-layerbtm btn-warning sub exchange-no-bottom">兑换码3000</a>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel(4)" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel(4)" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--3转账弹出层end-->
+		</div>
+
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/tools.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						isLoading: false,
+						username: '',
+						info: {},
+						teamInfo: {
+							isLoading: false,
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							info: {}
+						},
+						payInfo: {
+							payWay: 1,
+							qrCode: '',
+							isLoading: false,
+							code: ''
+						},
+						card: {
+							isLoading: false,
+							bankName: '',
+							bankNum: '',
+							aliPayName: '',
+							address: '',
+							isAliLoading: false,
+							type: '1',
+							canEdit: true,
+							safePW: '',
+							cashTime: '',
+							isCashLoading: false,
+							cashNum: 0,
+							isCashNumLoading: false,
+							isCashMoneyLoading: false,
+							cashMoney: 0
+						},
+						duration: {
+							isLoading: false,
+							count: '',
+							price: '',
+							safePW: '',
+							safePW1: '',
+							safePW2: '',
+							timeType: 4,
+							account: '',
+							canTestEdit: true,
+							canMonthEdit: true,
+							monthAccount: '',
+							marsAccount: '',
+							agentNum: '',
+							agentMoney: '',
+							isMonthLoading: false,
+							marsMoney: ''
+						},
+						selectType: '1',
+						scrollText: '',
+						isScrolling: false,
+						notice: {
+							isLoading: false,
+							showTitle: '',
+							showContent: '',
+							showTime: ''
+						},
+						address: {
+							RedeemUrl: '',
+							MeRedeemUrl: '',
+							HiRedeemUrl: '',
+							ThousandUrl: '',
+							ThoushunUrl: '',
+							ThoustwohUrl: ''
+						},
+						digitalIsLoading: false,
+						trans: {
+							money: '',
+							agent: '',
+							safePW: '',
+							isLoading: false
+						},
+						layerIndex: 0,
+						translateX: 0,
+						maxTranslateX: 0,
+						innerWidth: 0,
+						interval: null
+					}
+				},
+				mounted() {
+					let that = this;
+
+					let isHighest = localStorage.getItem('isHighest');
+					switch(isHighest) {
+						case '2':
+							window.location.href = window.location.origin + '/login.html';
+							break;
+						case '1':
+						case '3':
+							break;
+						default:
+							window.location.href = window.location.origin + '/login.html';
+							break;
+					}
+					let inde = layer.load(2);
+					that.handleGetInfo()
+					.then(function() {
+						$('#app').show();
+						setTimeout(function() {
+							$('#header').load('common/header.html');
+							var username = localStorage.getItem('loginName');
+							$('#username-min').html(username);
+							if (localStorage.getItem('isHighest') == '3') {
+								$('#high-level').remove();
+							} else {
+								$('#high-level').show();
+							}
+						}, 30)
+						layer.close(inde);
+						that.handleGetTeamInfo();
+						that.handleGetQrCode();
+						that.handleCardInfo();
+						that.handleGetAliPay();
+						that.handleGetCashTime();
+						that.handleGetCashNum();
+						that.handleGetCashMoney();
+						that.handleDuration(4);
+						that.handleGetMonthInfo();
+						that.handleGetScrollText();
+						that.handleGetNotice();
+						that.handleGetEXAddress();
+						that.handleQueryVirtual();
+					}).catch(function(err) {
+						window.location.href = window.location.origin + '/login.html';
+						layer.close(inde);
+					})
+				},
+				methods: {
+					handleOpenAddress(type) {
+						let that = this,
+							url = '';
+
+						switch(type) {
+							case 1:
+								url = that.address.RedeemUrl;
+							break;
+							case 2:
+								url = that.address.MeRedeemUrl;
+							break;
+							case 3:
+								url = that.address.HiRedeemUrl;
+							break;
+							case 4:
+								url = that.address.ThousandUrl;
+							break;
+							case 5:
+								url = that.address.ThoushunUrl;
+							break;
+							case 6:
+								url = that.address.ThoustwohUrl;
+							break;
+						}
+
+						url && (window.open(url.startsWith('http') ? url : ('http://' + url), ''));
+					},
+					handleJumpExAddress() {
+						let that = this;
+
+						if (that.address.RedeemUrl || that.address.MeRedeemUrl || that.address.HiRedeemUrl || that.address.ThousandUrl || that.address.ThoushunUrl || that.address.ThoustwohUrl) {
+							that.handleShowPanel(4);
+						} else {
+							layer.msg('没有配置兑换码地址，请联系上级', {
+								time: 1500
+							})
+						}
+					},
+					handleGetEXAddress() {
+						let that = this;
+
+						axios({
+							url: '/api/AgentUser/GetRedeemUrl'
+						}).then(function(data) {
+							if (data.data.Status === 100) {
+								const result = data.data.Model;
+
+								that.address.RedeemUrl = result.RedeemUrl;
+								that.address.MeRedeemUrl = result.MeRedeemUrl;
+								that.address.HiRedeemUrl = result.HiRedeemUrl;
+								that.address.ThousandUrl = result.ThousandUrl;
+								that.address.ThoushunUrl = result.ThoushunUrl;
+								that.address.ThoustwohUrl = result.ThoustwohUrl;
+							} else if (data.data.Status === 301) {
+								window.location.href = window.location.origin + '/login.html';
+							}
+						})
+					},
+					handleQueryVirtual() {
+						let that = this;
+
+						if (!that.digitalIsLoading) {
+							that.digitalIsLoading = true;
+
+							axios({
+								url: '/api/AccountSafe/GetVirtual'
+							}).then(function(data) {
+								that.digitalIsLoading = false;
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.card.address = result[0].CurrencyPath;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetNotice() {
+						let that = this;
+
+						if (!that.notice.isLoading) {
+							that.notice.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetNotice'
+							}).then(function(data) {
+								that.notice.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.notice.showContent = result.Content;
+									that.notice.showTitle = result.Title;
+									that.notice.showTime = result.Time;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleGetScrollText() {
+						let that = this;
+
+						if (!that.isScrolling) {
+							that.isScrolling = true;
+
+							axios({
+								url: '/api/AgentUser/GetScrollText'
+							}).then(function(data) {
+								that.isScrolling = false;
+
+								if (data.data.Status === 100) {
+									that.scrollText = data.data.Keyword;
+									localStorage.setItem('scrollText', that.scrollText);
+									that.$nextTick(function() {
+										that.$refs['notice'] && (that.maxTranslateX = parseInt(getComputedStyle(that.$refs['notice'], null).width));
+										that.$refs['box-poptip'] && (that.innerWidth = parseInt(getComputedStyle(that.$refs['box-poptip'], null).width));
+										that.handleScroll();
+									});
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleScroll() {
+						let that = this;
+						if (that.maxTranslateX && that.innerWidth && !that.interval) {
+							that.interval = window.requestAnimationFrame(that.handleMove);
+						}
+					},
+					handleMove() {
+						let that = this;
+						(that.maxTranslateX + that.innerWidth) >= Math.abs(that.translateX) ? (that.translateX -= 1) : (that.translateX = 0);
+						document.querySelector('#bulletin').setAttribute('style', `transform: translate3d(${that.translateX}px, 0px, 0px)`);
+						that.interval = window.requestAnimationFrame(that.handleMove);
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleMonthRecharge() {
+						let that = this;
+
+						if (!that.duration.monthAccount) {
+							layer.msg('请输入充值账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.duration.isLoading) {
+							that.duration.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/RechargeMonthly',
+								method: 'post',
+								params: {
+									account: that.duration.monthAccount
+								}
+							}).then(function(data) {
+								that.duration.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.duration.monthAccount = '';
+									that.card.safePW = '';
+									that.duration.canMonthEdit = true;
+									that.handleGetMonthInfo();
+									that.handleGetInfo();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleTestRecharge() {
+						let that = this;
+
+						if (!that.duration.account) {
+							layer.msg('请输入充值账号', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.duration.isLoading) {
+							that.duration.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/RechargeTestMerchant',
+								method: 'post',
+								params: {
+									account: that.duration.account,
+									duration: that.duration.timeType
+								}
+							}).then(function(data) {
+								that.duration.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.duration.account = '';
+									that.duration.safePW = '';
+									that.duration.canTestEdit = true;
+									that.handleGetInfo();
+									that.handleDuration(that.duration.timeType);
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetMonthInfo() {
+						let that = this;
+
+						if (!that.duration.isMonthLoading) {
+							that.duration.isMonthLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/GetAccountMonthly'
+							}).then(function(data) {
+								that.duration.isMonthLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.duration.agentNum = result.Count;
+									that.duration.agentMoney = result.Price;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleDuration(hour) {
+						let that = this;
+
+						that.duration.timeType = hour;
+
+						if (!that.duration.isLoading) {
+							that.duration.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/GetAccountDuration',
+								params: {
+									duration: hour
+								}
+							}).then(function(data) {
+								that.duration.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.duration.count = result.Count;
+									that.duration.price = result.Price;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetCashTime() {
+						let that = this;
+
+						if (!that.card.isCashLoading) {
+							that.card.isCashLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetSetTime'
+							}).then(function(data) {
+								that.card.isCashLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.card.cashTime = data.data.Keyword;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetCashNum() {
+						let that = this;
+
+						if (!that.card.isCashNumLoading) {
+							that.card.isCashNumLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetCashCount'
+							}).then(function(data) {
+								that.card.isCashNumLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.card.cashNum = data.data.Keyword;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetCashMoney() {
+						let that = this;
+
+						if (!that.card.isCashMoneyLoading) {
+							that.card.isCashMoneyLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetWithdrawal'
+							}).then(function(data) {
+								that.card.isCashMoneyLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.card.cashMoney = data.data.Keyword;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleChangePayWay(type) {
+						let that = this;
+
+						that.payInfo.payWay = type;
+					},
+					handleQueryRecharge (type) {
+						let that = this,
+							dateNow = new Date();
+
+						that.selectType = type;
+						switch(type) {
+							case 1:
+								that.teamInfo.startTime = new Date().pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.teamInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+							case 2:
+								let preDate = new Date(dateNow.setDate(dateNow.getDate() - 1));
+								that.teamInfo.startTime = preDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.teamInfo.endTime = preDate.pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+							case 3:
+								let sevenDate = new Date(dateNow.setDate(dateNow.getDate() - 7));
+								that.teamInfo.startTime = sevenDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.teamInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+							case 4:
+								let thirdDate = new Date(dateNow.setDate(dateNow.getDate() - 30));
+								that.teamInfo.startTime = thirdDate.pattern('yyyy-MM-dd') + ' 00:00:00';
+								that.teamInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+							break;
+						}
+						that.handleGetTeamInfo(null);
+					},
+					handleResetQuery () {
+						let that = this;
+
+						that.teamInfo.startTime = new Date().pattern('yyyy-MM-dd') + ' 00:00:00';
+						that.teamInfo.endTime = new Date().pattern('yyyy-MM-dd') + ' 23:59:59';
+					},
+					handleGetQrCode() {
+						let that = this;
+
+						if (!that.payInfo.isLoading) {
+							that.payInfo.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/GetBusinessQRCode'
+							}).then(function(data) {
+								that.payInfo.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									that.payInfo.qrCode = data.data.Keyword ? (data.data.Keyword.indexOf('://') != -1 ? data.data.Keyword : ('/' + data.data.Keyword)) : '';
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleRecharge() {
+						let that = this,
+							href = '',
+							vParam = {};
+
+						if (that.payInfo.payWay == 1) {
+							if (!that.payInfo.qrCode) {
+								layer.msg('请提示上级用户设置收款二维码', {
+									time: 1500
+								})
+								return;
+							}
+
+							if (!that.payInfo.money) {
+								layer.msg('请输入充值金额', {
+									time: 1500
+								})
+								return;
+							}
+
+							if (!that.payInfo.name) {
+								layer.msg('请输入转账姓名', {
+									time: 1500
+								})
+								return;
+							}
+							href = '/api/AgentUser/ApplyRecharge';
+							vParam['amount'] = parseInt(that.payInfo.money);
+							vParam['transferName'] = that.payInfo.name;
+						} else {
+							if (!that.payInfo.code) {
+								layer.msg('请输入兑换码', {
+									time: 1500
+								})
+								return;
+							}
+							href = '/api/AgentUser/ApplyRedeemCode'
+							vParam['redeemCode'] = that.payInfo.code;
+						}
+
+						if (!that.payInfo.isLoading) {
+							that.payInfo.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: href,
+								method: 'post',
+								params: vParam
+							}).then(function(data) {
+								that.payInfo.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.payInfo.money = '';
+									that.payInfo.name = '';
+									setTimeout(function() {
+										layer.closeAll()
+									}, 2000)
+									that.handleGetInfo();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleVeirfySafePW(type) {
+						let that = this,
+							vParam = {};
+
+						switch(type) {
+							case 1:
+								if (that.card.cashMoney == 0) {
+									layer.msg('可提现金额不足，请重新输入提现金额', {
+										time: 1500
+									})
+									that.card.money = '';
+									return;
+								}
+								if (!that.card.safePW) {
+									layer.msg('请输入安全密码', {
+										time: 1500
+									})
+									return;
+								} else {
+									vParam['safePwd'] = that.card.safePW;
+								}
+							break;
+							case 2:
+								if (!that.duration.safePW) {
+									layer.msg('请输入安全密码', {
+										time: 1500
+									})
+									return;
+								} else {
+									vParam['safePwd'] = that.duration.safePW;
+								}
+							break;
+							case 3:
+								if (!that.duration.safePW1) {
+									layer.msg('请输入安全密码', {
+										time: 1500
+									})
+									return;
+								} else {
+									vParam['safePwd'] = that.duration.safePW1;
+								}
+							break;
+							case 4:
+								if (!that.duration.marsAccount) {
+									layer.msg('请输入充值账号', {
+										time: 1500
+									})
+									return;
+								}
+								if (!that.duration.marsMoney) {
+									layer.msg('请输入充值金额', {
+										time: 1500
+									})
+									return;
+								}
+								if (parseInt(that.duration.marsMoney) > that.info.balance) {
+									layer.msg('余额不足，请重新输入充值金额', {
+										time: 1500
+									})
+									that.duration.marsMoney = '';
+									return;									
+								}
+								if (!that.duration.safePW3) {
+									layer.msg('请输入安全密码', {
+										time: 1500
+									})
+									return;
+								} else {
+									vParam['safePwd'] = that.duration.safeP3;
+								}
+							break;
+							case 5:
+								if (!that.trans.agent) {
+									layer.msg('请输入下级代理账号', {
+										time: 1500
+									})
+									return;
+								}
+								if (!that.trans.money) {
+									layer.msg('请输入转账金额', {
+										time: 1500
+									})
+									return;
+								}
+								if (parseInt(that.trans.money) > that.info.balance) {
+									layer.msg('余额不足，请重新输入转账金额', {
+										time: 1500
+									})
+									that.trans.money = '';
+									return;									
+								}
+								if (!that.trans.safePW) {
+									layer.msg('请输入安全密码', {
+										time: 1500
+									})
+									return;
+								} else {
+									vParam['safePwd'] = that.trans.safePW;
+								}
+							break;
+						}
+
+						if (!that.card.isLoading) {
+							that.card.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/VerifySecurePwd',
+								params: vParam
+							}).then(function(data) {
+								layer.close(index);
+								that.card.isLoading = false;
+								if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+								if (data.data.Status === 100) {
+									switch(type) {
+										case 1:
+											that.handleCash();
+										break;
+										case 2:
+											that.handleTestRecharge();
+										break;
+										case 3:
+											that.handleMonthRecharge();
+										break;
+										case 4:
+											that.handleMarsMoney();
+										break;
+										case 5:
+											that.handleTransMoney();
+										break;
+									}
+								} else {
+									layer.msg(data.data.Message, {
+										time: 1500
+									})
+								}
+							})
+						}
+					},
+					handleTransMoney() {
+						let that = this;
+
+						if (!that.trans.isLoading) {
+							that.trans.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/TransferAccounts',
+								method: 'post',
+								params: {
+									applyName: that.trans.agent,
+									amount: parseFloat(that.trans.money)
+								}
+							}).then(function(data) {
+								that.trans.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.trans.agent = '';
+									that.trans.money = '';
+									that.trans.safePW = '';
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 2000)
+									that.handleGetInfo();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleMarsMoney() {
+						let that = this;
+
+						if (!that.duration.isLoading) {
+							that.duration.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/Recharge/MerchantRecharge',
+								method: 'post',
+								params: {
+									merchantName: that.duration.marsAccount,
+									amount: parseFloat(that.duration.marsMoney)
+								}
+							}).then(function(data) {
+								that.duration.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.duration.marsAccount = '';
+									that.duration.marsMoney = '';
+									that.duration.safePW2 = '';
+									that.handleGetInfo();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleCash () {
+						let that = this;
+
+						if (!that.card.money) {
+							layer.msg('请输入提现金额', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (!that.card.isLoading) {
+							that.card.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/ApplyWithdrawal',
+								params: {
+									applyType: that.card.type,
+									amount: parseInt(that.card.money)
+								}
+							}).then(function(data) {
+								that.card.isLoading = false;
+								layer.close(index);
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									that.card.type = '1';
+									that.card.money = '';
+									that.card.canEdit = true;
+									setTimeout(function() {
+										that.handleClosePanel();
+									}, 2000)
+									that.handleGetInfo();
+									that.handleGetCashNum();
+									that.handleGetCashMoney();
+								}
+							})
+						}
+					},
+					handleGetInfo() {
+						let that = this;
+
+						return new Promise(function(resolve, reject) {
+							if (!that.isLoading) {
+								that.isLoading = true;
+								let index = layer.load(2);
+
+								axios({
+									url: '/api/AgentUser/GetAgentInfo'
+								}).then(function(data) {
+									that.isLoading = false;
+									layer.close(index);
+
+									if (data.data.Status === 100) {
+										const result = data.data.Model;
+
+										that.info = {
+											name: result.AgentName,
+											teamNum: result.TeamNum,
+											ip: result.IP,
+											balance: result.Balance,
+											saleNum: result.SaleNum,
+											teamBalance: result.TeamBalance
+										}
+										resolve();
+									} else if (data.data.Status === 301) {
+										reject();
+									}
+								})
+							}
+						})
+					},
+					handleCardInfo() {
+						let that = this;
+
+						if (!that.card.isLoading) {
+							that.card.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/GetBankInfo'
+							}).then(function(data) {
+								that.card.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.card.bankName = result.BankName;
+									that.card.bankNum = result.BankNum;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetAliPay() {
+						let that = this;
+
+						if (!that.card.isAliLoading) {
+							that.card.isAliLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AccountSafe/GetAlipayInfo'
+							}).then(function(data) {
+								that.card.isAliLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.card.aliPayName = result.Name;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleGetTeamInfo(e, startTime, endTime) {
+						let that = this,
+							vParam = {};
+
+						if (that.teamInfo.startTime) {
+							vParam['startTime'] = that.teamInfo.startTime;
+						}
+
+						if (that.teamInfo.endTime) {
+							vParam['endTime'] = that.teamInfo.endTime;
+						}
+
+						if (startTime) {
+							vParam['startTime'] = startTime;
+						}
+
+						if (endTime) {
+							vParam['endTime'] = endTime;
+						}
+
+						if (!that.teamInfo.isLoading) {
+							that.teamInfo.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AgentUser/SearchReapProfit',
+								params: vParam
+							}).then(function(data) {
+								that.teamInfo.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+
+									that.teamInfo.info = {
+										merchantNum: result.MerchantNum,
+										addNum: result.NewAgentNum,
+										salesNum: result.SalesNum,
+										cashNum: result.CashNum, // 提现
+										accountNum: result.AccountNum // 返利
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleShowPanel(id) {
+						let that = this;
+
+						if (id === 2 && !(that.card.bankNum || that.card.aliPayName)) {
+							layer.msg('请先设置收款方式，再进行提现操作', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (id === 2 && that.card.cashNum == 0) {
+							layer.msg('你今日的提现次数已达到上线，请明日再提现', {
+								time: 1500
+							})
+							return;
+						}
+
+						that.layerIndex = layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: id == 4 ? '600px' : '800px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content' + id)
+						});
+					},
+					handleClosePanel(type) {
+						let that = this;
+						
+						if (type && type == 4) {
+							layer.close(that.layerIndex);
+						} else {
+							that.card.canEdit = true;
+							that.card.safePW = '';
+							layer.closeAll();
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+
+</html>

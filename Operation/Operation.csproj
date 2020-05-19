@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Agent\PlatformSetUpOperation.cs~RFde48caf.TMP\**" />
+    <EmbeddedResource Remove="Agent\PlatformSetUpOperation.cs~RFde48caf.TMP\**" />
+    <None Remove="Agent\PlatformSetUpOperation.cs~RFde48caf.TMP\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Abutment\DistributionOperation.cs~RF1a01b23d.TMP" />
+    <None Remove="Abutment\FoundationSetupOperation.cs~RF2812ab6b.TMP" />
+    <None Remove="Abutment\LotteryOperation.cs~RF2035cae9.TMP" />
+    <None Remove="Abutment\MerchantSheetOperation.cs~RFb0397db.TMP" />
+    <None Remove="Abutment\OddsItemOperation.cs~RF16158e5d.TMP" />
+    <None Remove="Abutment\RoomGameOfRacingOperation.cs~RF14e6b995.TMP" />
+    <None Remove="Abutment\RoomOperation.cs~RF161ba3cc.TMP" />
+    <None Remove="Abutment\SendFlyingOperation.cs~RF14dbf25.TMP" />
+    <None Remove="Abutment\UserOperation.cs~RF22c5d245.TMP" />
+    <None Remove="Agent\BankInfoOperation.cs~RF113b375c.TMP" />
+    <None Remove="Agent\BankInfoOperation.cs~RF1de8d78c.TMP" />
+    <None Remove="Baccarat\OddsBaccaratOperation.cs~RF171660a.TMP" />
+    <None Remove="BaseHelper.cs~RF14efac3b.TMP" />
+    <None Remove="BaseHelper.cs~RF54c8941.TMP" />
+    <None Remove="BaseMongoHelper.cs~RF52b0e9c2.TMP" />
+    <None Remove="BaseMongoHelper.cs~RF53d730e7.TMP" />
+    <None Remove="Common\GameAlgorithms.cs~RF16ab9921.TMP" />
+    <None Remove="Common\GameAlgorithms.cs~RF9465141.TMP" />
+    <None Remove="Common\GameDiscrimination.cs~RF1a3a541a.TMP" />
+    <None Remove="Common\GameDiscrimination.cs~RF240958e7.TMP" />
+    <None Remove="Common\GameDiscrimination.cs~RF5240cd0.TMP" />
+    <None Remove="Common\Utils.cs~RF16790acf.TMP" />
+    <None Remove="Common\Utils.cs~RF2a299096.TMP" />
+    <None Remove="Common\Utils.cs~RF2d8f35.TMP" />
+    <None Remove="Common\Utils.cs~RF3a482fee.TMP" />
+    <None Remove="Common\Utils.cs~RF48a2be74.TMP" />
+    <None Remove="Common\Utils.cs~RF48c4982a.TMP" />
+    <None Remove="Common\WinPrize.cs~RF1a677f55.TMP" />
+    <None Remove="Common\WinPrize.cs~RF1b0fb62.TMP" />
+    <None Remove="RedisAggregate\RedisHelper.cs~RFb71bc44.TMP" />
+    <None Remove="RedisAggregate\RedisOperation.cs~RFb46b08d.TMP" />
+    <None Remove="RedisAggregate\RedisOperation.cs~RFb548a73.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSRedisCore" Version="3.6.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.1.30" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <PackageReference Include="ZKWeb.System.Drawing" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj" />
+  </ItemGroup>
+
+</Project>

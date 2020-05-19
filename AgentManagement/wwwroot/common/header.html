@@ -1,0 +1,29 @@
+<div class="wrap-top pos-abs clearfix hidden-xs">
+    <!--logo区域-->
+    <div class="logoarea pull-left">
+        <img src="img/logo.png" />
+    </div>
+    <!--顶部右侧菜单-->
+    <ul class="nav navbar-top-links navbar-right clearfix">
+        <!--账号-->
+        <li class="dropdown pull-left">
+            <a class="profile-element user-area">
+                <span class="user-info">
+                        <h1><span id="username"></span></h1>
+                </span>
+            </a>
+        </li>
+        <li class="dropdown pull-left">
+            <a class="dropdown-toggle count-info" onclick="vm.handleExit()">
+                <i class="fa fa fa-power-off" style="margin-right:0"></i>
+                <b>退出</b>
+            </a>
+        </li>
+    </ul>
+    <script>
+        (function() {
+            var username = localStorage.getItem('loginName');
+            $('#username').html(username);
+        })();
+    </script>
+</div>

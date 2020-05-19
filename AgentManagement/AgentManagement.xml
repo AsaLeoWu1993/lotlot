@@ -1,0 +1,1453 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AgentManagement</name>
+    </assembly>
+    <members>
+        <member name="T:AgentManagement.Controllers.AccountSafeController">
+            <summary>
+            帐户安全
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UpdateUserPwd(System.String,System.String)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="oldPwd">旧密码</param>
+            <param name="newPwd">新密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UpdateSafePwd(System.String,System.String)">
+            <summary>
+            修改安全密码
+            </summary>
+            <param name="oldPwd">旧密码</param>
+            <param name="newPwd">新密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.GetContactInfo">
+            <summary>
+            获取联系方式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.SetContactInfo(System.String,System.String,System.String)">
+            <summary>
+            修改联系方式
+            </summary>
+            <param name="phone"></param>
+            <param name="qq"></param>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.GetBankList">
+            <summary>
+            获取银行列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.GetBankInfo">
+            <summary>
+            获取银行信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UpdateBankInfo(System.String,System.String,Entity.AgentModel.BankEnum,System.String)">
+            <summary>
+            修改银行卡信息
+            </summary>
+            <param name="currentInfo">当前收款账号</param>
+            <param name="accountName">姓名</param>
+            <param name="bankType">新的收款银行</param>
+            <param name="bankInfo">新的收款账号</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.GetAlipayInfo">
+            <summary>
+            获取绑定支付宝信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UpdateAlipayInfo(System.String,System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改支付宝信息
+            </summary>
+            <param name="currentName">当前支付宝账号</param>
+            <param name="newName">新支付宝账号</param>
+            <param name="fileinput">二维码文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UnboundAccount">
+            <summary>
+            解绑支付宝帐户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.UpdateVirtual(System.String,Entity.AgentModel.CurrencyEnum,System.String)">
+            <summary>
+            设置虚假货币信息
+            </summary>
+            <param name="path">地址</param>
+            <param name="type">货币类型  1:泰达币</param>
+            <param name="oldPath">旧地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AccountSafeController.GetVirtual">
+            <summary>
+            获取虚假货币信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.AdvancedSetupController">
+            <summary>
+            高级设置
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetAllAgentInfo(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取高级代理下所有代理
+            </summary>
+            <param name="loginName">查询登录名</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        AgentID：代理Id
+                        UserName：用户名
+                        UserBalance：余额
+                        SubAgentPrice：代理价格
+                        BankNum：银行账户
+                        Account：支付宝名称
+                        IP：ip
+                        LastLoginTime：最后登录时间
+                        CreateTime：创建时间
+                        Status：锁定  1：正常 2：锁定
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetContactInfo(System.String)">
+            <summary>
+            联系方式
+            </summary>
+            <param name="agentID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.LockAgent(System.String)">
+            <summary>
+            锁定/解锁
+            </summary>
+            <param name="agentID">下级代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdatePrice(System.String,System.Decimal)">
+            <summary>
+            修改代理价格
+            </summary>
+            <param name="agentID">下级代理id</param>
+            <param name="price">代理价格</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ResetPwd(System.String)">
+            <summary>
+            重置密码
+            </summary>
+            <param name="agentID">下级代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.AgentDeduction(System.String,Entity.AgentModel.DeductionStatusEnum,Entity.AgentModel.DeductionTypeEnum,System.Decimal,System.String)">
+            <summary>
+            代理加扣款
+            </summary>
+            <param name="agentID">代理id</param>
+            <param name="status">操作</param>
+            <param name="type">类型</param>
+            <param name="amount">金额</param>
+            <param name="reason">理由</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetFreeAdmission(System.String)">
+            <summary>
+            获取代理免费时长和超出时长费用
+            </summary>
+            <param name="agenName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateFreeAdmission(System.String,System.Int32,System.Decimal)">
+            <summary>
+            修改代理免费时长和超出时长费用
+            </summary>
+            <param name="agentName">代理id</param>
+            <param name="freeDuration">免费时长</param>
+            <param name="excessExpenses">超出时长费用</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RequestCash(System.String,System.Int32,System.Int32)">
+            <summary>
+            提现请求查询
+            </summary>
+            <param name="loginName">用户名</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：数据id
+                        Name：用户名
+                        Amount：提现金额
+                        Balance：当前余额
+                        ApplyTime：申请时间
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetRequestCashInfo(System.String)">
+            <summary>
+            获取提现申请明细
+            </summary>
+            <param name="id">数据id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ConfirmationRequest(System.String,System.String)">
+            <summary>
+            确认放款
+            </summary>
+            <param name="id">数据id</param>
+            <param name="opinion">备注</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RefuseRequest(System.String,System.String)">
+            <summary>
+            拒绝放款
+            </summary>
+            <param name="id">数据id</param>
+            <param name="opinion">备注</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RequestRecord(System.String,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            提现记录查询
+            </summary>
+            <param name="loginName">用户名</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        Name：用户名
+                        Amount：提现金额
+                        Balance：当前余额
+                        ApplyTime：申请时间
+                        HandleTime：处理时间
+                        Type：提现方式
+                    }
+                    Summary：放款汇总
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SearchMerchantRecharge(System.String,System.Nullable{Entity.AgentModel.SalesTypeEnum},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            获取商户充值记录
+            </summary>
+            <param name="keyword">关键字  商家名称   代理名称</param>
+            <param name="salesType">销售方式  1：余额 2：库存  3：临时</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SearchRecharge(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            获取充值订单列表
+            </summary>
+            <param name="loginName">用户名称</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：数据id
+                        RechargeName：充值对象
+                        DirectName：直接代理
+                        Amount：金额
+                        ActualAmount：实际余额
+                        OrderType：订单方式
+                        Status：订单状态
+                        ApplyTime：申请时间
+                        IsHandle：是否处理
+                        HandleTime：处理时间
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ConfirmationArrival(System.String)">
+            <summary>
+            确认到账
+            </summary>
+            <param name="id">数据id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetSetTime">
+            <summary>
+            获取统一出款时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SetPayTime(System.DateTime,System.DateTime)">
+            <summary>
+            设置统一出款时间
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SetDeductionTime(System.String,System.Int32,System.Int32)">
+            <summary>
+            加扣客户有效时间
+            </summary>
+            <param name="cusName">客户名称</param>
+            <param name="num">数量</param>
+            <param name="type">类型 1：月  2：天</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ManualRecharge(System.String,System.String,System.Decimal)">
+            <summary>
+            手动处理客户充值
+            </summary>
+            <param name="agentName">代理名称</param>
+            <param name="merchantName">商户名称</param>
+            <param name="amount">扣除金额</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SetReceivables(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            配置人工收款二维码
+            </summary>
+            <param name="fileinput">图片文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.PreviewFile">
+            <summary>
+            预览二维码 地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ResetCustomerPwd(System.String)">
+            <summary>
+            重置客户密码
+            </summary>
+            <param name="cusName">客户名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.OperationMonthly(System.String,System.Int32)">
+            <summary>
+            增减代理库存月卡
+            </summary>
+            <param name="agentName">代理名称</param>
+            <param name="num">数量  不为0</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetRoll">
+            <summary>
+            获取滚动公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateRoll(System.String)">
+            <summary>
+            修改滚动公告
+            </summary>
+            <param name="notice">公告内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SearchOperationLogs(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取操作日志
+            </summary>
+            <param name="type">操作类型</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        OperationTime：操作时间
+                        OperationName：操作用户
+                        IP：登录ip
+                        OperationType：操作类型
+                        Status：状态
+                        Remark：备注
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetNotice">
+            <summary>
+            获取高级管理公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.AdvancedSetupController.NoticeClass">
+            <summary>
+            公告内容
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.NoticeClass.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.NoticeClass.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateNotice(AgentManagement.Controllers.AdvancedSetupController.NoticeClass)">
+            <summary>
+            修改公告
+            </summary>
+            <param name="model">公告信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetDatabaseList">
+            <summary>
+            获取连接地址列表
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：数据id
+                        Address：连接地址
+                        Count：现有人数
+                        MaxCount：最大人数
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.AddDatabas(System.String,System.String)">
+            <summary>
+            添加连接地址
+            </summary>
+            <param name="path">连接地址</param>
+            <param name="dbName">数据库名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateDatabas(System.String,System.String,System.String)">
+            <summary>
+            修改数据库地址
+            </summary>
+            <param name="id"></param>
+            <param name="path">连接地址</param>
+            <param name="dbName">数据库名称</param>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.AdvancedSetupController.DBAddress">
+            <summary>
+            数据库信息
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.DBAddress.ID">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.DBAddress.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.DBAddress.Count">
+            <summary>
+            已使用数量
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.DBAddress.MaxCount">
+            <summary>
+            最大使用数量
+            </summary>
+        </member>
+        <member name="P:AgentManagement.Controllers.AdvancedSetupController.DBAddress.DBName">
+            <summary>
+            数据库名称
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.AddRedeem(System.Int32,System.Decimal,System.DateTime)">
+            <summary>
+            添加兑换码
+            </summary>
+            <param name="count">添加数量</param>
+            <param name="amount">金额</param>
+            <param name="time">到期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SearchRedeemInfo(System.String,System.Nullable{Entity.AgentModel.RedeemEnum})">
+            <summary>
+            获取所有兑换码信息
+            </summary>
+            <param name="keyword">使用代理名称</param>
+            <param name="status">状态  1：未使用  2：已使用</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：数据Id
+                        UseName：使用代理名称
+                        UseTime：使用时间
+                        EffectiveTime：到期时间
+                        Status：状态,
+                        Amount：金额
+                        RedeemCode：兑换码
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.DeleteRedeem(System.Collections.Generic.List{System.String})">
+            <summary>
+            删除兑换码
+            </summary>
+            <param name="reIDList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetRedeemUrl">
+            <summary>
+            获取兑换码链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateRedeemUrl(System.String,System.String,System.String)">
+            <summary>
+            修改兑换码地址
+            </summary>
+            <param name="lowurl">1500地址</param>
+            <param name="meurl">2000地址</param>
+            <param name="hiurl">3000地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetH5Description">
+            <summary>
+            获取h5域名设置说明
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateH5Description(System.String)">
+            <summary>
+            设置h5域名设置说明
+            </summary>
+            <param name="description"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateMerchantRoll(System.String)">
+            <summary>
+            修改商户滚动公告
+            </summary>
+            <param name="notice">公告内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetMerchantRoll">
+            <summary>
+            获取商户滚动公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetSummary">
+            <summary>
+            获取汇总数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetMerchantInfoList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取商户信息列表
+            </summary>
+            <param name="keyword">关键字</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        ID：商户id
+                        MerchantName：商户名称
+                        DirectAgency：直接代理
+                        LastRechargeTime：最后充值时间
+                        ExpireTime：到期时间
+                        SeurityNo：安全码
+                        SuperStatus：超级商户
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateMerchantStatus(System.String,System.Boolean)">
+            <summary>
+            修改商户是否为超级商户
+            </summary>
+            <param name="merchantID">商户id</param>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RefreshNo(System.String)">
+            <summary>
+            刷新安全码
+            </summary>
+            <param name="merchantID">商户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RefreshMerchantPwd(System.String)">
+            <summary>
+            重置商户登录密码
+            </summary>
+            <param name="merchantID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RefreshMerchantSecurityPwd(System.String)">
+            <summary>
+            重置商户锁屏密码
+            </summary>
+            <param name="merchantID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.RefreshAgentSafePwd(System.String)">
+            <summary>
+            重置代理安全密码
+            </summary>
+            <param name="targetAgentID">目标代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetGameList">
+            <summary>
+            获取游戏信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateAgencyMargin(System.Decimal)">
+            <summary>
+            设置代理极差
+            </summary>
+            <param name="num">极差值</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetAgencyMargin">
+            <summary>
+            获取代理极差
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetTargetMerchant(System.String)">
+            <summary>
+            验证目标商户是否存在
+            </summary>
+            <param name="merchantName">商户名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetAllAgent">
+            <summary>
+            获取所有代理
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateTargetMerchant(System.String,System.String)">
+            <summary>
+            修改商户代理
+            </summary>
+            <param name="merchantName">商户名称</param>
+            <param name="agentName">代理名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetFormal">
+            <summary>
+            查看运营模式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.UpdateFormal(System.Boolean)">
+            <summary>
+            修改运营模式
+            </summary>
+            <param name="status">true:正式  false:测试</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.GetMerchatOnlineInfo(System.String,System.Int32,System.Int32)">
+            <summary>
+            在线商户信息
+            </summary>
+            <param name="keyword">关键字</param>
+            <param name="start">页数</param>
+            <param name="pageSize">页码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.SuperValidation(System.String)">
+            <summary>
+            验证超级管理密码
+            </summary>
+            <param name="pwd">管理密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AdvancedSetupController.ClearMerchant">
+            <summary>
+            清理两天未登录且未充值过的商户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.AgentUserController">
+            <summary>
+            代理帐号
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.AddAgentUser(System.String,System.String,Entity.AgentModel.ManagementTypeEnum)">
+            <summary>
+            添加代理帐号(测试)
+            </summary>
+            <param name="loginName">登录名称</param>
+            <param name="password">登录密码</param>
+            <param name="type">账号类型 1：超级管理 2：账务</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.AgentUserLogin(System.String,System.String,System.String)">
+            <summary>
+            账号登录
+            </summary>
+            <param name="loginName">登录名称</param>
+            <param name="password">登录密码</param>
+            <param name="code">安全码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetPwdPosition(System.String)">
+            <summary>
+            获取登录帐号密码位置 
+            </summary>
+            <param name="loginName">登录帐号</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.MixVerifyCode">
+            <summary>
+            获取验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetAgentUpperLimit">
+            <summary>
+            获取总共可创建账号、已创建账号数量和代理价格
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.CreateAgentAccount(System.String,System.String,System.Decimal)">
+            <summary>
+            创建代理帐号
+            </summary>
+            <param name="loginName">用户名</param>
+            <param name="password">密码</param>
+            <param name="price">代理价格</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.CreateCustomer(System.String,System.String)">
+            <summary>
+            创建客户账号
+            </summary>
+            <param name="loginName">登录名称</param>
+            <param name="password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.VerifySecurePwd(System.String)">
+            <summary>
+            验证安全密码
+            </summary>
+            <param name="safePwd">安全密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.UserExit">
+            <summary>
+            用户退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetSetTime">
+            <summary>
+            获取统一出款时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetCashCount">
+            <summary>
+            获取可提现剩余次数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetWithdrawal">
+            <summary>
+            获取可提现额度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.ApplyWithdrawal(Entity.AgentModel.ApplyTypeEnum,System.Decimal)">
+            <summary>
+            申请提现
+            </summary>
+            <param name="applyType">申请类型  1:银行卡 2:支付宝</param>
+            <param name="amount">金额</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.TransferAccounts(System.String,System.Decimal)">
+            <summary>
+            代理转账
+            </summary>
+            <param name="applyName">下级代理名称</param>
+            <param name="amount">金额</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetBusinessQRCode">
+            <summary>
+            获取商家二维码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.ApplyRecharge(System.Decimal,System.String)">
+            <summary>
+            充值
+            </summary>
+            <param name="amount">金额</param>
+            <param name="transferName">转账姓名</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.ApplyRedeemCode(System.String)">
+            <summary>
+            兑换码充值
+            </summary>
+            <param name="redeemCode">兑换码</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetRedeemUrl">
+            <summary>
+            获取兑换码链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetAgentInfo">
+            <summary>
+            获取首页代理个人基本信息
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        AgentName：帐号名称
+                        TeamNum：团队人数
+                        IP：登录ip
+                        Balance：余额
+                        SaleNum：今日销售量
+                        TeamBalance：团队余额
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.SearchReapProfit(System.DateTime,System.DateTime)">
+            <summary>
+            获取团队情况
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetScrollText">
+            <summary>
+            获取页头滚动文字
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.AgentUserController.GetNotice">
+            <summary>
+            获取高级管理公告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.PlatformSetUpController">
+            <summary>
+            平台设置
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="hostingEnvironment"></param>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetMerchantUrl">
+            <summary>
+            获取商户地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateMerchantUrl(System.String,System.String,System.String)">
+            <summary>
+            修改商户地址
+            </summary>
+            <param name="merchantUrl">商户后台地址</param>
+            <param name="merchantMUrl">商户后台手机端地址</param>
+            <param name="merchantAppUrl">商户游戏app地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetAppUrl">
+            <summary>
+            获取app地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateAppUrl(System.String,System.String)">
+            <summary>
+            修改app地址
+            </summary>
+            <param name="url1">地址1</param>
+            <param name="url2">地址2</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetSubscription">
+            <summary>
+            获取公众号图片地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateSubscription(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改公众号图片地址
+            </summary>
+            <param name="fileinput">图片</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetAppSetUp">
+            <summary>
+            获取app公共号设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateAppSetUp(System.String,System.String)">
+            <summary>
+            修改app公共号设置
+            </summary>
+            <param name="appID">appID</param>
+            <param name="appSecret">appSecret</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetWebSetUp">
+            <summary>
+            获取web公共号设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateWebSetUp(System.String,System.String)">
+            <summary>
+            修改web公共号设置
+            </summary>
+            <param name="appID">appID</param>
+            <param name="appSecret">appSecret</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetSwitch">
+            <summary>
+            获取微信开关
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateSwitch(System.Boolean)">
+            <summary>
+            修改微信开关
+            </summary>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetGameVideoUrl(Entity.GameOfType)">
+            <summary>
+            获取游戏视频地址
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateGameVideoUrl(Entity.GameOfType,System.String)">
+            <summary>
+            修改游戏视频地址
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <param name="url">地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetGameSetUp(Entity.GameOfType)">
+            <summary>
+            获取游戏视频地址
+            </summary>
+            <param name="gameType">游戏类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateGameSetUp(Entity.AgentModel.GameBasicsSetup)">
+            <summary>
+            修改游戏设置
+            </summary>
+            <param name="setup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetAppUrls">
+            <summary>
+            获取app域名列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateAppUrls(System.Collections.Generic.List{Entity.AgentModel.AppCanUserUrl})">
+            <summary>
+            修改app域名列表
+            </summary>
+            <param name="models"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetVersionNum">
+            <summary>
+            获取版本号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateVersionNum(System.String)">
+            <summary>
+            修改版本号
+            </summary>
+            <param name="versionNum">版本号</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateVersionFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            修改版本文件
+            </summary>
+            <param name="fileinput">文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetGrantUrl">
+            <summary>
+            获取h5微信授权域名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateGrantUrln(System.String)">
+            <summary>
+            设置h5微信授权域名
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.GetVideoUrl">
+            <summary>
+            获取视讯播放
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.PlatformSetUpController.UpdateVideoUrn(System.String)">
+            <summary>
+            设置视讯播放
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.RechargeController">
+            <summary>
+            充值
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.GetAccountDuration(System.Int32)">
+            <summary>
+            获取帐户剩余可赠送时长和使用金额
+            </summary>
+            <param name="duration"></param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        Count：剩余时长
+                        Price：使用金额
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.RechargeTestMerchant(System.String,System.Int32)">
+            <summary>
+            测试用户充值
+            </summary>
+            <param name="account">商户帐号</param>
+            <param name="duration">时长</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.GetAccountMonthly">
+            <summary>
+            获取库存和使用金额
+            </summary>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Model
+                    {
+                        Count：剩余时长
+                        Price：使用金额
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.RechargeMonthly(System.String)">
+            <summary>
+            充值月卡
+            </summary>
+            <param name="account">客户帐号</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.MerchantRecharge(System.String,System.Decimal)">
+            <summary>
+            商户余额充值
+            </summary>
+            <param name="merchantName">商户名称</param>
+            <param name="amount">金额</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.SearchSalesRecords(System.String,System.Nullable{Entity.AgentModel.SalesTypeEnum},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+             <summary>
+             查询销售列表
+             </summary>
+             <param name="userName">名称</param>
+             <param name="salesType">销售方式  1：余额 2：库存  3：临时</param>
+             <param name="startTime">开始时间</param>
+             <param name="endTime">结束时间</param>
+             <param name="start">页码</param>
+             <param name="pageSize">页数</param>
+             <remarks>
+            ##  参数说明
+                 userName：用户名
+                 startTime：开始时间
+                 endTime：结束时间
+                 start：页码
+                 pageSize：页数
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Total：数据总数量
+                     Data
+                     {
+                         RechargeTime：充值时间
+                         Direct：直接代理
+                         RechargeType：充值类型
+                         UseAmount：使用金额
+                         Account：购卡账户
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.SearchPersonalSalesRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            查询个人销售报表
+            </summary>
+            <param name="userName">购卡用户</param>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.SearchAccountChange(System.Nullable{Entity.AgentModel.AccountTypeEnum},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.String)">
+             <summary>
+             查询账变记录
+             </summary>
+             <param name="status">类型</param>
+             <param name="startTime">开始时间</param>
+             <param name="endTime">结束时间</param>
+             <param name="start">页码</param>
+             <param name="pageSize">页数</param>
+             <param name="agentName">代理名称   仅能管理员使用</param>
+             <remarks>
+            ##  参数说明
+                 status：类型
+                 余额充值 = 1,
+                 直充扣费 = 2,
+                 余额提现 = 3,
+                 团队返利 = 4,
+                 提现退回 = 5,
+                 活动 = 6,
+                 其他 = 7
+                 startTime：开始时间
+                 endTime：结束时间
+                 start：页码
+                 pageSize：页数
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Total：数据总数量
+                     Data
+                     {
+                         SerialNum：流水号
+                         AddTime：添加时间
+                         Change：变动金额
+                         Balance：余额
+                         Type：类型
+                         Remark：摘要
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.SearchPersonalState(System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            个人报表
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <param name="start">页码</param>
+            <param name="pageSize">页数</param>
+            <response>
+            ## 返回结果
+                {
+                    Status：返回状态
+                    Message：返回消息
+                    Total：数据总数量
+                    Data
+                    {
+                        Date：日期
+                        Aecharge：充值
+                        Sales：直充客户
+                        Rebate返利：余额
+                        Cash：提现
+                        Activity：活动
+                    }
+                }
+            </response>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.RechargeController.GetHeadData(System.DateTime,System.DateTime)">
+            <summary>
+            获取直充合计和返利合计
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Controllers.SubordinateController">
+            <summary>
+            下级管理
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Controllers.SubordinateController.SearchSubAccount(System.String,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+             <summary>
+             获取下级代理信息
+             </summary>
+             <param name="name">用户名</param>
+             <param name="startTime">开始时间</param>
+             <param name="endTime">结束时间</param>
+             <param name="start">页码</param>
+             <param name="pageSize">页数</param>
+             <remarks>
+            ##  参数说明
+                 name：用户名
+                 startTime：开始时间
+                 endTime：结束时间
+                 start：页码
+                 pageSize：页数
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Total：数据总数量
+                     Data
+                     {
+                         AgentID：代理id
+                         LoginName：名称
+                         AgentPrice：代理价格
+                         SubOutNum：下级人数
+                         SalesNum：团队销量
+                         Status：状态 
+                         LastLoginTime：最后登录时间
+                         CreateTime：创建时间
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.SubordinateController.UpdatePrice(System.String,System.Decimal)">
+            <summary>
+            修改代理价格
+            </summary>
+            <param name="agentID">下级代理id</param>
+            <param name="price">代理价格</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.SubordinateController.LockAgent(System.String)">
+            <summary>
+            锁定/解锁
+            </summary>
+            <param name="agentID">下级代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Controllers.SubordinateController.SearchMerchantRecharge(System.String,System.Int32,System.Int32)">
+             <summary>
+             获取客户信息
+             </summary>
+             <param name="name">名称</param>
+             <param name="start">页码</param>
+             <param name="pageSize">页数</param>
+             <remarks>
+            ##  参数说明
+                 name：用户名
+                 start：页码
+                 pageSize：页数
+             </remarks>
+             <response>
+             ## 返回结果
+                 {
+                     Status：返回状态
+                     Message：返回消息
+                     Total：数据总数量
+                     Data
+                     {
+                         Name：客户名称
+                         LastRechargeTime：最后充值时间
+                         MaturityTime：到期时间
+                         CreateTime：创建时间
+                         LastLoginTime：最后登录时间
+                     }
+                 }
+             </response>
+             <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Manipulate.AuthenticationAttribute">
+            <summary>
+            用户验证身份
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Manipulate.AuthenticationAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AgentManagement.Manipulate.AuthenticationAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:AgentManagement.Manipulate.AuthenticationAttribute.CheckMethod(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
+            <summary>
+            判断方法是否单独加特性
+            </summary>
+            <param name="descriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Manipulate.NotAuthenticationAttribute">
+            <summary>
+            不进行验证
+            </summary>
+        </member>
+        <member name="T:AgentManagement.Manipulate.CentralProcess">
+            <summary>
+            公共方法
+            </summary>
+        </member>
+        <member name="M:AgentManagement.Manipulate.CentralProcess.GetPerAgentName(System.String)">
+            <summary>
+            获取代理关系链
+            </summary>
+            <param name="agentID">代理id</param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Manipulate.CentralProcess.GetIP(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取ip
+            </summary>
+            <param name="HttpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AgentManagement.Manipulate.CentralProcess.IsAdmin(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            高级管理后台
+            </summary>
+            <param name="HttpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AgentManagement.Manipulate.ExceptionHandlerMiddleWare">
+            <summary>
+            处理异常中间层
+            </summary>
+        </member>
+    </members>
+</doc>

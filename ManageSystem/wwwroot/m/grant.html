@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+  </head>
+  <body>
+    <script>
+        let search = location.search;
+        let o0 = new RegExp("o0=([^&]*)(&|$)");
+        let o1 = new RegExp("o1=([^&]*)(&|$)");
+        let o0Url = new RegExp("o0Url=([^&]*)(&|$)");
+        let code = new RegExp("code=([^&]*)(&|$)");
+        if (search && search.indexOf('o0=') != -1 && search.indexOf('o1=') != -1) {
+            let webUrl = encodeURIComponent(location.origin + '/m/grant.html?o0Url=' + search.match(o0)[1]);
+            let href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${search.match(o1)[1]}&redirect_uri=${webUrl}&response_type=code&scope=snsapi_userinfo&state=sq&connect_redirect=1#wechat_redirect`;
+            window.location.href = href;
+        } else if (search && search.indexOf('code=') != -1) {
+          let href = `${decodeURIComponent(search.match(o0Url)[1])}#/login?code=${search.match(code)[1]}`;
+          window.location.href = href;
+        }
+    </script>
+  </body>
+</html>

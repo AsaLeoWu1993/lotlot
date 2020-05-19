@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+		<div class="plateform-wrapper">
+			<!--头部logo及操作按钮start-->
+			<div class="wrap-top pos-abs clearfix hidden-xs">
+				<!--logo区域-->
+				<div class="logoarea pull-left">
+					<img src="img/logo.png" />
+				</div>
+				<!--顶部右侧菜单-->
+				<ul class="nav navbar-top-links navbar-right clearfix">
+					<!--账号-->
+					<li class="dropdown pull-left">
+						<a class="profile-element user-area">
+							<span class="user-info">
+									<h1><span v-text="username"></span></h1>
+							</span>
+						</a>
+					</li>
+					<li class="dropdown pull-left">
+						<a class="dropdown-toggle count-info">
+							<i class="fa fa fa-power-off" style="margin-right:0"></i>
+							<b>退出</b>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--头部logo及操作按钮  end-->
+
+			<!--主体内容左侧start-->
+			<div class="main-left over-auto">
+				<div class="nav-wrap scroll">
+					<!--仅在小屏下显示的头部标题栏start-->
+					<div id="hader-title" class="header-bg hidden-sm hidden-md hidden-lg">
+						<a class="icon-nav" href="#menu-nav"><i class="fa fa-bars"></i></a>
+						<h3>创建购卡链接</h3>
+					</div>
+					<!--仅在小屏下显示的头部标题栏   end-->
+
+					<!--pc+mobile响应式导航菜单start-->
+					<nav id="menu-nav" class="leftmenu">
+						<ul class="nav metismenu" id="side-menu">
+							<li>
+								<a href="home.html"><i class="fa fa-desktop"></i> <span class="nav-label">首页</span></a>
+							</li>
+							<li>
+								<a href="sale_record.html"><i class="fa fa-pencil-square"></i> <span class="nav-label">销售记录</span></a>
+							</li>
+							<li>
+								<a href="sub_manage.html"><i class="fa fa-sitemap"></i> <span class="nav-label">下级管理</span></a>
+							</li>
+							<li>
+								<a href="creat_account.html"><i class="fa fa-group"></i> <span class="nav-label">创建账号</span></a>
+							</li>
+							<li>
+								<a href="person_report.html"><i class="fa fa-file-text"></i> <span class="nav-label">个人报表</span></a>
+							</li>
+							<li>
+								<a href="bill_record.html"><i class="fa fa-tags"></i> <span class="nav-label">账变记录</span></a>
+							</li>
+							<li>
+								<a href="account_sec.html"><i class="fa fa-umbrella"></i> <span class="nav-label">账户安全</span></a>
+							</li>
+							<li>
+								<a href="advance_manager.html"><i class="fa fa-cogs"></i> <span class="nav-label">高级管理</span></a>
+							</li>
+							<li class="mobile-user">
+								<span class="username" v-text="username"></span>
+								<a class="btn btn-success btn-md">退出登录</a>
+							</li>
+						</ul>
+					</nav>
+					<!--pc+mobile响应式导航菜单end-->
+				</div>
+			</div>
+			<!--主体内容左侧  end-->
+
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight">
+				<div class="main-area scroll">
+					<!--顶部公告start-->
+					<div class="topnotice">
+						<marquee direction="" scrollamount="3">关于近期调整代理上限设置的公告:自7月1日起，代理上限调整为每日100人。</marquee>
+					</div>
+					<!--顶部公告   end-->
+					<!--面包屑当前位置start-->
+					<ol class="breadcrumb">
+						<li>
+							当前位置：<a class="color-gray" href="home.html">首页</a>
+						</li>
+						<li class="active">创建购卡链接</li>
+					</ol>
+					<!--面包屑当前位置end-->
+
+					<!--立即创建 start-->
+					<div class="data-wrap widget-site-box mg-btm20">
+						<div class="body">
+							<div class="creatcard-wrap">
+								<div class="form-common">
+									<div class="linkitem-wrap clearfix">
+										<div class="form-group  clearfix linkitem">
+											<label class="item-label"><em>*</em>卡类型：</label>
+											<div class="item-content btns-group-blue">
+												<a class="btn btn-sm btn-primary">月卡</a>
+												<a class="btn btn-sm btn-default">季卡</a>
+												<a class="btn btn-sm btn-default">半年卡</a>
+											</div>
+										</div>
+
+										<div class="form-group linkitem clearfix">
+											<label class="item-label"><em>*</em>设定单价：</label>
+											<div class="item-content">
+
+												<div class="input-group">
+												  <span class="input-group-addon">¥</span>
+												  <input class="form-control" value="" name="" type="text" placeholder="">
+												</div>
+
+											</div>
+											<div class="item-des">
+	                                        	<span class="f-12 tiptext">价格设置区间<i class="f-12 color-gray color-orange">1000-2000</i>元</span>
+	                                    	</div>
+										</div>
+									</div>
+									<div class="form-group  clearfix">
+										<div class="creatcard-texttip">
+											<p class="color-orange">说明：</p>
+											<p>1、软件用户可以直接浏览创建好的链接进行自助购买点卡。</p>
+											<p>2、设定代理价格就是设定下级售卡的成本，下级的价格减去我的代理价格就是下级团队每售一套月卡我得到的返利。</p>
+										</div>
+									</div>
+
+									<div class="dis-flex clearfix mg-btm10 mg-btm15">
+										<div class="col-sm-offset-4 col-sm-4 col-xs-12 btn-full">
+											<a class="btn btn-md btn-success">立即创建</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--立即创建   end-->
+
+					<!--我已创建的链接start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<h2 class="table-header-title">我已创建的链接</h2>
+							<div class="table-area mg-btm20">
+								<table class="table-normal table-bordered">
+                                    <thead>
+										<tr>
+											<th>链接ID</th>
+											<th>链接地址</th>
+											<th width="160">设定单价</th>
+											<th width="140">销售量</th>
+											<th>创建时间</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>332145</td>
+											<td><a href="buy.html" target="_blank">http://www.fontawesome.com.cn/icons/chevron-circle-down/</a></td>
+											<td>1200</td>
+											<td>20</td>
+											<td>2017/11/10 22:50</td>
+											<td>
+												<a class="btn btn-sm btn-warning layer-confirm showshadow">删除</a>
+												<a class="btn btn-sm btn-success">复制链接</a>
+											</td>
+										</tr>
+										<tr>
+											<td>332145</td>
+											<td><a href="buy.html" target="_blank">http://www.fontawesome.com.cn/icons/chevron-circle-down/</a></td>
+											<td>1200</td>
+											<td>20</td>
+											<td>2017/11/10 22:50</td>
+											<td>
+												<a class="btn btn-sm btn-warning layer-confirm">删除</a>
+												<a class="btn btn-sm btn-success">复制链接</a>
+											</td>
+										</tr>
+										<tr>
+											<td>332145</td>
+											<td><a href="buy.html" target="_blank">http://www.fontawesome.com.cn/icons/chevron-circle-down/</a></td>
+											<td>1200</td>
+											<td>20</td>
+											<td>2017/11/10 22:50</td>
+											<td>
+												<a class="btn btn-sm btn-warning layer-confirm">删除</a>
+												<a class="btn btn-sm btn-success">复制链接</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--分页start-->
+							<div class="pagination-wrap">
+								<div class="list-pagination clearfix">
+	                                <ul class="pagination pull-left clearfix">
+	                                    <li class="hidden-xs">
+	                                        <a href="#">首页</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#"><</a>
+	                                    </li>
+	                                    <li class="active">
+	                                        <a href="#">1</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">2</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">3</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">4</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">…</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">12</a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">></a>
+	                                    </li>
+	                                    <li class="hidden-xs">
+	                                        <a href="#">尾页</a>
+	                                    </li>
+	                                </ul>
+	                                <div class="totle pull-left">
+	                        			共<i>100</i>条记录
+	                                </div>
+	                            </div>
+							</div>
+                            <!--分页pend---->
+						</div>
+					</div>
+					<!--我已创建的链接 end-->
+				</div>
+			</div>
+			<!--主体内容中间  end-->
+		</div>
+
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--日期控件laydate-->
+		<script src="plugins/laydate/laydate.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script>
+			//询问层
+			$(".layer-confirm").click(function(){
+				layer.confirm('确定要执行删除操作吗？', {
+				  btn: ['确定','取消'], //按钮
+				  shade: 0.6,
+				  title:'温馨提示',
+				  skin:'myconfim'
+				}, function(){
+				  layer.msg('删除成功', {
+				    time: 1000, //1s后自动关闭
+				  });
+				});
+			})
+			//日期控件laydate
+			laydate.render({
+				elem: '#datestart',
+				type: 'datetime'
+			});
+			laydate.render({
+				elem: '#dateend',
+				type: 'datetime'
+			});
+		</script>
+	</body>
+
+</html>

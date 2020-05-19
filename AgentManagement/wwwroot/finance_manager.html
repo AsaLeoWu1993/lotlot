@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<title>HT后台</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="plugins/layer/theme/default/layer.css" rel="stylesheet">
+		<link href="plugins/leftnav/css/jquery.mmenu.all.css" rel="stylesheet">
+		<link href="plugins/swiper/css/swiper.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/iview.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/iview.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="app" class="plateform-wrapper">
+			<div id="header"></div>
+
+			<script>
+				$(function(){
+					$('#header').load('common/header.html');
+				})
+			</script>
+			<!--主体内容中间start-->
+			<div class="main-mid pos-abs animated fadeInRight" style="left: 0;">
+				<div class="main-area scroll">
+					<!--数据区域start-->
+					<div class="data-wrap widget-site-box">
+						<div class="body">
+							<!--选项卡start-->
+							<div class="model-cate withpadding widget-box">
+								<div class="tab-hd">
+									<span class="cur" @click="handleCashApply()"><a>提现请求</a></span>
+									<span @click="handleCashRecord()"><a>提现记录</a></span>
+								</div>
+								<div class="tab-bd righth">
+									<!--提现请求start-->
+									<div class="cate-boxcon cur">
+										<div class="site-opearea clearfix pull-right mg-btm12" style="width: 100%;">
+											<div class="input-full pull-left flex-item flex-1">
+												<input class="ope-input" type="text" v-model="cashApply.loginName" placeholder="输入用户">
+											</div>
+											<div class="btn-full flex-1 pull-left flex-item flex-none">
+												<a @click="handleCashApply()" class="btn btn-sm btn-success"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+											</div>
+											<Checkbox class="flex-item" v-model="flush">定时刷新</Checkbox>
+										</div>
+										<div class="table-area">
+											<table class="table-normal table-bordered">
+												<thead>
+													<tr>
+														<th>用户名</th>
+														<th>提现金额</th>
+														<th>当前余额</th>
+														<th>申请时间</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in cashApply.list" :key="index">
+														<td><span v-text="item.loginName"></span></td>
+														<td><span v-text="item.money"></span></td>
+														<td><span v-text="item.balance"></span></td>
+														<td><span v-text="item.time"></span></td>
+														<td>
+															<a @click="showRecordView(item)" class="btn btn-sm btn-success take-cash layer-btn">查看</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="cashApply.page.total" show-total :page-size="cashApply.page.pageSize" :current="cashApply.page.pageNum" @on-change="handleChangePage(2, $event)"/>
+										</div>
+									</div>
+									<!--提现请求end-->
+									<!--提现记录start-->
+									<div class="cate-boxcon">
+										<div class="site-opearea clearfix pull-right mg-btm12">
+											<div class="flex-1 flex-item dis-flex mg-btm10 pull-left">
+												<div class="flex-1 flex-item pull-left">
+													<!-- <input class="date-normal" type="text" id="datestart" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="cashRecord.startTime"></Date-Picker>
+												</div>
+												<div class="flex-none pull-left lineheight">
+													-
+												</div>
+												<div class="flex-1 flex-item pull-left" style="margin-right: 10px;">
+													<!-- <input class="date-normal end" type="text" id="dateend" value=""> -->
+													<Date-Picker type="datetime" format="yyyy-MM-dd HH:mm:ss" :options="options3" v-model="cashRecord.endTime"></Date-Picker>
+												</div>
+											</div>
+											<div class="input-full pull-left flex-item flex-1">
+												<input class="ope-input" type="text" v-model="cashRecord.name" placeholder="输入用户">
+											</div>
+											<div class="btn-full pull-left flex-item flex-none">
+												<a @click="handleCashRecord()" class="btn btn-sm btn-success"><i class="fa fa-search" aria-hidden="true"></i>查 询</a>
+											</div>
+											<div class="input-full pull-left flex-item flex-1" style="margin-left: 20px;">
+												<span v-text="`提现金额总计: ${cashRecord.all}`"></span>
+											</div>
+										</div>
+										<div class="table-area">
+											<table class="table-normal table-bordered">
+												<thead>
+													<tr>
+														<th>用户名</th>
+														<th>提现金额</th>
+														<th>剩余金额</th>
+														<th>申请时间</th>
+														<th>处理时间</th>
+														<th>提现方式</th>
+														<th>状态</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(item, index) in cashRecord.list" :key="index">
+														<td><span v-text="item.name"></span></td>
+														<td><span v-text="item.money"></span></td>
+														<td><span v-text="item.balance"></span></td>
+														<td><span v-text="item.applyTime"></span></td>
+														<td><span v-text="item.handleTime"></span></td>
+														<td>
+															<div class="poverbox hsqure povfix">
+																<div v-show="item.type == '银行卡'">
+																		<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>
+																		银行卡</span>
+																		<span class="pover-con">
+																			<em class="arrow_box">卡号：<span v-text="item.url"></span></em>
+																		</span>
+																		<div class="shadowbg"></div>
+																</div>
+																<div v-show="item.type == '支付宝'" @click="handleViewAlipay(item.url)">
+																	<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>支付宝</span>
+																</div>
+																<div v-show="item.type == '泰达币'" @click="handleViewUsdt(item.url)">
+																	<span class="m-click"><i class="color-blue glyphicon glyphicon-info-sign"></i>泰达币</span>
+																</div>
+															<div>
+														</td>
+														<td class="color-orange"><span v-text="item.status"></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div style="text-align: center">
+											<Page style="margin-top: 20px;" :total="cashRecord.page.total" show-total :page-size="cashRecord.page.pageSize" :current="cashRecord.page.pageNum" @on-change="handleChangePage(3, $event)"/>
+										</div>
+									</div>
+									<!--提现记录end-->
+								</div>
+							</div>
+							<!--选项卡end-->
+						</div>
+					</div>
+					<!--数据区域   end-->
+				</div>
+			</div>
+			<!--3查看提现请求弹出层（支付宝）start-->
+			<div id="layer-content3" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">转账银行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue">支付宝</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">支付姓名：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.payName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">支付宝二维码：</label>
+							<div class="col-sm-6 col-xs-8">
+								<img class="alicode" :src="cashApply.select.QRCode"/>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2  control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--3查看提现请求弹出层（支付宝）end-->
+
+			<!--4查看提现请求弹出层（银行卡）start-->
+			<div id="layer-content4" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现银行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue" v-text="cashApply.select.transfer"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">银行姓名：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.payName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">银行账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.bankNum"></div>
+							</div>
+						</div>
+						<!-- <div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.bankNum"></div>
+							</div>
+						</div> -->
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--4查看提现请求弹出层（银行卡）end-->
+			<!--8--USDT层弹出start-->
+			<div id="layer-content8" class="layer-info layer-content dis-hidden layer-withbottom">
+				<div id="show-view-usdt"></div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--8--USDT层弹出end-->
+			<!--9查看提现请求弹出层（泰达币）start-->
+			<div id="layer-content9" class="layer-info layer-content dis-hidden layer-withbottom">
+				<h1>提现请求</h1>
+				<div class="layer-con over-auto">
+					<div class="form-common form-info label-left">
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">代理账号：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text" v-text="cashApply.select.agentName"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">收款类型：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-blue">数字货币(USDT/ERC20)</div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">收款地址：</label>
+							<div class="col-sm-6 col-xs-8">
+								<a @click="handleViewQRCode" class="btn btn-sm btn-primary take-cash layer-btn">预览</a>
+								<div class="only-text">地址：</div>
+								<div class="only-text" v-text="cashApply.select.address"></div>
+								<div v-show="cashApply.select.showQRCode" id="qrcode" class="alicode"></div>
+							</div>
+						</div>
+
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2 col-xs-4 control-label">提现金额：</label>
+							<div class="col-sm-6 col-xs-8">
+								<div class="only-text color-red text-bold" v-text="cashApply.select.amount"></div>
+							</div>
+						</div>
+						<div class="form-group  clearfix">
+							<label class="col-sm-offset-4 col-sm-2  control-label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</label>
+							<div class="col-sm-4">
+								<textarea class="textarea-control" placeholder="可输入拒绝理由" v-model="cashApply.select.remark"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="layer-bottom twobtns clearfix">
+					<div class="col-sm-offset-3 col-sm-6">
+						<div class="dis-flex clearfix layer-twobtns">
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, true)" class="btn btn-primary">确认放款</a>
+							</div>
+							<div class="flex-item flex-1 btn-full text-left pull-left">
+								<a @click="handleOperate(cashApply.select.id, false)" class="btn  btn-danger">拒绝</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--9查看提现请求弹出层（泰达币）end-->
+			<!--12--支付宝层弹出start-->
+			<div id="layer-content12" class="layer-info layer-content dis-hidden layer-withbottom">
+				<div style="width: 480px;height: 515px;">
+					<p v-if="cashRecord.alipayAccount" style="text-align: center;" v-text="`账号：${cashRecord.alipayAccount}`"></p>
+					<img v-if="cashRecord.alipayUrl" style="width: 480px;" :src="cashRecord.alipayUrl" alt/>
+				</div>
+				<!--右上角关闭-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close  hidden-xs">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<!--小屏下的关闭返回样式-->
+				<a @click="handleClosePanel" href="javascript:void(0)" class="info-ok layer-close hidden-lg hidden-md hidden-sm">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+			</div>
+			<!--12--支付宝层弹出end-->
+			<!--主体内容中间  end-->
+		</div>
+
+		<script src="js/axios.min.js?v1.0.0"></script>
+		<script src="js/jquery-3.1.1.min.js?v1.0.0"></script>
+		<script src="js/bootstrap.min.js?v1.0.0"></script>
+		<!--弹窗layer-->
+		<script src="plugins/layer/layer.js?v1.0.0"></script>
+		<!--mmmenu-->
+		<script src="plugins/leftnav/js/jquery.mmenu.all.min.js?v1.0.0"></script>
+		<!--swiper-->
+		<script src="plugins/swiper/js/swiper.min.js?v1.0.0"></script>
+		<!--公共js-->
+		<script src="js/common.js?v1.0.0"></script>
+		<script src="js/tools.js?v1.0.0"></script>
+		<script src="js/qrcode.min.js?v1.0.0"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						flush: false,
+						flushInterval: null,
+						cashApply: {
+							loginName: '',
+							list: [],
+							isLoading: false,
+							page: {
+								pageNum: 1,
+								pageSize: 20,
+								total: 0
+							},
+							select: {
+								id: '',
+								remark: ''
+							}
+						},
+						cashRecord: {
+							name: '',
+							list: [],
+							isLoading: false,
+							startTime: new Date().pattern('yyyy-MM-dd') + ' 00:00:00',
+							endTime: new Date().pattern('yyyy-MM-dd') + ' 23:59:59',
+							all: 0,
+							page: {
+								pageNum: 1,
+								pageSize: 20,
+								total: 0
+							},
+							alipayAccount: '',
+							alipayUrl: ''
+						},
+						options3: {
+							disabledDate (date) {
+								return date && date.valueOf() > Date.now();
+							}
+						},
+					}
+				},
+				watch: {
+					flush(val) {
+						if (val) {
+							this.flushInterval && (clearInterval(this.flushInterval)) && (this.flushInterval = null);
+							this.handleCashApply();
+							this.flushInterval = setInterval(() => {
+								this.handleCashApply();
+							}, 6000);
+						} else {
+							this.flushInterval && (clearInterval(this.flushInterval)) && (this.flushInterval = null);
+						}
+					}
+				},
+				mounted() {
+					let that = this;
+
+					that.handleCashApply();
+					if (that.flush) {
+						that.flushInterval && (clearInterval(that.flushInterval)) && (that.flushInterval = null);
+						that.flushInterval = setInterval(() => {
+							that.handleCashApply();
+						}, 6000);
+					} else {
+						that.flushInterval && (clearInterval(that.flushInterval)) && (that.flushInterval = null);
+					}
+				},
+				methods: {
+					handleViewAlipay(url) {
+						let that = this;
+						if (!url) {
+							return;
+						}
+						if (url.indexOf('&') != -1) {
+							let res = url.split('&');
+							that.cashRecord.alipayAccount = res[0];
+							that.cashRecord.alipayUrl = res[1];
+						} else {
+							that.cashRecord.alipayAccount = url;
+							that.cashRecord.alipayUrl = '';
+						}
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '480px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content12')
+						});
+					},
+					handleViewQRCode() {
+						let that = this;
+
+						if (!that.qrcode) {
+							that.qrcode = new QRCode(document.getElementById("qrcode"), {
+								width : 120,
+								height : 120
+							});
+						}
+						that.qrcode.makeCode(that.cashApply.select.address);
+						that.cashApply.select.showQRCode = !that.cashApply.select.showQRCode;
+					},
+					handleViewUsdt(url) {
+						let that = this;
+						if (!url) {
+							return;
+						}
+						if (!that.usdtCode) {
+							that.usdtCode = new QRCode(document.getElementById('show-view-usdt'), {
+								width : 480,
+								height : 480
+							});
+						}
+						that.usdtCode.makeCode(url);
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '480px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content8')
+						});
+					},
+					handleClosePanel() {
+						layer.closeAll();
+					},
+					handleExit() {
+						let that = this;
+
+						if (!that.isLoading) {
+							that.isLoading = true;
+
+							axios({
+								url: '/api/AgentUser/UserExit'
+							}).then(function(data) {
+								that.isLoading = false;
+								if (data.data.Status === 100) {
+									window.location.href = window.location.origin + '/login.html'
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleCashApply() {
+						let that = this,
+							vParam = {};
+
+						return new Promise((resolve, reject) => {
+							if (that.cashApply.loginName) {
+								vParam['loginName'] = that.cashApply.loginName;
+							}
+
+							vParam['start'] = that.cashApply.page.pageNum;
+							vParam['pageSize'] = that.cashApply.page.pageSize;
+
+							if (!that.cashApply.isLoading) {
+								that.cashApply.isLoading = true;
+
+								axios({
+									url: '/api/AdvancedSetup/RequestCash',
+									params: vParam
+								}).then(function(data) {
+									that.cashApply.isLoading = false;
+
+									if (data.data.Status === 100) {
+										const result = data.data.Data;
+
+										that.cashApply.page.total = data.data.Total;
+										that.cashApply.list = result.map(function(item) {
+											return {
+												id: item.ID,
+												loginName: item.Name,
+												money: item.Amount,
+												balance: item.Balance,
+												time: item.ApplyTime
+											}
+										})
+										if (that.cashApply.list.length > 0) {
+											let au = document.createElement('audio');
+											au.preload = 'auto';
+											au.src = './audio/4204.wav';
+											au.src = './audio/4204.mp3';
+											au.play();
+										}
+										resolve();
+									} else if (data.data.Status === 301) {
+										window.location.href = window.location.origin + '/login.html'
+									}
+								})
+							}
+						})
+					},
+					handleOperate(id, type) {
+						let that = this,
+							vParam = {},
+							vUrl = '';
+
+						if (that.cashApply.select.remark) {
+							vParam['opinion'] = that.cashApply.select.remark;
+						}
+
+						vParam['id'] = that.cashApply.select.id;
+
+						if (type) {
+							vUrl = '/api/AdvancedSetup/ConfirmationRequest';
+						} else {
+							vUrl = '/api/AdvancedSetup/RefuseRequest';
+						}
+
+						if (!that.cashApply.isLoading) {
+							that.cashApply.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: vUrl,
+								method: 'post',
+								params: vParam
+							}).then(function(data) {
+								that.cashApply.isLoading = false;
+								layer.close(index);
+
+								layer.msg(data.data.Message, {
+									time: 1500
+								})
+
+								if (data.data.Status === 100) {
+									setTimeout(function() {
+										that.cashApply.select = {};
+										layer.closeAll();
+									}, 1500)
+									that.handleCashApply();
+									that.handleCashRecord();
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					handleCashRecord() {
+						let that = this,
+							vParam = {};
+
+						if (that.cashRecord.name) {
+							vParam['loginName'] = that.cashRecord.name;
+						}
+
+						if (that.cashRecord.startTime) {
+							vParam['startTime'] = that.cashRecord.startTime;
+						} else {
+							layer.Message('请选择记录开始时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						if (that.cashRecord.endTime) {
+							vParam['endTime'] = that.cashRecord.endTime;
+						} else {
+							layer.Message('请选择记录结束时间', {
+								time: 1500
+							})
+							return;
+						}
+
+						vParam['start'] = that.cashRecord.page.pageNum;
+						vParam['pageSize'] = that.cashRecord.page.pageSize;
+
+						if (!that.cashRecord.isLoading) {
+							that.cashRecord.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/RequestRecord',
+								params: vParam
+							}).then(function(data) {
+								that.cashRecord.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Data;
+
+									that.cashRecord.page.total = data.data.Total;
+									that.cashRecord.list = result.map(function(item) {
+										return {
+											name: item.Name,
+											money: item.Amount,
+											balance: item.Balance,
+											applyTime: item.ApplyTime,
+											handleTime: item.HandleTime,
+											type: item.Type,
+											status: item.Status,
+											url: item.Url,
+											showUrl: false
+										}
+									})
+									that.cashRecord.all = data.data.Summary;
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html'
+								}
+							})
+						}
+					},
+					showRecordView(item) {
+						let that = this;
+
+						if (!that.cashApply.isLoading) {
+							that.cashApply.isLoading = true;
+							let index = layer.load(2);
+
+							axios({
+								url: '/api/AdvancedSetup/GetRequestCashInfo',
+								params: {
+									id: item.id
+								}
+							}).then(function(data) {
+								that.cashApply.isLoading = false;
+								layer.close(index);
+
+								if (data.data.Status === 100) {
+									const result = data.data.Model;
+									const path = result.Path;
+									that.cashApply.select = {
+										id: item.id,
+										remark: '',
+										agentName: result.AgentName,
+										amount: result.Amount,
+										type: result.ApplyType,
+										bankNum: result.BankNum,
+										payName: result.PayName,
+										transfer: result.Transfer,
+										QRCode: result.QRCode ? (result.QRCode.indexOf('://') != -1 ? result.QRCode : ('/' + result.QRCode)) : '',
+										address: path ? (path.CurrencyInfo[0].CurrencyPath) : '',
+										showQRCode: false
+									}
+
+									if (that.cashApply.select.type === 1) {
+										that.handleShowPanel(4);
+									} else if (that.cashApply.select.type === 2) {
+										that.handleShowPanel(3);
+									} else {
+										that.handleShowPanel(9);
+									}
+								} else if (data.data.Status === 301) {
+									window.location.href = window.location.origin + '/login.html';
+								}
+							})
+						}
+					},
+					handleChangeSwitch(e, type) {
+						let that = this;
+
+						switch(type) {
+							case 1:
+							if (e.target.checked && !that.qrCode.showImage) {
+								layer.msg('请先上传收款二维码，再预览', {
+									time: 1500
+								})
+								setTimeout(function() {
+									that.$refs['switch01'].click();
+								}, 1400)
+								return;
+							}
+							break;
+						}
+					},
+					handleShowPanel(ind, id, name) {
+						let that = this;
+
+						layer.open({
+							type: 1,
+							title: false,
+							closeBtn: 0,
+							shade: 0.6,
+							area: '800px',
+							offset: 'auto',
+							skin: 'mylayer',
+							shadeClose: false,
+							anim: 0,
+							isOutAnim: false,
+							scrollbar: false,
+							content: $('#layer-content' + ind)
+						});
+					},
+				}
+			})
+		</script>
+	</body>
+</html>
