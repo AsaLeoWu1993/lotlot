@@ -1296,11 +1296,9 @@ namespace Operation.Common
                 }
                 return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //var message = string.Format("链接：{0}，错误信息：{1}", url, JsonConvert.SerializeObject(e));
-                //Logger.Error(message);
-                return null;
+                throw e;
             }
         }
 

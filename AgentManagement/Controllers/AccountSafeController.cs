@@ -36,6 +36,18 @@ namespace AgentManagement.Controllers
         }
 
         /// <summary>
+        /// 测试获取外网
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetHtml()
+        {
+            var url = "https://www.baidu.com/";
+            var code = await Utils.GetAsync(url);
+            return Ok(code);
+        }
+
+        /// <summary>
         /// 修改密码
         /// </summary>
         /// <param name="oldPwd">旧密码</param>
