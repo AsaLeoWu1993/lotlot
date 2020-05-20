@@ -32,9 +32,9 @@ namespace Operation.RedisAggregate
             {
                 if (Environment.GetEnvironmentVariable("Online") == null)
                     connstr = string.Format("{0}:{1},password={2},poolsize=500,defaultDatabase=4",
-                        //"redis-app-0.redis-service.default.svc.cluster.local", 6379, "Skhd0euuL5hI8L7afpbwTauppUDaA1MhVNdJ=");
+                //"redis-app-0.redis-service.default.svc.cluster.local", 6379, "Skhd0euuL5hI8L7afpbwTauppUDaA1MhVNdJ=");
                 //"old.teleicu.cn", 8004, "cisRedisqwerasdfzxcv");
-                "0.0.0.0", 6379, "123456");
+                "172.27.0.11", 6379, "123456");
                 else
                     connstr = string.Format("{0}:{1},password={2},poolsize=100,defaultDatabase=4",
                         "redis-app-0.redis-service.default.svc.cluster.local", 6379, "Skhd0euuL5hI8LksdjfwTauppUDaA1MhVNdJ=");

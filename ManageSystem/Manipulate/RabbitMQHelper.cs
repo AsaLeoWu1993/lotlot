@@ -49,7 +49,7 @@ namespace ManageSystem.Manipulate
                         //Password = "123456",
                         //HostName = "120.24.20.112",
                         //HostName = "localhost",
-                        HostName = "0.0.0.0",
+                        HostName = "172.27.0.11",
                         //HostName = "132.232.70.44",
                         Port = 5672
                     };
