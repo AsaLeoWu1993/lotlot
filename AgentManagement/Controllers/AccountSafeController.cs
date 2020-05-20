@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using AgentManagement.Manipulate;
+using Entity;
 using Entity.AgentModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using Newtonsoft.Json;
 using Operation.Agent;
 using Operation.Common;
 using Operation.RedisAggregate;
@@ -36,15 +39,28 @@ namespace AgentManagement.Controllers
         }
 
         /// <summary>
-        /// 测试获取外网
+        /// 测试连接
         /// </summary>
+        /// <param name="path"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetHtml()
+        [NotAuthenticationAttribute]
+        public IActionResult GetHtml(string path)
         {
-            var url = "https://www.baidu.com/";
-            var code = await Utils.GetAsync(url);
-            return Ok(code);
+            try
+            {
+                MongoUrl url = new MongoUrl(path); // url
+                MongoClientSettings settings = MongoClientSettings.FromUrl(url);
+                settings.ServerSelectionTimeout = TimeSpan.FromSeconds(10);
+                settings.ConnectTimeout = TimeSpan.FromSeconds(10);
+                MongoClient server = new MongoClient(settings);
+                server.ListDatabaseNames();
+            }
+            catch (Exception e)
+            {
+                return Ok(new RecoverModel(RecoverEnum.失败, "连接地址不可用！" + "\r\n" + JsonConvert.SerializeObject(e)));
+            }
+            return Ok("ok");
         }
 
         /// <summary>
